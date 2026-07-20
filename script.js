@@ -243,3 +243,73 @@ function initSubscribeForm() {
         }
     });
 }
+
+function initPreloader() {
+    const preloader = document.getElementById('preloader');
+    const percentageEl = document.getElementById('loader-percentage');
+    const phraseEl = document.getElementById('loader-phrase');
+    const progressFillEl = document.getElementById('loader-progress-fill');
+    
+    if (!preloader || !percentageEl) return;
+
+    let phrases = ["Loading..."];
+    let currentPhraseIndex = 0;
+
+    // Try to load custom phrases
+    if (phraseEl) {
+        fetch('settings.json')
+            .then(res => res.json())
+            .then(data => {
+                if (data.loadingPhrases && data.loadingPhrases.length > 0) {
+                    // Randomize array
+                    phrases = data.loadingPhrases.sort(() => 0.5 - Math.random());
+                    phraseEl.innerText = phrases[0];
+                    
+                    // Cycle phrases rapidly
+                    setInterval(() => {
+                        currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
+                        phraseEl.innerText = phrases[currentPhraseIndex];
+                    }, 300);
+                }
+            }).catch(() => {});
+    }
+
+    let percentage = 0;
+    // Fast count to 90%
+    const interval = setInterval(() => {
+        percentage += Math.floor(Math.random() * 5) + 1;
+        if (percentage > 90) {
+            percentage = 90;
+            clearInterval(interval);
+        }
+        percentageEl.innerText = `${percentage}%`;
+        if (progressFillEl) progressFillEl.style.width = `${percentage}%`;
+    }, 50);
+
+    // When the whole page (images, videos) is loaded, jump to 100% and hide
+    window.addEventListener('load', () => {
+        clearInterval(interval);
+        
+        // Fast finish from current percentage to 100
+        const finishInterval = setInterval(() => {
+            percentage += 2;
+            if (percentage >= 100) {
+                percentage = 100;
+                clearInterval(finishInterval);
+                percentageEl.innerText = `100%`;
+                if (progressFillEl) progressFillEl.style.width = `100%`;
+                
+                setTimeout(() => {
+                    preloader.classList.add('fade-out');
+                    setTimeout(() => {
+                        preloader.style.display = 'none';
+                    }, 800);
+                }, 300);
+            } else {
+                percentageEl.innerText = `${percentage}%`;
+                if (progressFillEl) progressFillEl.style.width = `${percentage}%`;
+            }
+        }, 20);
+    });
+}
+initPreloader();

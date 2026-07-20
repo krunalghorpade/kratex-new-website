@@ -4,13 +4,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KRATEX | MULTIVERSE</title>
-    <link rel="stylesheet" href="style.css?v=2">
+    <meta name="description"
+        content="Official website of Kratex. Discover new music, DJ sets, tour dates, exclusive merch, and more from music producer and DJ Kratex.">
+    <meta name="keywords"
+        content="Kratex, DJ Kratex, Music Producer, Electronic Music, DJ Sets, Live Shows, Kratex Merch, Kratex Music">
+    <meta name="author" content="Kratex">
+    <title>KRATEX | Official Website - DJ & Music Producer</title>
+    <link rel="stylesheet" href="style.css?v=6">
     <link rel="stylesheet" href="mobile.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css">
+    <link rel="icon" type="image/x-icon" href="assets/icon.ico">
+    <link rel="icon" type="image/png" href="assets/icon.png">
 </head>
 
 <body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader-content">
+            <img src="assets/logom.svg" alt="Loading Monogram" class="loader-icon">
+            <div class="loader-text-container">
+                <span id="loader-percentage">0%</span>
+                <span id="loader-phrase">Loading...</span>
+            </div>
+        </div>
+        <div id="loader-progress-bar">
+            <div id="loader-progress-fill"></div>
+        </div>
+    </div>
 
     <!-- Top Navigation -->
     <!-- Top Navigation -->
@@ -24,7 +44,7 @@
                 <img src="assets/logom.svg" alt="Home Hover" class="nav-logo hover-logo">
             </a>
             <a href="index.html#merch">MERCH</a>
-            <a href="index.html#music">MUSIC</a>
+            <a href="index.html#music">MUSIC VIDEOS</a>
             <a href="index.html#subscribe">SUBSCRIBE</a>
         </div>
         <button class="hamburger" id="hamburger-menu" aria-label="Menu">
@@ -48,7 +68,7 @@
                 <img src="assets/logom.svg" alt="Home Hover" class="nav-logo hover-logo">
             </a>
             <a href="index.html#merch" class="mobile-link">MERCH</a>
-            <a href="index.html#music" class="mobile-link">MUSIC</a>
+            <a href="index.html#music" class="mobile-link">MUSIC VIDEOS</a>
             <a href="index.html#subscribe" class="mobile-link">SUBSCRIBE</a>
         </div>
     </div>
@@ -82,6 +102,12 @@
             <div id="bandsintown-events" class="tour-list">
                 <!-- Events will be injected here by JS -->
                 <p>LOADING DATES...</p>
+            </div>
+
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="https://www.bandsintown.com/artist-subscribe/15525088-kratex" target="_blank"
+                    class="btn-subscribe" style="font-size: 0.9rem; padding: 0.8rem 2.5rem;">REQUEST A SHOW IN YOUR
+                    CITY</a>
             </div>
         </section>
 
@@ -127,47 +153,56 @@
                     <a class="video-item" href="https://www.youtube.com/watch?v=KPBlZbO59V8" target="_blank">
                         <img src="https://img.youtube.com/vi/KPBlZbO59V8/hqdefault.jpg" alt="DJ Set" loading="lazy"
                             class="video-thumb">
-                        <p class="video-title">Kratex | Birthday Set Pune | Club Ballr | Marathi House Music @Mhouseofficial</p>
+                        <p class="video-title">Kratex | Birthday Set Pune | Club Ballr | Marathi House Music
+                            @Mhouseofficial</p>
                     </a>
                     <a class="video-item" href="https://www.youtube.com/watch?v=B-htKvg6ZeQ" target="_blank">
                         <img src="https://img.youtube.com/vi/B-htKvg6ZeQ/hqdefault.jpg" alt="DJ Set" loading="lazy"
                             class="video-thumb">
-                        <p class="video-title">Kratex | MVP | मराठी वाजलाच पाहिजे  | Mumbai | MHouse Marathi House Music | Full Dj Set</p>
+                        <p class="video-title">Kratex | MVP | मराठी वाजलाच पाहिजे | Mumbai | MHouse Marathi House Music
+                            | Full Dj Set</p>
                     </a>
                     <a class="video-item" href="https://www.youtube.com/watch?v=l5tcQ0hG3mg" target="_blank">
                         <img src="https://img.youtube.com/vi/l5tcQ0hG3mg/hqdefault.jpg" alt="DJ Set" loading="lazy"
                             class="video-thumb">
-                        <p class="video-title">Kratex - Epic Marathi Sunset Dj Set | Aranya Villa | Deep Melodic House @Mhouseofficial</p>
+                        <p class="video-title">Kratex - Epic Marathi Sunset Dj Set | Aranya Villa | Deep Melodic House
+                            @Mhouseofficial</p>
                     </a>
                     <a class="video-item" href="https://www.youtube.com/watch?v=6Cwnn8UMFys" target="_blank">
                         <img src="https://img.youtube.com/vi/6Cwnn8UMFys/hqdefault.jpg" alt="DJ Set" loading="lazy"
                             class="video-thumb">
-                        <p class="video-title">Kratex | M-House NUSTA VIBES Full Dj Set | Marathi House Music | With @Mhouseofficial @BhaDiPa</p>
+                        <p class="video-title">Kratex | M-House NUSTA VIBES Full Dj Set | Marathi House Music | With
+                            @Mhouseofficial @BhaDiPa</p>
                     </a>
                     <a class="video-item" href="https://www.youtube.com/watch?v=wq8KO0YkPF8" target="_blank">
                         <img src="https://img.youtube.com/vi/wq8KO0YkPF8/hqdefault.jpg" alt="DJ Set" loading="lazy"
                             class="video-thumb">
-                        <p class="video-title">Kratex | Nusta Vibes | Pune | मराठी | Marathi House Music @Mhouseofficial</p>
+                        <p class="video-title">Kratex | Nusta Vibes | Pune | मराठी | Marathi House Music @Mhouseofficial
+                        </p>
                     </a>
                     <a class="video-item" href="https://www.youtube.com/watch?v=1giGB5xIKjI" target="_blank">
                         <img src="https://img.youtube.com/vi/1giGB5xIKjI/hqdefault.jpg" alt="DJ Set" loading="lazy"
                             class="video-thumb">
-                        <p class="video-title">Tech House Mix by Kratex | Tech House, Jackin House, Bass House | 2020</p>
+                        <p class="video-title">Tech House Mix by Kratex | Tech House, Jackin House, Bass House | 2020
+                        </p>
                     </a>
                     <a class="video-item" href="https://www.youtube.com/watch?v=y2Smn9dlBdc" target="_blank">
                         <img src="https://img.youtube.com/vi/y2Smn9dlBdc/hqdefault.jpg" alt="DJ Set" loading="lazy"
                             class="video-thumb">
-                        <p class="video-title">Kratex | MVP | मराठी वाजलाच पाहिजे  | Goa | MHouse Marathi House Music | Full Dj Set</p>
+                        <p class="video-title">Kratex | MVP | मराठी वाजलाच पाहिजे | Goa | MHouse Marathi House Music |
+                            Full Dj Set</p>
                     </a>
                     <a class="video-item" href="https://www.youtube.com/watch?v=8y10lRCy4cI" target="_blank">
                         <img src="https://img.youtube.com/vi/8y10lRCy4cI/hqdefault.jpg" alt="DJ Set" loading="lazy"
                             class="video-thumb">
-                        <p class="video-title">Kratex Live Dj Set at @BhaDiPa Bhadyachi Birthday Party | Pune | Marathi House Music</p>
+                        <p class="video-title">Kratex Live Dj Set at @BhaDiPa Bhadyachi Birthday Party | Pune | Marathi
+                            House Music</p>
                     </a>
                     <a class="video-item" href="https://www.youtube.com/watch?v=zxEVToice8k" target="_blank">
                         <img src="https://img.youtube.com/vi/zxEVToice8k/hqdefault.jpg" alt="DJ Set" loading="lazy"
                             class="video-thumb">
-                        <p class="video-title">Kratex in Pune | MVP | मराठी वाजलाच पाहिजे  | High Spirits | Marathi House Music | Full Dj Set</p>
+                        <p class="video-title">Kratex in Pune | MVP | मराठी वाजलाच पाहिजे | High Spirits | Marathi House
+                            Music | Full Dj Set</p>
                     </a>
                     <a class="video-item" href="https://www.youtube.com/watch?v=wxrUgDqwpBQ" target="_blank">
                         <img src="https://img.youtube.com/vi/wxrUgDqwpBQ/hqdefault.jpg" alt="DJ Set" loading="lazy"
@@ -187,101 +222,145 @@
                     FULL SHOP ↗</a>
             </div>
             <div class="merch-grid">
-                <a href="https://shop.kratex.in/products/mvp-unisex-oversized-t-shirt?variant=50940723200285" target="_blank" class="merch-item">
+                <a href="https://shop.kratex.in/products/mvp-unisex-oversized-t-shirt?variant=50940723200285"
+                    target="_blank" class="merch-item">
                     <div class="merch-img-container">
-                        <img src="https://shop.kratex.in/cdn/shop/files/Back_2_c_2_11dc13e3-cd82-425a-bae6-d420c9aff174.jpg?width=800" alt="MVP Unisex Oversized T-Shirt" class="merch-img merch-img-default">
-                        <img src="https://shop.kratex.in/cdn/shop/files/Front_1_c_2_30d276ec-9b64-4d03-a2f8-8877841e31cb.jpg?width=800" alt="MVP Unisex Oversized T-Shirt Hover" class="merch-img merch-img-hover">
+                        <img src="https://shop.kratex.in/cdn/shop/files/Back_2_c_2_11dc13e3-cd82-425a-bae6-d420c9aff174.jpg?width=800"
+                            alt="MVP Unisex Oversized T-Shirt" class="merch-img merch-img-default">
+                        <img src="https://shop.kratex.in/cdn/shop/files/Front_1_c_2_30d276ec-9b64-4d03-a2f8-8877841e31cb.jpg?width=800"
+                            alt="MVP Unisex Oversized T-Shirt Hover" class="merch-img merch-img-hover">
                     </div>
                     <div class="merch-info">
                         <h3>MVP UNISEX OVERSIZED T-SHIRT</h3>
-                        </div>
+                    </div>
                 </a>
-                <a href="https://shop.kratex.in/products/unisex-terry-oversized-tee?variant=52029643424029" target="_blank" class="merch-item">
+                <a href="https://shop.kratex.in/products/unisex-terry-oversized-tee?variant=52029643424029"
+                    target="_blank" class="merch-item">
                     <div class="merch-img-container">
-                        <img src="https://shop.kratex.in/cdn/shop/files/white_os_back.png?width=800" alt="FAKTA HOUSE Unisex Oversized T-Shirt – White" class="merch-img merch-img-default">
-                        <img src="https://shop.kratex.in/cdn/shop/files/Front_1_c_1_2b30d2cd-585f-4cda-8508-61424e44c33e.jpg?width=800" alt="FAKTA HOUSE Unisex Oversized T-Shirt – White Hover" class="merch-img merch-img-hover">
+                        <img src="https://shop.kratex.in/cdn/shop/files/white_os_back.png?width=800"
+                            alt="FAKTA HOUSE Unisex Oversized T-Shirt – White" class="merch-img merch-img-default">
+                        <img src="https://shop.kratex.in/cdn/shop/files/Front_1_c_1_2b30d2cd-585f-4cda-8508-61424e44c33e.jpg?width=800"
+                            alt="FAKTA HOUSE Unisex Oversized T-Shirt – White Hover" class="merch-img merch-img-hover">
                     </div>
                     <div class="merch-info">
                         <h3>FAKTA HOUSE UNISEX OVERSIZED T-SHIRT – WHITE</h3>
-                        </div>
+                    </div>
                 </a>
-                <a href="https://shop.kratex.in/products/fakta-house-unisex-oversized-t-shirt-black?variant=52030003249437" target="_blank" class="merch-item">
+                <a href="https://shop.kratex.in/products/fakta-house-unisex-oversized-t-shirt-black?variant=52030003249437"
+                    target="_blank" class="merch-item">
                     <div class="merch-img-container">
-                        <img src="https://shop.kratex.in/cdn/shop/files/Back_2_c_2_4c4bc0db-7a78-4e4e-b020-0f1f9758c23b.jpg?width=800" alt="FAKTA HOUSE Unisex Oversized T-Shirt – Black" class="merch-img merch-img-default">
-                        <img src="https://shop.kratex.in/cdn/shop/files/Front_1_c_2_603180e5-ba0b-454d-9942-17d135126c94.jpg?width=800" alt="FAKTA HOUSE Unisex Oversized T-Shirt – Black Hover" class="merch-img merch-img-hover">
+                        <img src="https://shop.kratex.in/cdn/shop/files/Back_2_c_2_4c4bc0db-7a78-4e4e-b020-0f1f9758c23b.jpg?width=800"
+                            alt="FAKTA HOUSE Unisex Oversized T-Shirt – Black" class="merch-img merch-img-default">
+                        <img src="https://shop.kratex.in/cdn/shop/files/Front_1_c_2_603180e5-ba0b-454d-9942-17d135126c94.jpg?width=800"
+                            alt="FAKTA HOUSE Unisex Oversized T-Shirt – Black Hover" class="merch-img merch-img-hover">
                     </div>
                     <div class="merch-info">
                         <h3>FAKTA HOUSE UNISEX OVERSIZED T-SHIRT – BLACK</h3>
-                        </div>
+                    </div>
                 </a>
-                <a href="https://shop.kratex.in/products/mvp-unisex-oversized-hoodie?variant=50940749709597" target="_blank" class="merch-item">
+                <a href="https://shop.kratex.in/products/mvp-unisex-oversized-hoodie?variant=50940749709597"
+                    target="_blank" class="merch-item">
                     <div class="merch-img-container">
-                        <img src="https://shop.kratex.in/cdn/shop/files/Back_2_c_2.jpg?width=800" alt="MVP Unisex Oversized Hoodie" class="merch-img merch-img-default">
-                        <img src="https://shop.kratex.in/cdn/shop/files/Front_1_c_2.jpg?width=800" alt="MVP Unisex Oversized Hoodie Hover" class="merch-img merch-img-hover">
+                        <img src="https://shop.kratex.in/cdn/shop/files/Back_2_c_2.jpg?width=800"
+                            alt="MVP Unisex Oversized Hoodie" class="merch-img merch-img-default">
+                        <img src="https://shop.kratex.in/cdn/shop/files/Front_1_c_2.jpg?width=800"
+                            alt="MVP Unisex Oversized Hoodie Hover" class="merch-img merch-img-hover">
                     </div>
                     <div class="merch-info">
                         <h3>MVP UNISEX OVERSIZED HOODIE</h3>
-                        </div>
+                    </div>
                 </a>
-                <a href="https://shop.kratex.in/products/nusta-vibes-unisex-oversized-tee?variant=50954875306269" target="_blank" class="merch-item">
+                <a href="https://shop.kratex.in/products/nusta-vibes-unisex-oversized-tee?variant=50954875306269"
+                    target="_blank" class="merch-item">
                     <div class="merch-img-container">
-                        <img src="https://shop.kratex.in/cdn/shop/files/Back_2_c_2_b0c2e3bc-25b7-4304-ba9a-9ee1da5a5ae4.jpg?width=800" alt="Nusta Vibes Unisex Oversized Tee" class="merch-img merch-img-default">
-                        <img src="https://shop.kratex.in/cdn/shop/files/Left_Pocket_3_c_2.jpg?width=800" alt="Nusta Vibes Unisex Oversized Tee Hover" class="merch-img merch-img-hover">
+                        <img src="https://shop.kratex.in/cdn/shop/files/Back_2_c_2_b0c2e3bc-25b7-4304-ba9a-9ee1da5a5ae4.jpg?width=800"
+                            alt="Nusta Vibes Unisex Oversized Tee" class="merch-img merch-img-default">
+                        <img src="https://shop.kratex.in/cdn/shop/files/Left_Pocket_3_c_2.jpg?width=800"
+                            alt="Nusta Vibes Unisex Oversized Tee Hover" class="merch-img merch-img-hover">
                     </div>
                     <div class="merch-info">
                         <h3>NUSTA VIBES UNISEX OVERSIZED TEE</h3>
-                        </div>
+                    </div>
                 </a>
-                <a href="https://shop.kratex.in/products/unisex-oversized-classic-t-shirt?variant=51875725508893" target="_blank" class="merch-item">
+                <a href="https://shop.kratex.in/products/unisex-oversized-classic-t-shirt?variant=51875725508893"
+                    target="_blank" class="merch-item">
                     <div class="merch-img-container">
-                        <img src="https://shop.kratex.in/cdn/shop/files/new_couple.png?width=800" alt="MVP मराठी वाजलाच पाहिजे Unisex Oversized Classic T-Shirt" class="merch-img merch-img-default">
-                        <img src="https://shop.kratex.in/cdn/shop/files/Front_1_c_1.jpg?width=800" alt="MVP मराठी वाजलाच पाहिजे Unisex Oversized Classic T-Shirt Hover" class="merch-img merch-img-hover">
+                        <img src="https://shop.kratex.in/cdn/shop/files/new_couple.png?width=800"
+                            alt="MVP मराठी वाजलाच पाहिजे Unisex Oversized Classic T-Shirt"
+                            class="merch-img merch-img-default">
+                        <img src="https://shop.kratex.in/cdn/shop/files/Front_1_c_1.jpg?width=800"
+                            alt="MVP मराठी वाजलाच पाहिजे Unisex Oversized Classic T-Shirt Hover"
+                            class="merch-img merch-img-hover">
                     </div>
                     <div class="merch-info">
                         <h3>MVP मराठी वाजलाच पाहिजे UNISEX OVERSIZED CLASSIC T-SHIRT</h3>
-                        </div>
+                    </div>
                 </a>
-                <a href="https://shop.kratex.in/products/mvp-mens-sleeveless-t-shirt?variant=51902761042205" target="_blank" class="merch-item">
+                <a href="https://shop.kratex.in/products/mvp-mens-sleeveless-t-shirt?variant=51902761042205"
+                    target="_blank" class="merch-item">
                     <div class="merch-img-container">
-                        <img src="https://shop.kratex.in/cdn/shop/files/tank-top-mockup-of-a-fit-man-working-out-at-the-gym-34507-r-el2.png?width=800" alt="MVP Men's Sleeveless T-Shirt" class="merch-img merch-img-default">
-                        <img src="https://shop.kratex.in/cdn/shop/files/Front_1_c_1_7f056d6c-ba07-4177-bbb0-0f993e13da7e.jpg?width=800" alt="MVP Men's Sleeveless T-Shirt Hover" class="merch-img merch-img-hover">
+                        <img src="https://shop.kratex.in/cdn/shop/files/tank-top-mockup-of-a-fit-man-working-out-at-the-gym-34507-r-el2.png?width=800"
+                            alt="MVP Men's Sleeveless T-Shirt" class="merch-img merch-img-default">
+                        <img src="https://shop.kratex.in/cdn/shop/files/Front_1_c_1_7f056d6c-ba07-4177-bbb0-0f993e13da7e.jpg?width=800"
+                            alt="MVP Men's Sleeveless T-Shirt Hover" class="merch-img merch-img-hover">
                     </div>
                     <div class="merch-info">
                         <h3>MVP MEN'S SLEEVELESS T-SHIRT</h3>
-                        </div>
+                    </div>
                 </a>
-                <a href="https://shop.kratex.in/products/fakta-house-men-s-shorts-black?variant=52030002463005" target="_blank" class="merch-item">
+                <a href="https://shop.kratex.in/products/fakta-house-men-s-shorts-black?variant=52030002463005"
+                    target="_blank" class="merch-item">
                     <div class="merch-img-container">
-                        <img src="https://shop.kratex.in/cdn/shop/files/Left_Pocket_1_c_2_dc5e81a2-7962-47f9-95fb-752b09198764.jpg?width=800" alt="FAKTA HOUSE Men’s Shorts – Black" class="merch-img merch-img-default">
+                        <img src="https://shop.kratex.in/cdn/shop/files/Left_Pocket_1_c_2_dc5e81a2-7962-47f9-95fb-752b09198764.jpg?width=800"
+                            alt="FAKTA HOUSE Men’s Shorts – Black" class="merch-img merch-img-default">
                     </div>
                     <div class="merch-info">
                         <h3>FAKTA HOUSE MEN’S SHORTS – BLACK</h3>
-                        </div>
+                    </div>
                 </a>
-                <a href="https://shop.kratex.in/products/baseball-ottoman-cap?variant=50954732601629" target="_blank" class="merch-item">
+                <a href="https://shop.kratex.in/products/baseball-ottoman-cap?variant=50954732601629" target="_blank"
+                    class="merch-item">
                     <div class="merch-img-container">
-                        <img src="https://shop.kratex.in/cdn/shop/files/Front_1_c_2_ccf09ed8-1a23-4d43-a892-9e9ac9d06a6e.jpg?width=800" alt="MVP Baseball Cap" class="merch-img merch-img-default">
+                        <img src="https://shop.kratex.in/cdn/shop/files/Front_1_c_2_ccf09ed8-1a23-4d43-a892-9e9ac9d06a6e.jpg?width=800"
+                            alt="MVP Baseball Cap" class="merch-img merch-img-default">
                     </div>
                     <div class="merch-info">
                         <h3>MVP BASEBALL CAP</h3>
-                        </div>
+                    </div>
                 </a>
-                <a href="https://shop.kratex.in/products/fakta-house-baseball-cap-white?variant=52030002135325" target="_blank" class="merch-item">
+                <a href="https://shop.kratex.in/products/fakta-house-baseball-cap-white?variant=52030002135325"
+                    target="_blank" class="merch-item">
                     <div class="merch-img-container">
-                        <img src="https://shop.kratex.in/cdn/shop/files/Front_1_c_1_4937923b-cbaf-476d-8797-18c5bedb6c2a.jpg?width=800" alt="FAKTA HOUSE - BaseBall Cap White" class="merch-img merch-img-default">
+                        <img src="https://shop.kratex.in/cdn/shop/files/Front_1_c_1_4937923b-cbaf-476d-8797-18c5bedb6c2a.jpg?width=800"
+                            alt="FAKTA HOUSE - BaseBall Cap White" class="merch-img merch-img-default">
                     </div>
                     <div class="merch-info">
                         <h3>FAKTA HOUSE - BASEBALL CAP WHITE</h3>
-                        </div>
+                    </div>
                 </a>
-            
+
             </div>
         </section>
 
-        <!-- Music Section -->
+        <!-- Spotify Music Section -->
+        <section id="kratex-music" class="section">
+            <div class="section-header">
+                <h2>KRATEX MUSIC</h2>
+                <span>// SPOTIFY</span>
+            </div>
+            <div style="max-width: 800px; margin: 0 auto;">
+                <iframe data-testid="embed-iframe" style="border-radius:12px"
+                    src="https://open.spotify.com/embed/playlist/37i9dQZF1DZ06evO28WUMi?utm_source=generator&theme=0&si=67646b8625f94673"
+                    width="100%" height="352" frameBorder="0" allowfullscreen=""
+                    allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                    loading="lazy"></iframe>
+            </div>
+        </section>
+
+        <!-- Music Videos Section -->
         <section id="music" class="section">
             <div class="section-header">
-                <h2>MUSIC</h2>
+                <h2>MUSIC VIDEOS</h2>
                 <span>// ESSENTIALS</span>
             </div>
             <div class="video-carousel-container">
@@ -478,10 +557,12 @@
         <section id="subscribe" class="section subscribe-section">
             <div class="subscribe-container">
                 <h2>CONNECT WITH KRATEX</h2>
-                <p class="subscribe-cta">Join the inner circle for exclusive giveaways, secret show meetups, new music before it drops, and early access to limited merch.</p>
+                <p class="subscribe-cta">Join the inner circle for exclusive giveaways, secret show meetups, new music
+                    before it drops, and early access to limited merch.</p>
                 <form id="subscribe-form" class="subscribe-form">
                     <input type="email" id="subscribe-email" placeholder="Enter your email..." required>
-                    <a href="#" id="subscribe-btn" class="btn-subscribe btn-disabled" target="_blank">JOIN FOR FREE ↗</a>
+                    <a href="#" id="subscribe-btn" class="btn-subscribe btn-disabled" target="_blank">JOIN FOR FREE
+                        ↗</a>
                 </form>
             </div>
         </section>
@@ -502,9 +583,9 @@
                 </div>
                 <div class="footer-col">
                     <h4>FOR BOOKINGS & INQUIRIES</h4>
-                    <p>All representations are handled by World of Vibes.</p>
-                    <p>Contact Rock Kacchi (Founder)</p>
-                    <p>+91 98341 79271 (WhatsApp Call/Msg preferred)</p>
+                    <p>Managed by World of Vibes.</p>
+                    <p>Rock Kacchi </p>
+                    <p>+91 98341 79271 </p>
                     <p>rock@worldofvibes.com</p>
                 </div>
                 <div class="footer-col">
@@ -544,7 +625,7 @@
         </footer>
     </div>
 
-    <script src="script.js?v=2"></script>
+    <script src="script.js?v=6"></script>
 </body>
 
 </html>

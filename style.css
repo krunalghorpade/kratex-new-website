@@ -65,6 +65,31 @@ a:hover {
     align-items: center;
 }
 
+.nav-links a:not(.nav-logo-link) {
+    position: relative;
+    display: inline-block;
+    opacity: 1; /* override global a:hover opacity if needed */
+}
+
+.nav-links a:not(.nav-logo-link)::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 1px;
+    bottom: -4px;
+    left: 0;
+    background-color: var(--text-color);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:not(.nav-logo-link):hover {
+    opacity: 1;
+}
+
+.nav-links a:not(.nav-logo-link):hover::after {
+    width: 100%;
+}
+
 /* Hero Section (Video Layout) */
 .hero-video {
     position: relative;
@@ -175,7 +200,7 @@ a:hover {
     justify-content: space-between;
     gap: 1.5rem;
     padding: 1.5rem 1rem;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     font-weight: 500;
     align-items: center;
     border-bottom: 1px solid rgba(255, 255, 255, var(--tour-divider-opacity, 0.5));
@@ -385,7 +410,7 @@ a:hover {
     opacity: 1;
 }
 
-.merch-item:hover .merch-img-hover ~ .merch-img-default, 
+.merch-item:hover .merch-img-hover~.merch-img-default,
 .merch-item:hover .merch-img-default:not(:only-child) {
     opacity: 0;
 }
@@ -592,6 +617,95 @@ a:hover {
 .footer-col a {
     color: var(--text-color);
     text-decoration: none;
+}
+
+/* Preloader */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--bg-color);
+    z-index: 99999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+#preloader.fade-out {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.loader-icon {
+    width: 60px;
+    height: auto;
+    animation: pulse 2s infinite ease-in-out;
+}
+
+.loader-text-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+#loader-percentage {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    color: var(--text-color);
+    letter-spacing: 2px;
+}
+
+#loader-phrase {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 500;
+}
+
+@keyframes pulse {
+    0% {
+        opacity: 0.5;
+        transform: scale(0.95);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    100% {
+        opacity: 0.5;
+        transform: scale(0.95);
+    }
+}
+
+#loader-progress-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+#loader-progress-fill {
+    height: 100%;
+    width: 0%;
+    background: var(--text-color);
+    transition: width 0.1s ease;
 }
 
 .footer-col a:hover {
