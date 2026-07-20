@@ -1,0 +1,190 @@
+/* Mobile Specific Styles */
+@media (max-width: 768px) {
+
+
+    /* Countdown Block Center Aligned & Stretched */
+    .countdown {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* Merch block size reduce */
+    .merch-item {
+        flex: 0 0 40vw !important;
+        max-width: 40vw !important;
+    }
+
+    /* Album Image Height */
+    .album-image-wrapper {
+        height: 250px;
+        max-height: none;
+    }
+
+    .album-img {
+        height: 80%;
+    }
+
+    /* Mobile Links Spacing */
+    .mobile-nav-links {
+        gap: 3.5rem !important;
+    }
+
+    /* Hero 70% height */
+    .hero-video {
+        height: 70vh !important;
+        min-height: 70vh !important;
+    }
+
+    /* Album mobile fixes */
+    .album-image-wrapper {
+        margin: 0;
+        padding: 0;
+    }
+
+    .album-info {
+        text-align: center;
+        align-items: center;
+    }
+
+    /* Thumbnails 1.3 items width */
+    .video-item {
+        flex: 0 0 75vw;
+        max-width: 75vw;
+    }
+
+    /* Merch horizontal scroll */
+    .merch-grid {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        padding-bottom: 1rem;
+        gap: 1rem;
+    }
+
+    .merch-item {
+        flex: 0 0 75vw;
+        max-width: 75vw;
+        scroll-snap-align: start;
+    }
+
+    /* Footer 2 columns */
+
+
+    .content-wrapper {
+        width: 100%;
+        padding: 4rem 0.5rem;
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .hamburger {
+        display: block;
+        margin-left: auto;
+    }
+
+    .top-nav {
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        padding: 1.5rem 1rem;
+    }
+
+    .hero-logo {
+        width: 80%;
+    }
+
+    .section-header {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .section-header h2 {
+        font-size: 1rem;
+    }
+
+
+    .tour-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 1.5rem 0;
+        gap: 1rem;
+        font-size: 1rem;
+        white-space: normal;
+        background: transparent;
+        border: none;
+        border-bottom: 1px solid rgba(255, 255, 255, var(--tour-divider-opacity, 0.5));
+        border-radius: 0;
+        margin-bottom: 1rem;
+    }
+
+    .tour-left,
+    .tour-middle,
+    .tour-right {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .tour-middle {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.2rem;
+        margin: 0.5rem 0;
+    }
+
+    .tour-middle .title {
+        font-size: 1.25rem;
+    }
+
+    .tour-item .book-btn {
+        margin: 0.5rem auto 0 auto;
+    }
+
+
+    .tour-item:hover {
+        transform: none;
+    }
+
+    .calendar-block {
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-between;
+        align-items: center;
+        border: none;
+        padding: 0.5rem 0;
+    }
+
+    .cal-month,
+    .cal-day {
+        border: none;
+        width: auto;
+        padding: 0;
+    }
+
+    .cal-date {
+        padding: 0;
+    }
+
+    .video-item {
+        width: 85vw;
+    }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .subscribe-container h2 {
+        font-size: 1.1rem;
+    }
+
+    .btn-subscribe {
+        padding: 1rem 2rem;
+        font-size: 1.2rem;
+    }
+}

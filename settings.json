@@ -1,0 +1,9 @@
+{
+  "initialVideoDarkness": 0,
+  "videoDarknessOnScroll": 0.8,
+  "textTransform": "capitalize",
+  "letterSpacing": "-0.5px",
+  "showDividerThickness": "2px",
+  "heroVideoContrast": "1",
+  "tourDividerOpacity": "0.2"
+}
