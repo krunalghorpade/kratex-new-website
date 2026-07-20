@@ -1092,3 +1092,40 @@ a:hover {
         font-size: 0.7rem;
     }
 }
+/* About Page Carousel */
+.carousel-container {
+    width: 100vw;
+    margin-left: calc(-50vw + 50%);
+    overflow: hidden;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    white-space: nowrap;
+    position: relative;
+    padding: 1rem 0;
+}
+.carousel-track {
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    animation: scroll-right var(--carousel-speed, 40s) linear infinite;
+    /* Since we want it to move left to right, we start at -50% and go to 0 */
+}
+.carousel-track img {
+    height: 300px;
+    width: auto;
+    object-fit: cover;
+    border-radius: 8px;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+@keyframes scroll-right {
+    0% { transform: translateX(-50%); }
+    100% { transform: translateX(0%); }
+}
+
+/* On mobile, make height slightly smaller */
+@media (max-width: 768px) {
+    .carousel-track img {
+        height: 200px;
+    }
+}

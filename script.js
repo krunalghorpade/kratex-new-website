@@ -39,6 +39,7 @@ async function initScrollEffect() {
             :root {
                 --show-divider-thickness: ${settings.showDividerThickness || '1px'};
                 --tour-divider-opacity: ${settings.tourDividerOpacity || '0.5'};
+                --carousel-speed: ${settings.aboutCarouselSpeed || 40}s;
             }
             body, h1, h2, h3, h4, p, a, span, div, .btn-tv {
                 text-transform: ${settings.textTransform || 'none'} !important;
