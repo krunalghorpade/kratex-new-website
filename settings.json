@@ -1,20 +1,20 @@
 {
-  "initialVideoDarkness": 0.5,
-  "videoDarknessOnScroll": 0.85,
-  "textTransform": "capitalize",
+  "initialVideoDarkness": 0.4,
+  "videoDarknessOnScroll": 0.7,
+  "textTransform": "none",
   "letterSpacing": "-0.5px",
   "showDividerThickness": "2px",
   "heroVideoContrast": "1",
   "tourDividerOpacity": "0.2",
   "loadingPhrases": [
-    "Tuning the synths...",
-    "Warming up the subs...",
-    "Finding the groove...",
-    "Dropping the beat in 3, 2, 1...",
-    "Syncing the multiverse...",
-    "Polishing the kicks...",
-    "Adjusting the tempo...",
-    "Loading the vibe..."
+    "Marathi Vaajlach Pahije",
+    "House Music All Night Long",
+    "Nusta Vibes",
+    "Areee awaaj konach",
+    "taambdi chaamdi",
+    "Jevlis ka",
+    "zhaga maga mala bagha",
+    "zhapuk zhupuk"
   ],
   "aboutCarouselSpeed": 40
 }

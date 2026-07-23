@@ -104,17 +104,8 @@ async function fetchBandsintownEvents() {
             const dateNum = dateObj.getDate().toString().padStart(2, '0');
             const dayOfWeek = dayNames[dateObj.getDay()];
             
-            const city = event.venue.city.toUpperCase();
-            let rawVenue = event.venue.name;
-            rawVenue = rawVenue.replace(/\b(?:x|ft\.?|@|featuring|with)\s+kratex\b/gi, '')
-                               .replace(/\bkratex\s+(?:x|ft\.?|@|featuring|with)\b/gi, '')
-                               .replace(/\bkratex\b/gi, '')
-                               .replace(/^[^\w]+|[^\w]+$/g, '')
-                               .trim();
-            if (!rawVenue) rawVenue = event.venue.city || 'TBA';
-            
-            const venue = rawVenue.toUpperCase();
-            const title = (event.title || 'LIVE SET').toUpperCase();
+            const title = event.title || event.venue.name || 'LIVE SET';
+            const location = event.venue.location || `${event.venue.city}, ${event.venue.country}`;
             
             let ticketLink = '#';
             if (event.offers && event.offers.length > 0) {
@@ -138,7 +129,7 @@ async function fetchBandsintownEvents() {
                 </div>
                 <div class="tour-middle">
                     <span class="title">${title}</span>
-                    <span class="location">📍 ${venue}, ${city}</span>
+                    <span class="location">📍 ${location}</span>
                 </div>
                 <div class="tour-right">
                     <span class="btn-tv book-btn">🎫 🔗 Book Now</span>

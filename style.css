@@ -63,12 +63,34 @@ a:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-size: 0.8rem;
+}
+
+.nav-left, .nav-right {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.nav-left {
+    justify-content: flex-start;
+    gap: 3rem;
+}
+
+.nav-right {
+    justify-content: flex-end;
+    gap: 3rem;
+}
+
+.nav-logo-link {
+    flex-shrink: 0;
 }
 
 .nav-links a:not(.nav-logo-link) {
     position: relative;
     display: inline-block;
-    opacity: 1; /* override global a:hover opacity if needed */
+    opacity: 1;
+    /* override global a:hover opacity if needed */
 }
 
 .nav-links a:not(.nav-logo-link)::after {
@@ -203,7 +225,7 @@ a:hover {
     justify-content: space-between;
     gap: 1.5rem;
     padding: 1.5rem 1rem;
-    font-size: 1.8rem;
+    font-size: 1.2rem;
     font-weight: 500;
     align-items: center;
     border-bottom: 1px solid rgba(255, 255, 255, var(--tour-divider-opacity, 0.5));
@@ -825,9 +847,12 @@ a:hover {
 }
 
 .tour-middle {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     gap: 1rem;
     flex: 2;
-    justify-content: center;
+    align-items: center;
+    text-align: left;
 }
 
 .tour-right {
@@ -949,7 +974,7 @@ a:hover {
     display: flex;
     flex-direction: column;
     align-items: center;
-
+    gap: 2rem;
     margin-bottom: 2rem;
 }
 
@@ -958,14 +983,14 @@ a:hover {
         flex-direction: row;
         align-items: center;
         justify-content: center;
-
+        gap: 4rem;
     }
 }
 
 .album-image-wrapper {
     position: relative;
     width: 100%;
-    max-width: 650px;
+    max-width: 550px;
     aspect-ratio: 1;
     height: 20rem;
     flex-shrink: 0;
@@ -985,13 +1010,19 @@ a:hover {
 
 
 
-.album-image-wrapper:hover .album-info {
+.album-info {
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
     gap: 2rem;
-    text-align: left;
+    text-align: center;
+}
+
+@media (min-width: 900px) {
+    .album-info {
+        text-align: left;
+    }
 }
 
 .album-title {
@@ -1092,6 +1123,7 @@ a:hover {
         font-size: 0.7rem;
     }
 }
+
 /* About Page Carousel */
 .carousel-container {
     width: 100vw;
@@ -1103,6 +1135,7 @@ a:hover {
     position: relative;
     padding: 1rem 0;
 }
+
 .carousel-track {
     display: inline-flex;
     align-items: center;
@@ -1110,22 +1143,262 @@ a:hover {
     animation: scroll-right var(--carousel-speed, 40s) linear infinite;
     /* Since we want it to move left to right, we start at -50% and go to 0 */
 }
+
 .carousel-track img {
-    height: 300px;
+    height: 500px;
     width: auto;
     object-fit: cover;
     border-radius: 8px;
     user-select: none;
     -webkit-user-drag: none;
 }
+
 @keyframes scroll-right {
-    0% { transform: translateX(-50%); }
-    100% { transform: translateX(0%); }
+    0% {
+        transform: translateX(-50%);
+    }
+
+    100% {
+        transform: translateX(0%);
+    }
 }
 
 /* On mobile, make height slightly smaller */
 @media (max-width: 768px) {
     .carousel-track img {
-        height: 200px;
+        height: 500px;
     }
+}
+
+/* TV Section Styles */
+.tv-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+@media (min-width: 900px) {
+    .tv-container {
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 4rem;
+    }
+}
+
+.tv-image-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 550px;
+    aspect-ratio: 1;
+    height: 20rem;
+    flex-shrink: 0;
+}
+
+.tv-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    text-align: center;
+    margin-top: 7rem;
+}
+
+@media (min-width: 900px) {
+    .tv-info {
+        text-align: left;
+
+    }
+}
+
+.tv-title {
+    font-size: 2.75rem;
+    font-family: var(--font-heading);
+    letter-spacing: 2px;
+    margin: 0;
+    line-height: 2;
+}
+
+.tv-meta {
+    font-size: 1.2rem;
+    font-family: var(--font-body);
+    font-weight: 500;
+    opacity: 0.7;
+    margin: 0;
+    margin-bottom: 1rem;
+}
+
+.tv-release {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin: 0;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.tv-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+@media (min-width: 768px) {
+    .tv-actions {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+}
+
+.tv-actions .btn-tv {
+    text-align: center;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.8rem;
+}
+
+.tv-actions .btn-tv:hover {
+    background: var(--text-color);
+    color: var(--bg-color);
+}
+
+/* Y2K TV Frame */
+.tv-frame-link {
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    transition: transform 0.2s ease;
+}
+
+.tv-frame-link:hover {
+    transform: scale(1.02);
+}
+
+.y2k-tv-frame {
+    position: relative;
+    border: 20px solid #333;
+    border-bottom: 40px solid #222;
+    border-radius: 10% / 5%;
+    background: #000;
+    box-shadow: inset 0 0 20px #000, 0 10px 30px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    padding: 10px;
+    aspect-ratio: 4/3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+}
+
+.y2k-tv-frame::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(0deg,
+            rgba(0, 0, 0, 0.15),
+            rgba(0, 0, 0, 0.15) 1px,
+            transparent 1px,
+            transparent 2px);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.tv-glare {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    right: -50%;
+    bottom: -50%;
+    background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 3;
+}
+
+.tv-gif {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Contact Section */
+.contact-section {
+    text-align: center;
+    padding: 4rem 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.contact-container h2 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-bottom: 0.5rem;
+}
+
+.contact-container span {
+    display: block;
+    font-size: 0.9rem;
+    letter-spacing: 4px;
+    opacity: 0.6;
+    margin-bottom: 3rem;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+@media (min-width: 768px) {
+    .contact-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .contact-grid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+.contact-col {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: left;
+}
+
+.contact-col h4 {
+    color: var(--text-color);
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    margin-bottom: 0.5rem;
+    opacity: 0.7;
+    margin-top: 0;
+}
+
+.contact-col p {
+    margin: 0;
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+
+.contact-col a {
+    color: var(--text-color);
+    text-decoration: underline;
+    transition: opacity 0.2s;
+}
+
+.contact-col a:hover {
+    opacity: 1;
 }

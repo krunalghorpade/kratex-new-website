@@ -63,19 +63,22 @@
     </div>
 
     <!-- Top Navigation -->
-    <!-- Top Navigation -->
     <nav class="top-nav">
         <div class="nav-links">
-            <a href="/about">ABOUT KRATEX</a>
-            <a href="/#shows">SHOWS</a>
-            <a href="/#djsets">DJ SETS</a>
+            <div class="nav-left">
+                <a href="/about">ABOUT KRATEX</a>
+                <a href="/#shows">SHOWS</a>
+            </div>
             <a href="/" class="nav-logo-link">
                 <img src="assets/logo.svg" alt="Home" class="nav-logo default-logo">
                 <img src="assets/logom.svg" alt="Home Hover" class="nav-logo hover-logo">
             </a>
-            <a href="/#merch">MERCH</a>
-            <a href="/#music">MUSIC VIDEOS</a>
-            <a href="/#subscribe">SUBSCRIBE</a>
+            <div class="nav-right">
+                <a href="/#merch">MERCH</a>
+                <a href="/#music">MUSIC VIDEOS</a>
+                <a href="/#subscribe">SUBSCRIBE</a>
+                <a href="/#contact">CONTACT</a>
+            </div>
         </div>
         <button class="hamburger" id="hamburger-menu" aria-label="Menu">
             <svg viewBox="0 0 100 80" width="30" height="30" fill="var(--text-color)">
@@ -92,7 +95,6 @@
         <div class="mobile-nav-links">
             <a href="/about" class="mobile-link">ABOUT KRATEX</a>
             <a href="/#shows" class="mobile-link">SHOWS</a>
-            <a href="/#djsets" class="mobile-link">DJ SETS</a>
             <a href="/" class="mobile-link nav-logo-link">
                 <img src="assets/logo.svg" alt="Home" class="nav-logo default-logo">
                 <img src="assets/logom.svg" alt="Home Hover" class="nav-logo hover-logo">
@@ -100,6 +102,7 @@
             <a href="/#merch" class="mobile-link">MERCH</a>
             <a href="/#music" class="mobile-link">MUSIC VIDEOS</a>
             <a href="/#subscribe" class="mobile-link">SUBSCRIBE</a>
+            <a href="/#contact" class="mobile-link">CONTACT</a>
         </div>
     </div>
 
@@ -111,7 +114,7 @@
         <div id="video-scrim"></div>
         <div class="hero-overlay">
             <img src="assets/logo.svg" alt="KRATEX" class="hero-logo">
-            <a href="https://tv.kratex.in" target="_blank" class="btn-tv">WATCH KRATEX TV</a>
+            <a href="#album-promo" class="btn-tv">NEW ALBUM FAKTA HOUSE</a>
         </div>
 
         <!-- Subtle Scroll Prompt -->
@@ -583,6 +586,32 @@
             </div>
         </section>
 
+        <!-- Kratex TV Promo Section -->
+        <section id="kratex-tv-promo" class="section">
+            <div class="tv-container">
+                <div class="tv-image-wrapper">
+                    <a href="https://tv.kratex.in" target="_blank" class="tv-frame-link">
+                        <div class="y2k-tv-frame">
+                            <img src="assets/video/kratextv.gif" alt="Kratex TV Preview" class="tv-gif">
+                            <div class="tv-glare"></div>
+                        </div>
+                    </a>
+                </div>
+                <div class="tv-info">
+                    <h2 class="tv-title">KRATEX TV</h2>
+                    <p class="tv-meta" style="font-size: 1.1rem; line-height: 1.5; max-width: 500px;">
+                        Experience Kratex like never before. Dive into a retro 90s TV experience where every channel
+                        change drops you into a random timestamp of exclusive podcasts, music videos, unreleased DJ
+                        mixes, and behind-the-scenes content.
+                    </p>
+                    <p class="tv-release">YOUR NEW FAVORITE ADDICTION.</p>
+                    <div class="tv-actions">
+                        <a href="https://tv.kratex.in" target="_blank" class="btn-tv">WATCH NOW ↗</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Subscribe Section -->
         <section id="subscribe" class="section subscribe-section">
             <div class="subscribe-container">
@@ -618,6 +647,39 @@
             </div>
         </div>
 
+        <!-- Contact Section -->
+        <section id="contact" class="section contact-section">
+            <div class="contact-container">
+                <h2>CONTACT</h2>
+                <span>// GET IN TOUCH</span>
+                <div class="contact-grid">
+                    <div class="contact-col">
+                        <h4>BOOKINGS</h4>
+                        <p>Rock Kacchi</p>
+                        <p><a href="https://wa.link/5eah82" target="_blank">+91 98341 79271</a></p>
+                        <p><a href="mailto:rock@worldofvibes.com">rock@worldofvibes.com</a></p>
+                    </div>
+                    <div class="contact-col">
+                        <h4>PROMOS</h4>
+                        <p><a href="https://tstack.link/kratex" target="_blank">Send your music</a></p>
+                    </div>
+                    <div class="contact-col">
+                        <h4>M-HOUSE LABEL</h4>
+                        <p><a href="https://tstack.link/mhouse" target="_blank">Submit your demos</a></p>
+                    </div>
+                    <div class="contact-col">
+                        <h4>COMMUNITY</h4>
+                        <p><a href="https://whatsapp.com/channel/0029VaA3LelAu3aMHcTdIY16" target="_blank">Join Kratex
+                                WhatsApp</a></p>
+                    </div>
+                    <div class="contact-col">
+                        <h4>KRATEX</h4>
+                        <p><a href="mailto:contact@kratex.in">contact@kratex.in</a></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <footer class="footer">
             <div style="margin-bottom: 2rem;">
                 <img src="assets/logo.svg" alt="Kratex Logo" style="height: 40px; opacity: 1;">
@@ -628,9 +690,9 @@
                     <p><a href="/">Home</a></p>
                     <p><a href="/about">About Kratex</a></p>
                     <p><a href="/#shows">Shows</a></p>
-                    <p><a href="/#djsets">DJ Sets</a></p>
                     <p><a href="/#merch">Merch</a></p>
                     <p><a href="/#music">Music</a></p>
+                    <p><a href="/#contact">Contact</a></p>
                 </div>
                 <div class="footer-col">
                     <h4>FOR BOOKINGS & INQUIRIES</h4>
