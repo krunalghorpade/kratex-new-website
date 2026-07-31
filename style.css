@@ -66,7 +66,8 @@ a:hover {
     font-size: 0.8rem;
 }
 
-.nav-left, .nav-right {
+.nav-left,
+.nav-right {
     display: flex;
     align-items: center;
     flex: 1;
@@ -1054,8 +1055,8 @@ a:hover {
 .album-actions {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
-    margin-top: 1rem;
+
+
 }
 
 @media (min-width: 768px) {
