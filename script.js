@@ -94,6 +94,67 @@ async function fetchBandsintownEvents() {
             return;
         }
 
+        // --- UPDATE HERO BUTTON LOGIC ---
+        const firstEvent = events[0];
+        const firstEventDate = new Date(firstEvent.starts_at);
+        const city = firstEvent.venue.city || '';
+        const venueName = firstEvent.venue.name || '';
+        
+        const monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
+        const month = monthNames[firstEventDate.getMonth()];
+        const dateNum = firstEventDate.getDate().toString().padStart(2, '0');
+        
+        const heroBtnText = document.getElementById('hero-btn-text');
+        const heroBtnLabel = document.getElementById('hero-btn-label');
+        const heroBtn = document.getElementById('hero-next-show-btn');
+        
+        if (heroBtnText && heroBtnLabel && heroBtn) {
+            heroBtnText.innerText = `NEXT SHOW : ${city.toUpperCase()} - ${dateNum} ${month}`;
+            
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            const eventDay = new Date(firstEventDate);
+            eventDay.setHours(0, 0, 0, 0);
+            
+            const diffTime = eventDay.getTime() - today.getTime();
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            
+            const getDayOfWeek = (date) => date.getDay();
+            
+            const venueSuffix = venueName ? ` - ${venueName.toUpperCase()}` : '';
+            
+            if (diffDays === 0) {
+                heroBtnLabel.innerText = "TODAY" + venueSuffix;
+                heroBtnLabel.style.display = "block";
+                heroBtn.classList.add("btn-highlight");
+            } else if (diffDays === 1) {
+                heroBtnLabel.innerText = "TOMORROW" + venueSuffix;
+                heroBtnLabel.style.display = "block";
+                heroBtn.classList.add("btn-highlight");
+            } else if (diffDays > 1 && diffDays <= 7) {
+                const todayDayOfWeek = getDayOfWeek(today);
+                const daysUntilSaturday = (6 - todayDayOfWeek + 7) % 7;
+                const daysUntilSunday = (0 - todayDayOfWeek + 7) % 7 || 7;
+                
+                if (diffDays === daysUntilSaturday) {
+                    heroBtnLabel.innerText = "THIS SATURDAY" + venueSuffix;
+                    heroBtnLabel.style.display = "block";
+                    heroBtn.classList.remove("btn-highlight");
+                } else if (diffDays === daysUntilSunday) {
+                    heroBtnLabel.innerText = "THIS SUNDAY" + venueSuffix;
+                    heroBtnLabel.style.display = "block";
+                    heroBtn.classList.remove("btn-highlight");
+                } else {
+                    heroBtnLabel.style.display = "none";
+                    heroBtn.classList.remove("btn-highlight");
+                }
+            } else {
+                heroBtnLabel.style.display = "none";
+                heroBtn.classList.remove("btn-highlight");
+            }
+        }
+        // --- END UPDATE HERO BUTTON LOGIC ---
+
         events.forEach(event => {
             const dateObj = new Date(event.starts_at);
             const monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];

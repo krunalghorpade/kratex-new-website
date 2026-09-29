@@ -576,6 +576,33 @@ a:hover {
     transition: all 0.3s ease;
 }
 
+.btn-tv.hero-btn-dynamic {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 2rem;
+    line-height: 1.2;
+}
+
+.btn-bottom-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    opacity: 0.8;
+    margin-top: 2px;
+    letter-spacing: 1.5px;
+}
+
+@keyframes btnHighlight {
+    0% { box-shadow: 0 0 0 rgba(255, 255, 255, 0.2); }
+    50% { box-shadow: 0 0 20px rgba(255, 255, 255, 0.6); }
+    100% { box-shadow: 0 0 0 rgba(255, 255, 255, 0.2); }
+}
+
+.btn-highlight {
+    animation: btnHighlight 2s infinite;
+}
+
 .btn-tv:hover {
     background: var(--text-color);
     color: var(--bg-color);

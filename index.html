@@ -109,13 +109,18 @@
     <!-- Video Hero Section -->
     <header id="hero" class="hero-video">
         <video autoplay muted loop playsinline class="hero-bg-video">
-            <source src="assets/video/video.mov" type="video/mp4">
+            <source src="assets/video/video.mp4" type="video/mp4">
         </video>
         <div id="video-scrim"></div>
         <div class="hero-overlay">
             <img src="assets/logo.svg" alt="KRATEX" class="hero-logo">
-            <a href="#shows" class="btn-tv"
-                onclick="gtag('event', 'click', {'event_category': 'Button', 'event_label': 'Hero_Next_Shows'});">NEXT SHOWS</a>
+            <div class="hero-cta-container" style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+                <a href="#shows" id="hero-next-show-btn" class="btn-tv hero-btn-dynamic"
+                    onclick="gtag('event', 'click', {'event_category': 'Button', 'event_label': 'Hero_Next_Shows'});">
+                    <span id="hero-btn-text">NEXT SHOWS</span>
+                </a>
+                <span id="hero-btn-label" class="btn-bottom-label" style="display: none;"></span>
+            </div>
         </div>
 
         <!-- Subtle Scroll Prompt -->
@@ -186,6 +191,11 @@
             </div>
             <div class="video-carousel-container">
                 <div class="video-carousel">
+                    <a class="video-item" href="https://www.youtube.com/watch?v=DHat4FKy52o" target="_blank">
+                        <img src="https://img.youtube.com/vi/DHat4FKy52o/hqdefault.jpg" alt="DJ Set" loading="lazy"
+                            class="video-thumb">
+                        <p class="video-title">KRATEX - FAKTAHOUSE DJ Set | Raya's Roof at Hylo, Mumbai</p>
+                    </a>
                     <a class="video-item" href="https://www.youtube.com/watch?v=KPBlZbO59V8" target="_blank">
                         <img src="https://img.youtube.com/vi/KPBlZbO59V8/hqdefault.jpg" alt="DJ Set" loading="lazy"
                             class="video-thumb">
@@ -747,7 +757,7 @@
         </footer>
     </div>
 
-    <script src="script.js?v=6"></script>
+    <script src="script.js?v=8"></script>
 </body>
 
 </html>
