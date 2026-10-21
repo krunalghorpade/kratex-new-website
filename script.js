@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initScrollEffect();
     initVideoHover();
     initSubscribeForm();
+    initStreamBackgroundPan();
     
     // Mobile Menu Logic
     const hamburger = document.getElementById('hamburger-menu');
@@ -366,3 +367,73 @@ function initPreloader() {
     });
 }
 initPreloader();
+
+/* ==========================================================
+   Full Width Section Background Slow Pan (Ken Burns) Effect
+   ========================================================== */
+function initStreamBackgroundPan() {
+    const layer1 = document.getElementById('stream-layer-1');
+    const layer2 = document.getElementById('stream-layer-2');
+    if (!layer1 || !layer2) return;
+
+    // Use p1, p2, p3, p4, p5, p6 from images/pics
+    const pics = [
+        'assets/images/pics/p1.png',
+        'assets/images/pics/p2.png',
+        'assets/images/pics/p3.png',
+        'assets/images/pics/p4.png',
+        'assets/images/pics/p5.png',
+        'assets/images/pics/p6.png'
+    ];
+
+    // Preload images so crossfades are instant and seamless
+    pics.forEach(src => {
+        const img = new Image();
+        img.src = src;
+    });
+
+    let currentPicIndex = -1;
+    let currentPanIndex = 0;
+    let activeLayer = layer1;
+    let inactiveLayer = layer2;
+
+    function getNextRandomIndex(max, current) {
+        if (max <= 1) return 0;
+        let next;
+        do {
+            next = Math.floor(Math.random() * max);
+        } while (next === current);
+        return next;
+    }
+
+    function switchImage() {
+        const nextPicIndex = getNextRandomIndex(pics.length, currentPicIndex);
+        currentPicIndex = nextPicIndex;
+
+        // Cycle through slowPan1 to slowPan4
+        currentPanIndex = (currentPanIndex % 4) + 1;
+        const picUrl = pics[currentPicIndex];
+
+        // Prepare the inactive layer before revealing
+        inactiveLayer.style.animation = 'none';
+        void inactiveLayer.offsetWidth; // Force reflow to restart animation from 0%
+
+        inactiveLayer.style.backgroundImage = `url("${picUrl}")`;
+        inactiveLayer.style.animation = `slowPan${currentPanIndex} 64s linear infinite`;
+
+        // Crossfade
+        inactiveLayer.classList.add('is-active');
+        activeLayer.classList.remove('is-active');
+
+        // Swap active and inactive layer pointers
+        const temp = activeLayer;
+        activeLayer = inactiveLayer;
+        inactiveLayer = temp;
+    }
+
+    // Launch immediately on page load
+    switchImage();
+
+    // Each image lasts exactly 1 minute (60 seconds = 60000ms)
+    setInterval(switchImage, 60000);
+}

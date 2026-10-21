@@ -1430,3 +1430,428 @@ a:hover {
 .contact-col a:hover {
     opacity: 1;
 }
+
+/* ==========================================================
+   Full Width Streaming Showcase Section with Slow Pan Background
+   (Compact Half-Height Layout)
+   ========================================================== */
+.stream-showcase-section {
+    position: relative;
+    width: 100vw;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    min-height: 36vh;
+    padding: 2.75rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin-top: 2.5rem;
+    margin-bottom: 3.5rem;
+    box-sizing: border-box;
+}
+
+.stream-bg-wrapper {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.stream-bg-layer {
+    position: absolute;
+    top: -12%;
+    left: -12%;
+    width: 124%;
+    height: 124%;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 2.5s ease-in-out;
+    will-change: transform, opacity;
+}
+
+.stream-bg-layer.is-active {
+    opacity: 1;
+}
+
+/* 4 Cinematic Ken Burns slow pan variations (smooth 60s movement) */
+@keyframes slowPan1 {
+    0% {
+        transform: scale(1.08) translate(0%, 0%);
+    }
+    50% {
+        transform: scale(1.15) translate(-2%, -1.5%);
+    }
+    100% {
+        transform: scale(1.22) translate(-3.5%, -2.5%);
+    }
+}
+
+@keyframes slowPan2 {
+    0% {
+        transform: scale(1.22) translate(2.5%, 2%);
+    }
+    50% {
+        transform: scale(1.15) translate(0%, 0.5%);
+    }
+    100% {
+        transform: scale(1.08) translate(-2.5%, -1%);
+    }
+}
+
+@keyframes slowPan3 {
+    0% {
+        transform: scale(1.10) translate(-3%, 2%);
+    }
+    50% {
+        transform: scale(1.17) translate(0%, 0%);
+    }
+    100% {
+        transform: scale(1.23) translate(2.5%, -2%);
+    }
+}
+
+@keyframes slowPan4 {
+    0% {
+        transform: scale(1.23) translate(-2%, -2%);
+    }
+    50% {
+        transform: scale(1.15) translate(0.5%, -0.5%);
+    }
+    100% {
+        transform: scale(1.10) translate(3%, 1.5%);
+    }
+}
+
+.stream-bg-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, rgba(10, 10, 10, 0.75) 0%, rgba(5, 5, 5, 0.92) 100%);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 1;
+}
+
+/* Feathered borders scaled down for compact height */
+.stream-bg-overlay::before,
+.stream-bg-overlay::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 60px;
+    pointer-events: none;
+    z-index: 2;
+}
+
+.stream-bg-overlay::before {
+    top: 0;
+    background: linear-gradient(to bottom, var(--bg-color, #0a0a0a), transparent);
+}
+
+.stream-bg-overlay::after {
+    bottom: 0;
+    background: linear-gradient(to top, var(--bg-color, #0a0a0a), transparent);
+}
+
+.stream-content-container {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stream-header {
+    text-align: center;
+    max-width: 800px;
+    margin-bottom: 1.35rem;
+}
+
+.stream-badge {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 0.35rem;
+    text-transform: uppercase;
+}
+
+.stream-hero-title {
+    font-family: var(--font-heading);
+    font-size: clamp(1.35rem, 2.5vw, 2.1rem);
+    font-weight: 800;
+    line-height: 1.15;
+    letter-spacing: -0.5px;
+    color: var(--text-color);
+    margin-bottom: 0.35rem;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.85);
+}
+
+.stream-hero-sub {
+    font-size: clamp(0.8rem, 1.1vw, 0.92rem);
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.68);
+    margin: 0 auto;
+    max-width: 550px;
+    font-weight: 400;
+}
+
+.stream-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0.7rem;
+    width: 100%;
+}
+
+.stream-card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.65rem 0.85rem;
+    background: rgba(18, 18, 20, 0.76);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 9px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    color: var(--text-color);
+    text-decoration: none;
+    transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.stream-card-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: transform 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+}
+
+.stream-card-icon svg {
+    display: block;
+    width: 22px;
+    height: 22px;
+}
+
+.stream-card-info {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    flex: 1;
+}
+
+.stream-card-name {
+    font-size: 0.86rem;
+    font-weight: 600;
+    letter-spacing: 0.2px;
+    color: #ffffff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.stream-card-meta {
+    font-size: 0.62rem;
+    color: rgba(255, 255, 255, 0.48);
+    margin-top: 1px;
+    letter-spacing: 0.4px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-transform: uppercase;
+}
+
+.stream-card-arrow {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.35);
+    transition: transform 0.25s ease, color 0.25s ease;
+    flex-shrink: 0;
+}
+
+/* Hover States with Brand Accent Highlights */
+.stream-card:hover {
+    transform: translateY(-2px);
+    background: rgba(28, 28, 32, 0.92);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.55);
+}
+
+.stream-card:hover .stream-card-arrow {
+    transform: translate(2px, -2px);
+    color: #ffffff;
+}
+
+.stream-card:hover .stream-card-icon {
+    transform: scale(1.08);
+}
+
+.stream-card-spotify:hover {
+    border-color: rgba(29, 185, 84, 0.55);
+    box-shadow: 0 8px 24px rgba(29, 185, 84, 0.2);
+}
+.stream-card-spotify:hover .stream-card-icon {
+    background: rgba(29, 185, 84, 0.15);
+    border-color: rgba(29, 185, 84, 0.35);
+}
+
+.stream-card-apple:hover {
+    border-color: rgba(252, 60, 68, 0.55);
+    box-shadow: 0 8px 24px rgba(252, 60, 68, 0.2);
+}
+.stream-card-apple:hover .stream-card-icon {
+    background: rgba(252, 60, 68, 0.15);
+    border-color: rgba(252, 60, 68, 0.35);
+}
+
+.stream-card-ytmusic:hover {
+    border-color: rgba(255, 0, 0, 0.55);
+    box-shadow: 0 8px 24px rgba(255, 0, 0, 0.2);
+}
+.stream-card-ytmusic:hover .stream-card-icon {
+    background: rgba(255, 0, 0, 0.15);
+    border-color: rgba(255, 0, 0, 0.35);
+}
+
+.stream-card-amazon:hover {
+    border-color: rgba(0, 168, 225, 0.55);
+    box-shadow: 0 8px 24px rgba(0, 168, 225, 0.2);
+}
+.stream-card-amazon:hover .stream-card-icon {
+    background: rgba(0, 168, 225, 0.15);
+    border-color: rgba(0, 168, 225, 0.35);
+}
+
+.stream-card-soundcloud:hover {
+    border-color: rgba(255, 85, 0, 0.55);
+    box-shadow: 0 8px 24px rgba(255, 85, 0, 0.2);
+}
+.stream-card-soundcloud:hover .stream-card-icon {
+    background: rgba(255, 85, 0, 0.15);
+    border-color: rgba(255, 85, 0, 0.35);
+}
+
+.stream-card-jiosaavn:hover {
+    border-color: rgba(30, 204, 176, 0.55);
+    box-shadow: 0 8px 24px rgba(30, 204, 176, 0.2);
+}
+.stream-card-jiosaavn:hover .stream-card-icon {
+    background: rgba(30, 204, 176, 0.15);
+    border-color: rgba(30, 204, 176, 0.35);
+}
+
+.stream-card-beatport:hover {
+    border-color: rgba(2, 255, 149, 0.55);
+    box-shadow: 0 8px 24px rgba(2, 255, 149, 0.2);
+}
+.stream-card-beatport:hover .stream-card-icon {
+    background: rgba(2, 255, 149, 0.15);
+    border-color: rgba(2, 255, 149, 0.35);
+}
+
+.stream-card-bandcamp:hover {
+    border-color: rgba(29, 160, 195, 0.55);
+    box-shadow: 0 8px 24px rgba(29, 160, 195, 0.2);
+}
+.stream-card-bandcamp:hover .stream-card-icon {
+    background: rgba(29, 160, 195, 0.15);
+    border-color: rgba(29, 160, 195, 0.35);
+}
+
+.stream-card-deezer:hover {
+    border-color: rgba(162, 56, 255, 0.55);
+    box-shadow: 0 8px 24px rgba(162, 56, 255, 0.2);
+}
+.stream-card-deezer:hover .stream-card-icon {
+    background: rgba(162, 56, 255, 0.15);
+    border-color: rgba(162, 56, 255, 0.35);
+}
+
+.stream-card-tidal:hover {
+    border-color: rgba(0, 255, 255, 0.55);
+    box-shadow: 0 8px 24px rgba(0, 255, 255, 0.2);
+}
+.stream-card-tidal:hover .stream-card-icon {
+    background: rgba(0, 255, 255, 0.15);
+    border-color: rgba(0, 255, 255, 0.35);
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 1200px) {
+    .stream-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.65rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .stream-showcase-section {
+        padding: 2.25rem 0.85rem;
+        margin-top: 2rem;
+        margin-bottom: 2.75rem;
+        min-height: auto;
+    }
+
+    .stream-header {
+        margin-bottom: 1.15rem;
+    }
+
+    .stream-hero-title {
+        font-size: 1.25rem;
+    }
+
+    .stream-hero-sub {
+        font-size: 0.78rem;
+    }
+
+    .stream-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+    }
+
+    .stream-card {
+        padding: 0.55rem 0.7rem;
+        gap: 0.55rem;
+    }
+
+    .stream-card-icon {
+        width: 30px;
+        height: 30px;
+    }
+
+    .stream-card-icon svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .stream-card-name {
+        font-size: 0.78rem;
+    }
+
+    .stream-card-meta {
+        font-size: 0.56rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .stream-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
