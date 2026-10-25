@@ -1,439 +1,255 @@
-document.addEventListener('DOMContentLoaded', () => {
-    initCountdown();
-    fetchBandsintownEvents();
-    initScrollEffect();
-    initVideoHover();
-    initSubscribeForm();
-    initStreamBackgroundPan();
-    
-    // Mobile Menu Logic
-    const hamburger = document.getElementById('hamburger-menu');
-    const closeBtn = document.getElementById('close-menu');
-    const mobileMenu = document.getElementById('mobile-menu');
-    const mobileLinks = document.querySelectorAll('.mobile-link');
-    
-    if (hamburger && closeBtn && mobileMenu) {
-        hamburger.addEventListener('click', () => {
-            mobileMenu.classList.add('active');
-        });
-        
-        closeBtn.addEventListener('click', () => {
-            mobileMenu.classList.remove('active');
-        });
-        
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.remove('active');
-            });
-        });
-    }
-});
+'use strict';
 
-async function initScrollEffect() {
-    try {
-        const res = await fetch('settings.json');
-        const settings = await res.json();
-        
-        // Apply Global Typography Settings
-        const style = document.createElement('style');
-        style.innerHTML = `
-            :root {
-                --show-divider-thickness: ${settings.showDividerThickness || '1px'};
-                --tour-divider-opacity: ${settings.tourDividerOpacity || '0.5'};
-                --carousel-speed: ${settings.aboutCarouselSpeed || 40}s;
-            }
-            body, h1, h2, h3, h4, p, a, span, div, .btn-tv {
-                text-transform: ${settings.textTransform || 'none'} !important;
-                letter-spacing: ${settings.letterSpacing || 'normal'} !important;
-            }
-            .hero-bg-video {
-                filter: contrast(${settings.heroVideoContrast || '1'});
-            }
-        `;
-        document.head.appendChild(style);
+// Keep existing analytics handlers safe on pages that do not load Google Analytics.
+window.gtag = window.gtag || function () { (window.dataLayer = window.dataLayer || []).push(arguments); };
+const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-        const scrim = document.getElementById('video-scrim');
-        
-        if (scrim) {
-            const initialDarkness = settings.initialVideoDarkness !== undefined ? settings.initialVideoDarkness : 0;
-            const scrollDarkness = settings.videoDarknessOnScroll !== undefined ? settings.videoDarknessOnScroll : 0.7;
-            
-            // Set initial state
-            scrim.style.opacity = initialDarkness;
-            
-            window.addEventListener('scroll', () => {
-                const heroHeight = window.innerHeight * 0.5;
-                if (window.scrollY > heroHeight) {
-                    scrim.style.opacity = scrollDarkness;
-                } else {
-                    scrim.style.opacity = initialDarkness;
-                }
-            });
-        }
-        } catch (e) {
-        console.error("Error loading settings.json", e);
+function initNavigation() {
+  const nav = document.querySelector('.top-nav');
+  const trigger = document.getElementById('hamburger-menu');
+  const menu = document.getElementById('mobile-menu');
+  const close = document.getElementById('close-menu');
+  const background = [nav, document.querySelector('header'), document.querySelector('main')].filter(Boolean);
+  if (!nav || !trigger || !menu || !close) return;
+  const updateNav = () => nav.classList.toggle('is-scrolled', window.scrollY > 40);
+  updateNav();
+  window.addEventListener('scroll', updateNav, { passive: true });
+  function setOpen(open, restoreFocus = true) {
+    menu.inert = !open;
+    menu.classList.toggle('active', open);
+    trigger.setAttribute('aria-expanded', String(open));
+    document.body.classList.toggle('menu-open', open);
+    background.forEach(element => { element.inert = open; });
+    if (open) requestAnimationFrame(() => close.focus());
+    else if (restoreFocus) trigger.focus();
+  }
+  trigger.addEventListener('click', () => setOpen(true));
+  close.addEventListener('click', () => setOpen(false));
+  menu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setOpen(false)));
+  menu.addEventListener('keydown', event => {
+    if (event.key === 'Escape') setOpen(false);
+    if (event.key !== 'Tab') return;
+    const focusables = [...menu.querySelectorAll('a[href], button')];
+    const first = focusables[0], last = focusables.at(-1);
+    if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+    if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+  });
+  window.matchMedia('(min-width: 801px)').addEventListener('change', event => {
+    if (event.matches && menu.classList.contains('active')) setOpen(false, false);
+  });
+  if (location.pathname.startsWith('/about')) {
+    nav.querySelectorAll('a[href="/about"]').forEach(link => link.setAttribute('aria-current', 'page'));
+  }
+  document.querySelectorAll('.footer-bottom').forEach(footer => {
+    const link = document.createElement('a');
+    link.href = '#';
+    link.className = 'back-to-top';
+    link.textContent = 'BACK TO TOP ↑';
+    footer.append(link);
+  });
+}
+
+function initMotion() {
+  const video = document.querySelector('.hero-bg-video');
+  const button = document.getElementById('motion-toggle');
+  let paused = motionPreference.matches;
+  let heroVisible = true;
+  const tv = document.querySelector('.tv-gif');
+  const tvAnimation = tv?.getAttribute('src');
+  function update() {
+    document.body.classList.toggle('motion-paused', paused);
+    if (tv) {
+      const desiredSource = paused ? '/assets/images/pics/p6.png' : tvAnimation;
+      if (tv.getAttribute('src') !== desiredSource) tv.src = desiredSource;
     }
+    if (video) {
+      if (paused || !heroVisible || document.hidden) video.pause();
+      else video.play().catch(() => {}); // Autoplay can be declined by the browser.
+    }
+    if (button) {
+      button.textContent = paused ? 'PLAY MOTION ▷' : 'PAUSE MOTION Ⅱ';
+      button.setAttribute('aria-pressed', String(paused));
+      button.setAttribute('aria-label', paused ? 'Play background motion' : 'Pause background motion');
+    }
+  }
+  button?.addEventListener('click', () => { paused = !paused; update(); });
+  motionPreference.addEventListener('change', event => { paused = event.matches; update(); });
+  document.addEventListener('visibilitychange', update);
+  if (video && 'IntersectionObserver' in window) {
+    new IntersectionObserver(entries => { heroVisible = entries[0].isIntersecting; update(); }, { threshold: .05 }).observe(video);
+  }
+  update();
+}
+
+function initCollections() {
+  document.querySelectorAll('.video-carousel, .merch-grid').forEach((rail, index) => {
+    const section = rail.closest('section');
+    const title = section.querySelector('h2').textContent.replace(/^\d+/, '').trim();
+    rail.id = rail.id || `collection-${index}`;
+    rail.tabIndex = 0;
+    rail.setAttribute('role', 'region');
+    rail.setAttribute('aria-label', `${title} — scroll to explore`);
+    const controls = document.createElement('div');
+    controls.className = 'rail-controls';
+    const count = document.createElement('span');
+    count.className = 'rail-count';
+    const previous = document.createElement('button');
+    const next = document.createElement('button');
+    for (const [button, label, symbol] of [[previous, 'Previous', '←'], [next, 'Next', '→']]) {
+      button.type = 'button';
+      button.className = 'rail-button';
+      button.setAttribute('aria-label', `${label} ${title.toLowerCase()}`);
+      button.setAttribute('aria-controls', rail.id);
+      button.textContent = symbol;
+    }
+    controls.append(count, previous, next);
+    rail.after(controls);
+    const step = () => rail.children[0].getBoundingClientRect().width + parseFloat(getComputedStyle(rail).gap);
+    const update = () => {
+      previous.disabled = rail.scrollLeft < 2;
+      next.disabled = rail.scrollLeft + rail.clientWidth >= rail.scrollWidth - 3;
+      const first = Math.round(rail.scrollLeft / step()) + 1;
+      count.textContent = `${String(first).padStart(2, '0')} / ${String(rail.children.length).padStart(2, '0')} — ${rail.classList.contains('merch-grid') ? 'THE COLLECTION' : 'PRESS PLAY'}`;
+    };
+    const move = direction => rail.scrollBy({ left: step() * direction, behavior: motionPreference.matches ? 'instant' : 'smooth' });
+    previous.addEventListener('click', () => move(-1));
+    next.addEventListener('click', () => move(1));
+    rail.addEventListener('keydown', event => {
+      if (event.target !== rail || !['ArrowLeft', 'ArrowRight'].includes(event.key)) return;
+      event.preventDefault();
+      move(event.key === 'ArrowLeft' ? -1 : 1);
+    });
+    rail.addEventListener('scroll', update, { passive: true });
+    if ('ResizeObserver' in window) new ResizeObserver(update).observe(rail);
+    update();
+  });
+  document.querySelectorAll('.carousel-track').forEach(track => {
+    [...track.children].slice(track.children.length / 2).forEach(image => {
+      image.alt = '';
+      image.setAttribute('aria-hidden', 'true');
+    });
+    if ('IntersectionObserver' in window) new IntersectionObserver(entries => {
+      track.style.animationPlayState = entries[0].isIntersecting ? '' : 'paused';
+    }).observe(track);
+  });
+}
+
+function initReveals() {
+  if (motionPreference.matches || !('IntersectionObserver' in window)) return;
+  const observer = new IntersectionObserver(entries => entries.forEach(entry => {
+    if (entry.isIntersecting) { entry.target.classList.remove('is-waiting'); observer.unobserve(entry.target); }
+  }), { threshold: .08, rootMargin: '0px 0px 30px 0px' });
+  document.querySelectorAll('.section-header, .album-info, .album-image-wrapper, .tv-info, .stream-header, .subscribe-container, .contact-container > h2').forEach(element => {
+    element.classList.add('reveal');
+    if (element.getBoundingClientRect().top > window.innerHeight) element.classList.add('is-waiting');
+    observer.observe(element);
+  });
+  // Keyboard navigation must never land on visually hidden content.
+  document.addEventListener('focusin', event => event.target.closest('.reveal')?.classList.remove('is-waiting'));
+  motionPreference.addEventListener('change', event => {
+    if (event.matches) document.querySelectorAll('.is-waiting').forEach(element => element.classList.remove('is-waiting'));
+  });
+}
+
+function safeLink(value, fallback) {
+  try { const url = new URL(value); return ['https:', 'http:'].includes(url.protocol) ? url.href : fallback; }
+  catch { return fallback; }
 }
 
 async function fetchBandsintownEvents() {
-    const container = document.getElementById('bandsintown-events');
-    const appId = 'a6c091218a1b4ce7722331b71949efd4';
-    const artistName = 'Kratex';
-    const url = `https://rest.bandsintown.com/artists/${artistName}/events?app_id=${appId}`;
-
-    try {
-        const response = await fetch(url);
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        const events = await response.json();
-        
-        container.innerHTML = ''; // Clear loading text
-        
-        if (events.length === 0) {
-            container.innerHTML = '<p>NO UPCOMING DATES.</p>';
-            return;
-        }
-
-        // --- UPDATE HERO BUTTON LOGIC ---
-        const firstEvent = events[0];
-        const firstEventDate = new Date(firstEvent.starts_at);
-        const city = firstEvent.venue.city || '';
-        const venueName = firstEvent.venue.name || '';
-        
-        const monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
-        const month = monthNames[firstEventDate.getMonth()];
-        const dateNum = firstEventDate.getDate().toString().padStart(2, '0');
-        
-        const heroBtnText = document.getElementById('hero-btn-text');
-        const heroBtnLabel = document.getElementById('hero-btn-label');
-        const heroBtn = document.getElementById('hero-next-show-btn');
-        
-        if (heroBtnText && heroBtnLabel && heroBtn) {
-            heroBtnText.innerText = `NEXT SHOW : ${city.toUpperCase()} - ${dateNum} ${month}`;
-            
-            const today = new Date();
-            today.setHours(0, 0, 0, 0);
-            const eventDay = new Date(firstEventDate);
-            eventDay.setHours(0, 0, 0, 0);
-            
-            const diffTime = eventDay.getTime() - today.getTime();
-            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-            
-            const getDayOfWeek = (date) => date.getDay();
-            
-            const venueSuffix = venueName ? ` - ${venueName.toUpperCase()}` : '';
-            
-            if (diffDays === 0) {
-                heroBtnLabel.innerText = "TODAY" + venueSuffix;
-                heroBtnLabel.style.display = "block";
-                heroBtn.classList.add("btn-highlight");
-            } else if (diffDays === 1) {
-                heroBtnLabel.innerText = "TOMORROW" + venueSuffix;
-                heroBtnLabel.style.display = "block";
-                heroBtn.classList.add("btn-highlight");
-            } else if (diffDays > 1 && diffDays <= 7) {
-                const todayDayOfWeek = getDayOfWeek(today);
-                const daysUntilSaturday = (6 - todayDayOfWeek + 7) % 7;
-                const daysUntilSunday = (0 - todayDayOfWeek + 7) % 7 || 7;
-                
-                if (diffDays === daysUntilSaturday) {
-                    heroBtnLabel.innerText = "THIS SATURDAY" + venueSuffix;
-                    heroBtnLabel.style.display = "block";
-                    heroBtn.classList.remove("btn-highlight");
-                } else if (diffDays === daysUntilSunday) {
-                    heroBtnLabel.innerText = "THIS SUNDAY" + venueSuffix;
-                    heroBtnLabel.style.display = "block";
-                    heroBtn.classList.remove("btn-highlight");
-                } else {
-                    heroBtnLabel.style.display = "none";
-                    heroBtn.classList.remove("btn-highlight");
-                }
-            } else {
-                heroBtnLabel.style.display = "none";
-                heroBtn.classList.remove("btn-highlight");
-            }
-        }
-        // --- END UPDATE HERO BUTTON LOGIC ---
-
-        events.forEach(event => {
-            const dateObj = new Date(event.starts_at);
-            const monthNames = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
-            const dayNames = ["SUNDAY", "MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY"];
-            
-            const month = monthNames[dateObj.getMonth()];
-            const year = dateObj.getFullYear().toString().slice(-2);
-            const dateNum = dateObj.getDate().toString().padStart(2, '0');
-            const dayOfWeek = dayNames[dateObj.getDay()];
-            
-            const title = event.title || event.venue.name || 'LIVE SET';
-            const location = event.venue.location || `${event.venue.city}, ${event.venue.country}`;
-            
-            let ticketLink = '#';
-            if (event.offers && event.offers.length > 0) {
-                const ticketOffer = event.offers.find(o => o.type === 'Tickets' && o.status === 'available');
-                if (ticketOffer) {
-                    ticketLink = ticketOffer.url;
-                }
-            }
-
-            const itemDiv = document.createElement('a');
-            itemDiv.className = 'tour-item';
-            itemDiv.href = ticketLink;
-            itemDiv.target = '_blank';
-            
-            const fullYear = dateObj.getFullYear();
-            
-            itemDiv.innerHTML = `
-                <div class="tour-left">
-                    <span class="date">🗓️ ${dateNum} ${month}, ${fullYear}</span>
-                    <span class="day">${dayOfWeek}</span>
-                </div>
-                <div class="tour-middle">
-                    <span class="title">${title}</span>
-                    <span class="location">📍 ${location}</span>
-                </div>
-                <div class="tour-right">
-                    <span class="btn-tv book-btn">🎫 🔗 Book Now</span>
-                </div>
-            `;
-            
-            container.appendChild(itemDiv);
-        });
-
-    } catch (error) {
-        console.error('Error fetching events:', error);
-        container.innerHTML = '<p>UNABLE TO LOAD DATES.</p>';
+  const container = document.getElementById('bandsintown-events');
+  if (!container) return;
+  const fallback = 'https://www.bandsintown.com/a/15525088-kratex';
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 8000);
+  const message = text => {
+    const p = document.createElement('p');
+    p.textContent = text + ' ';
+    const link = document.createElement('a');
+    link.href = fallback; link.target = '_blank'; link.rel = 'noopener noreferrer'; link.textContent = 'View Kratex on Bandsintown ↗';
+    p.append(link); container.replaceChildren(p);
+  };
+  try {
+    const response = await fetch('https://rest.bandsintown.com/artists/Kratex/events?app_id=a6c091218a1b4ce7722331b71949efd4', { signal: controller.signal });
+    if (!response.ok) throw new Error('Events unavailable');
+    const data = await response.json();
+    if (!Array.isArray(data)) throw new Error('Invalid events response');
+    const events = data.map(event => ({ ...event, date: new Date(event.datetime || event.starts_at) }))
+      .filter(event => !Number.isNaN(event.date.getTime()) && event.venue)
+      .sort((a, b) => a.date - b.date);
+    if (!events.length) { message('New dates are on the way.'); return; }
+    container.replaceChildren();
+    const formatDate = date => date.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }).toUpperCase();
+    for (const event of events) {
+      const offer = event.offers?.find(item => item.type?.toLowerCase() === 'tickets' && item.status === 'available');
+      const row = document.createElement('a');
+      row.className = 'tour-item'; row.href = safeLink(offer?.url || event.url, fallback); row.target = '_blank'; row.rel = 'noopener noreferrer';
+      for (const [className, content] of [
+        ['tour-left', [['date', formatDate(event.date)], ['day', event.date.toLocaleDateString('en-US', { weekday: 'long' }).toUpperCase()]]],
+        ['tour-middle', [['title', event.title || event.venue.name || 'Live set'], ['location', event.venue.location || [event.venue.city, event.venue.country].filter(Boolean).join(', ')]]],
+        ['tour-right', [['btn-tv book-btn', offer ? 'BOOK NOW ↗' : 'SHOW DETAILS ↗']]]
+      ]) {
+        const group = document.createElement('div'); group.className = className;
+        for (const [name, value] of content) { const span = document.createElement('span'); span.className = name; span.textContent = value; group.append(span); }
+        row.append(group);
+      }
+      container.append(row);
     }
-}
-
-// Album Countdown Logic
-function initCountdown() {
-    // Release Date: 31st July 2026, 12:00 PM IST
-    const releaseDate = new Date('2026-07-31T12:00:00+05:30').getTime();
-    
-    const daysEl = document.getElementById('cd-days');
-    const hoursEl = document.getElementById('cd-hours');
-    const minsEl = document.getElementById('cd-mins');
-    const secsEl = document.getElementById('cd-secs');
-
-    if (!daysEl) return; 
-
-    function update() {
-        const now = new Date().getTime();
-        const distance = releaseDate - now;
-
-        if (distance < 0) {
-            daysEl.innerText = '00';
-            hoursEl.innerText = '00';
-            minsEl.innerText = '00';
-            secsEl.innerText = '00';
-            return;
-        }
-
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        daysEl.innerText = days.toString().padStart(2, '0');
-        hoursEl.innerText = hours.toString().padStart(2, '0');
-        minsEl.innerText = minutes.toString().padStart(2, '0');
-        secsEl.innerText = seconds.toString().padStart(2, '0');
-    }
-    
-    update();
-    setInterval(update, 1000);
-}
-
-// Video Hover Pause Logic
-function initVideoHover() {
-    const btnTv = document.querySelector('.hero-overlay .btn-tv');
-    const heroVideo = document.querySelector('.hero-bg-video');
-
-    if (btnTv && heroVideo) {
-        btnTv.addEventListener('mouseenter', () => {
-            heroVideo.pause();
-        });
-        btnTv.addEventListener('mouseleave', () => {
-            heroVideo.play();
-        });
-    }
+    const first = events[0];
+    const heroText = document.getElementById('hero-btn-text');
+    if (heroText) heroText.textContent = `NEXT SHOW: ${(first.venue.city || first.venue.name).toUpperCase()} · ${first.date.toLocaleDateString('en-GB', { day: '2-digit', month: 'short' }).toUpperCase()}`;
+    const label = document.getElementById('hero-btn-label');
+    if (label && first.venue.name) { label.textContent = first.venue.name; label.style.display = 'block'; }
+  } catch { message('Live dates are temporarily unavailable.'); }
+  finally { clearTimeout(timeout); container.setAttribute('aria-busy', 'false'); }
 }
 
 function initSubscribeForm() {
-    const form = document.getElementById('subscribe-form');
-    const emailInput = document.getElementById('subscribe-email');
-    const subscribeBtn = document.getElementById('subscribe-btn');
-
-    if (!form || !emailInput || !subscribeBtn) return;
-
-    // Simple email validation regex
-    const isValidEmail = (email) => {
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    };
-
-    const handleInput = (e) => {
-        const email = e.target.value.trim();
-        if (isValidEmail(email)) {
-            subscribeBtn.classList.remove('btn-disabled');
-            subscribeBtn.href = `https://www.bandsintown.com/artist-subscribe/15525088?came_from=701&spn=1&signature=ZZ9dfbc80df9c61962408fde1d904ff938310c5694f290cb54f169d1a05415ce8c&newsletter_email=${encodeURIComponent(email)}`;
-        } else {
-            subscribeBtn.classList.add('btn-disabled');
-            subscribeBtn.href = '#';
-        }
-    };
-    
-    ['input', 'change', 'keyup'].forEach(eventType => {
-        emailInput.addEventListener(eventType, handleInput);
-    });
-
-    // Prevent form default submission
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const email = emailInput.value.trim();
-        if (isValidEmail(email)) {
-            window.open(subscribeBtn.href, '_blank');
-        }
-    });
+  const form = document.getElementById('subscribe-form');
+  const input = document.getElementById('subscribe-email');
+  const button = document.getElementById('subscribe-btn');
+  if (!form || !input || !button) return;
+  const base = 'https://www.bandsintown.com/artist-subscribe/15525088?came_from=701&spn=1&signature=ZZ9dfbc80df9c61962408fde1d904ff938310c5694f290cb54f169d1a05415ce8c';
+  function update() {
+    const valid = input.value.trim() !== '' && input.validity.valid;
+    button.classList.toggle('btn-disabled', !valid);
+    button.setAttribute('aria-disabled', String(!valid));
+    button.href = valid ? `${base}&newsletter_email=${encodeURIComponent(input.value.trim())}` : '#';
+    return valid;
+  }
+  input.addEventListener('input', update);
+  input.addEventListener('change', update);
+  button.addEventListener('click', event => {
+    if (!update()) { event.preventDefault(); input.reportValidity(); input.focus(); }
+  });
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    if (update()) window.open(button.href, '_blank', 'noopener,noreferrer');
+    else input.reportValidity();
+  });
+  update();
 }
 
-function initPreloader() {
-    const preloader = document.getElementById('preloader');
-    const percentageEl = document.getElementById('loader-percentage');
-    const phraseEl = document.getElementById('loader-phrase');
-    const progressFillEl = document.getElementById('loader-progress-fill');
-    
-    if (!preloader || !percentageEl) return;
-
-    let phrases = ["Loading..."];
-    let currentPhraseIndex = 0;
-
-    // Try to load custom phrases
-    if (phraseEl) {
-        fetch('settings.json')
-            .then(res => res.json())
-            .then(data => {
-                if (data.loadingPhrases && data.loadingPhrases.length > 0) {
-                    // Randomize array
-                    phrases = data.loadingPhrases.sort(() => 0.5 - Math.random());
-                    phraseEl.innerText = phrases[0];
-                    
-                    // Cycle phrases rapidly
-                    setInterval(() => {
-                        currentPhraseIndex = (currentPhraseIndex + 1) % phrases.length;
-                        phraseEl.innerText = phrases[currentPhraseIndex];
-                    }, 300);
-                }
-            }).catch(() => {});
-    }
-
-    let percentage = 0;
-    // Fast count to 90%
-    const interval = setInterval(() => {
-        percentage += Math.floor(Math.random() * 5) + 1;
-        if (percentage > 90) {
-            percentage = 90;
-            clearInterval(interval);
-        }
-        percentageEl.innerText = `${percentage}%`;
-        if (progressFillEl) progressFillEl.style.width = `${percentage}%`;
-    }, 50);
-
-    // When the whole page (images, videos) is loaded, jump to 100% and hide
-    window.addEventListener('load', () => {
-        clearInterval(interval);
-        
-        // Fast finish from current percentage to 100
-        const finishInterval = setInterval(() => {
-            percentage += 2;
-            if (percentage >= 100) {
-                percentage = 100;
-                clearInterval(finishInterval);
-                percentageEl.innerText = `100%`;
-                if (progressFillEl) progressFillEl.style.width = `100%`;
-                
-                setTimeout(() => {
-                    preloader.classList.add('fade-out');
-                    setTimeout(() => {
-                        preloader.style.display = 'none';
-                    }, 800);
-                }, 300);
-            } else {
-                percentageEl.innerText = `${percentage}%`;
-                if (progressFillEl) progressFillEl.style.width = `${percentage}%`;
-            }
-        }, 20);
-    });
+async function initSettings() {
+  try {
+    const response = await fetch('/settings.json');
+    if (!response.ok) return;
+    const settings = await response.json();
+    const speed = Number(settings.aboutCarouselSpeed);
+    if (Number.isFinite(speed) && speed >= 10) document.documentElement.style.setProperty('--carousel-speed', `${speed * 2}s`);
+  } catch { /* Presentation defaults work even when settings cannot be loaded. */ }
+  const layer = document.getElementById('stream-layer-1');
+  if (layer) { layer.style.backgroundImage = 'url("/assets/images/pics/p6.png")'; layer.classList.add('is-active'); }
 }
-initPreloader();
 
-/* ==========================================================
-   Full Width Section Background Slow Pan (Ken Burns) Effect
-   ========================================================== */
-function initStreamBackgroundPan() {
-    const layer1 = document.getElementById('stream-layer-1');
-    const layer2 = document.getElementById('stream-layer-2');
-    if (!layer1 || !layer2) return;
-
-    // Use p1, p2, p3, p4, p5, p6 from images/pics
-    const pics = [
-        'assets/images/pics/p1.png',
-        'assets/images/pics/p2.png',
-        'assets/images/pics/p3.png',
-        'assets/images/pics/p4.png',
-        'assets/images/pics/p5.png',
-        'assets/images/pics/p6.png'
-    ];
-
-    // Preload images so crossfades are instant and seamless
-    pics.forEach(src => {
-        const img = new Image();
-        img.src = src;
-    });
-
-    let currentPicIndex = -1;
-    let currentPanIndex = 0;
-    let activeLayer = layer1;
-    let inactiveLayer = layer2;
-
-    function getNextRandomIndex(max, current) {
-        if (max <= 1) return 0;
-        let next;
-        do {
-            next = Math.floor(Math.random() * max);
-        } while (next === current);
-        return next;
-    }
-
-    function switchImage() {
-        const nextPicIndex = getNextRandomIndex(pics.length, currentPicIndex);
-        currentPicIndex = nextPicIndex;
-
-        // Cycle through slowPan1 to slowPan4
-        currentPanIndex = (currentPanIndex % 4) + 1;
-        const picUrl = pics[currentPicIndex];
-
-        // Prepare the inactive layer before revealing
-        inactiveLayer.style.animation = 'none';
-        void inactiveLayer.offsetWidth; // Force reflow to restart animation from 0%
-
-        inactiveLayer.style.backgroundImage = `url("${picUrl}")`;
-        inactiveLayer.style.animation = `slowPan${currentPanIndex} 64s linear infinite`;
-
-        // Crossfade
-        inactiveLayer.classList.add('is-active');
-        activeLayer.classList.remove('is-active');
-
-        // Swap active and inactive layer pointers
-        const temp = activeLayer;
-        activeLayer = inactiveLayer;
-        inactiveLayer = temp;
-    }
-
-    // Launch immediately on page load
-    switchImage();
-
-    // Each image lasts exactly 1 minute (60 seconds = 60000ms)
-    setInterval(switchImage, 60000);
+function init() {
+  initNavigation();
+  initMotion();
+  initCollections();
+  initReveals();
+  initSubscribeForm();
+  initSettings();
+  fetchBandsintownEvents();
 }
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
+else init();

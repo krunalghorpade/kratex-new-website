@@ -10,9 +10,8 @@
         content="Kratex, DJ Kratex, Music Producer, Electronic Music, DJ Sets, Live Shows, Kratex Merch, Kratex Music">
     <meta name="author" content="Kratex">
     <title>KRATEX | Official Website - DJ & Music Producer</title>
-    <link rel="stylesheet" href="style.css?v=11">
-    <link rel="stylesheet" href="mobile.css?v=2">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css?v=15">
+    <link rel="stylesheet" href="mobile.css?v=15">
     <link rel="icon" type="image/x-icon" href="assets/icon.ico">
     <link rel="icon" type="image/png" href="assets/icon.png">
     <meta property="og:title" content="KRATEX | Official Website - DJ & Music Producer">
@@ -48,22 +47,10 @@
 </script>
 
 <body>
-    <!-- Preloader -->
-    <div id="preloader">
-        <div class="loader-content">
-            <img src="assets/logom.svg" alt="Loading Monogram" class="loader-icon">
-            <div class="loader-text-container">
-                <span id="loader-percentage">0%</span>
-                <span id="loader-phrase">Loading...</span>
-            </div>
-        </div>
-        <div id="loader-progress-bar">
-            <div id="loader-progress-fill"></div>
-        </div>
-    </div>
+    <a class="skip-link" href="#shows">Skip to content</a>
 
     <!-- Top Navigation -->
-    <nav class="top-nav">
+    <nav class="top-nav" aria-label="Main navigation">
         <div class="nav-links">
             <div class="nav-left">
                 <a href="/about">ABOUT KRATEX</a>
@@ -80,8 +67,8 @@
                 <a href="/#contact">CONTACT</a>
             </div>
         </div>
-        <button class="hamburger" id="hamburger-menu" aria-label="Menu">
-            <svg viewBox="0 0 100 80" width="30" height="30" fill="var(--text-color)">
+        <button class="hamburger" id="hamburger-menu" aria-label="Open navigation" aria-controls="mobile-menu" aria-expanded="false">
+            <span>MENU</span><svg viewBox="0 0 100 80" width="24" height="24" fill="currentColor" aria-hidden="true">
                 <rect width="100" height="10"></rect>
                 <rect y="30" width="100" height="10"></rect>
                 <rect y="60" width="100" height="10"></rect>
@@ -90,8 +77,8 @@
     </nav>
 
     <!-- Mobile Menu Overlay -->
-    <div class="mobile-menu-overlay" id="mobile-menu">
-        <button class="close-menu" id="close-menu" aria-label="Close">✕</button>
+    <div class="mobile-menu-overlay" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation" inert>
+        <button class="close-menu" id="close-menu" aria-label="Close navigation">✕</button>
         <div class="mobile-nav-links">
             <a href="/about" class="mobile-link">ABOUT KRATEX</a>
             <a href="/#shows" class="mobile-link">SHOWS</a>
@@ -106,47 +93,50 @@
         </div>
     </div>
 
-    <!-- Video Hero Section -->
+    <!-- Cinematic, grain-textured hero -->
     <header id="hero" class="hero-video">
-        <video autoplay muted loop playsinline class="hero-bg-video">
+        <video autoplay muted loop playsinline preload="metadata" poster="assets/images/pics/p6.png" class="hero-bg-video" aria-hidden="true">
             <source src="assets/video/video.mp4" type="video/mp4">
         </video>
         <div id="video-scrim"></div>
         <div class="hero-overlay">
-            <img src="assets/logo.svg" alt="KRATEX" class="hero-logo">
-            <div class="hero-cta-container" style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
-                <a href="#shows" id="hero-next-show-btn" class="btn-tv hero-btn-dynamic"
-                    onclick="gtag('event', 'click', {'event_category': 'Button', 'event_label': 'Hero_Next_Shows'});">
-                    <span id="hero-btn-text">NEXT SHOWS</span>
-                </a>
-                <span id="hero-btn-label" class="btn-bottom-label" style="display: none;"></span>
+            <div class="hero-meta">
+                <a class="hero-about" href="/about">THE WORLD OF KRATEX <span aria-hidden="true">↗</span></a>
+                <div class="hero-cta-container">
+                    <a href="#shows" id="hero-next-show-btn" class="hero-show-link"
+                        onclick="gtag('event', 'click', {'event_category': 'Button', 'event_label': 'Hero_Next_Shows'});">
+                        <span id="hero-btn-text">NEXT SHOWS</span><span class="round-arrow" aria-hidden="true">↗</span>
+                    </a>
+                    <span id="hero-btn-label" class="btn-bottom-label" style="display: none;"></span>
+                </div>
             </div>
-        </div>
-
-        <!-- Subtle Scroll Prompt -->
-        <div class="scroll-prompt">
-            // SCROLL TO EXPLORE
+            <h1 class="hero-wordmark">KRATEX<span class="wordmark-reg" aria-hidden="true">™</span></h1>
+            <div class="hero-bottom">
+                <span>INDEPENDENT SOUND. COLLECTIVE ENERGY.</span>
+                <button type="button" class="motion-toggle" id="motion-toggle" aria-pressed="false">PAUSE MOTION <span aria-hidden="true">Ⅱ</span></button>
+                <a href="#shows" class="scroll-prompt">SCROLL TO EXPLORE <span aria-hidden="true">↓</span></a>
+            </div>
         </div>
     </header>
 
     <!-- Content Sections -->
-    <div class="content-wrapper">
+    <main class="content-wrapper" id="main-content">
 
         <!-- Shows Section (Bandsintown API) -->
         <section id="shows" class="section">
             <div class="section-header">
-                <h2>SHOWS</h2>
+                <h2><span class="section-index">01</span><span class="gradient-type">SHOWS</span></h2>
                 <span>// UPCOMING</span>
             </div>
-            <div id="bandsintown-events" class="tour-list">
+            <div id="bandsintown-events" class="tour-list" aria-live="polite" aria-busy="true">
                 <!-- Events will be injected here by JS -->
                 <p>LOADING DATES...</p>
             </div>
 
-            <div style="text-align: center; margin-top: 3rem;">
+            <div class="shows-action">
                 <a href="https://www.bandsintown.com/artist-subscribe/15525088-kratex" target="_blank"
-                    class="btn-subscribe" style="font-size: 0.9rem; padding: 0.8rem 2.5rem;"
-                    onclick="gtag('event', 'click', {'event_category': 'Button', 'event_label': 'Request_Show'});">REQUEST
+                    class="text-link"
+                    onclick="gtag('event', 'click', {'event_category': 'Button', 'event_label': 'Request_Show'});" rel="noopener noreferrer">REQUEST
                     A SHOW IN YOUR
                     CITY</a>
             </div>
@@ -157,10 +147,11 @@
         <section id="album-promo" class="section">
             <div class="album-container">
                 <div class="album-image-wrapper">
-                    <img src="assets/images/mockup_fhv.png" alt="Fakta House Vinyl" class="album-img">
+                    <img src="assets/images/mockup_fhv.png" alt="Fakta House Vinyl" class="album-img" loading="lazy" decoding="async">
                 </div>
                 <div class="album-info">
-                    <h2 class="album-title">FAKTA HOUSE</h2>
+                    <span class="eyebrow">02 / THE DEBUT ALBUM</span>
+                    <h2 class="album-title">FAKTA<br>HOUSE<span class="title-star" aria-hidden="true">✳</span></h2>
                     <p class="album-meta" style="font-size: 1.1rem; line-height: 1.5; max-width: 500px;">The Highly
                         Anticipated 12-Track Debut Album by Kratex Redefining M-House. Secure Your Limited Edition
                         Premium Vinyl
@@ -168,11 +159,11 @@
 
                     <div class="album-actions">
                         <a href="https://faktahouse.kratex.in" target="_blank" class="btn-tv"
-                            onclick="gtag('event', 'click', {'event_category': 'Button', 'event_label': 'Listen_Album'});">LISTEN
+                            onclick="gtag('event', 'click', {'event_category': 'Button', 'event_label': 'Listen_Album'});" rel="noopener noreferrer">LISTEN
                             NOW ↗</a>
                         <a href="https://elasticstage.com/kratex/releases/fakta-house-album" target="_blank"
-                            class="btn-tv" style="background: var(--text-color); color: var(--bg-color);"
-                            onclick="gtag('event', 'click', {'event_category': 'Button', 'event_label': 'Order_Vinyl'});">ORDER
+                            class="btn-tv btn-filled"
+                            onclick="gtag('event', 'click', {'event_category': 'Button', 'event_label': 'Order_Vinyl'});" rel="noopener noreferrer">ORDER
                             PREMIUM
                             VINYL & CD ↗</a>
                     </div>
@@ -183,74 +174,74 @@
         <!-- DJ Sets Section -->
         <section id="djsets" class="section">
             <div class="section-header">
-                <h2>DJ SETS</h2>
+                <h2><span class="section-index">03</span>DJ SETS</h2>
                 <a href="https://youtube.com/playlist?list=PL9ExUjv_4xfHIWXHRYt77fXg1oBtzoOBK&si=Ufu1tGk0vQKItNSv"
                     target="_blank" class="view-all-link"
-                    onclick="gtag('event', 'click', {'event_category': 'Link', 'event_label': 'View_All_DJ_Sets'});">VIEW
+                    onclick="gtag('event', 'click', {'event_category': 'Link', 'event_label': 'View_All_DJ_Sets'});" rel="noopener noreferrer">VIEW
                     ALL ↗</a>
             </div>
             <div class="video-carousel-container">
                 <div class="video-carousel">
-                    <a class="video-item" href="https://www.youtube.com/watch?v=DHat4FKy52o" target="_blank">
+                    <a class="video-item" href="https://www.youtube.com/watch?v=DHat4FKy52o" target="_blank" rel="noopener noreferrer">
                         <img src="https://img.youtube.com/vi/DHat4FKy52o/hqdefault.jpg" alt="DJ Set" loading="lazy"
                             class="video-thumb">
                         <p class="video-title">KRATEX - FAKTAHOUSE DJ Set | Raya's Roof at Hylo, Mumbai</p>
                     </a>
-                    <a class="video-item" href="https://www.youtube.com/watch?v=KPBlZbO59V8" target="_blank">
+                    <a class="video-item" href="https://www.youtube.com/watch?v=KPBlZbO59V8" target="_blank" rel="noopener noreferrer">
                         <img src="https://img.youtube.com/vi/KPBlZbO59V8/hqdefault.jpg" alt="DJ Set" loading="lazy"
                             class="video-thumb">
                         <p class="video-title">Kratex | Birthday Set Pune | Club Ballr | Marathi House Music
                             @Mhouseofficial</p>
                     </a>
-                    <a class="video-item" href="https://www.youtube.com/watch?v=B-htKvg6ZeQ" target="_blank">
+                    <a class="video-item" href="https://www.youtube.com/watch?v=B-htKvg6ZeQ" target="_blank" rel="noopener noreferrer">
                         <img src="https://img.youtube.com/vi/B-htKvg6ZeQ/hqdefault.jpg" alt="DJ Set" loading="lazy"
                             class="video-thumb">
                         <p class="video-title">Kratex | MVP | मराठी वाजलाच पाहिजे | Mumbai | MHouse Marathi House Music
                             | Full Dj Set</p>
                     </a>
-                    <a class="video-item" href="https://www.youtube.com/watch?v=l5tcQ0hG3mg" target="_blank">
+                    <a class="video-item" href="https://www.youtube.com/watch?v=l5tcQ0hG3mg" target="_blank" rel="noopener noreferrer">
                         <img src="https://img.youtube.com/vi/l5tcQ0hG3mg/hqdefault.jpg" alt="DJ Set" loading="lazy"
                             class="video-thumb">
                         <p class="video-title">Kratex - Epic Marathi Sunset Dj Set | Aranya Villa | Deep Melodic House
                             @Mhouseofficial</p>
                     </a>
-                    <a class="video-item" href="https://www.youtube.com/watch?v=6Cwnn8UMFys" target="_blank">
+                    <a class="video-item" href="https://www.youtube.com/watch?v=6Cwnn8UMFys" target="_blank" rel="noopener noreferrer">
                         <img src="https://img.youtube.com/vi/6Cwnn8UMFys/hqdefault.jpg" alt="DJ Set" loading="lazy"
                             class="video-thumb">
                         <p class="video-title">Kratex | M-House NUSTA VIBES Full Dj Set | Marathi House Music | With
                             @Mhouseofficial @BhaDiPa</p>
                     </a>
-                    <a class="video-item" href="https://www.youtube.com/watch?v=wq8KO0YkPF8" target="_blank">
+                    <a class="video-item" href="https://www.youtube.com/watch?v=wq8KO0YkPF8" target="_blank" rel="noopener noreferrer">
                         <img src="https://img.youtube.com/vi/wq8KO0YkPF8/hqdefault.jpg" alt="DJ Set" loading="lazy"
                             class="video-thumb">
                         <p class="video-title">Kratex | Nusta Vibes | Pune | मराठी | Marathi House Music @Mhouseofficial
                         </p>
                     </a>
-                    <a class="video-item" href="https://www.youtube.com/watch?v=1giGB5xIKjI" target="_blank">
+                    <a class="video-item" href="https://www.youtube.com/watch?v=1giGB5xIKjI" target="_blank" rel="noopener noreferrer">
                         <img src="https://img.youtube.com/vi/1giGB5xIKjI/hqdefault.jpg" alt="DJ Set" loading="lazy"
                             class="video-thumb">
                         <p class="video-title">Tech House Mix by Kratex | Tech House, Jackin House, Bass House | 2020
                         </p>
                     </a>
-                    <a class="video-item" href="https://www.youtube.com/watch?v=y2Smn9dlBdc" target="_blank">
+                    <a class="video-item" href="https://www.youtube.com/watch?v=y2Smn9dlBdc" target="_blank" rel="noopener noreferrer">
                         <img src="https://img.youtube.com/vi/y2Smn9dlBdc/hqdefault.jpg" alt="DJ Set" loading="lazy"
                             class="video-thumb">
                         <p class="video-title">Kratex | MVP | मराठी वाजलाच पाहिजे | Goa | MHouse Marathi House Music |
                             Full Dj Set</p>
                     </a>
-                    <a class="video-item" href="https://www.youtube.com/watch?v=8y10lRCy4cI" target="_blank">
+                    <a class="video-item" href="https://www.youtube.com/watch?v=8y10lRCy4cI" target="_blank" rel="noopener noreferrer">
                         <img src="https://img.youtube.com/vi/8y10lRCy4cI/hqdefault.jpg" alt="DJ Set" loading="lazy"
                             class="video-thumb">
                         <p class="video-title">Kratex Live Dj Set at @BhaDiPa Bhadyachi Birthday Party | Pune | Marathi
                             House Music</p>
                     </a>
-                    <a class="video-item" href="https://www.youtube.com/watch?v=zxEVToice8k" target="_blank">
+                    <a class="video-item" href="https://www.youtube.com/watch?v=zxEVToice8k" target="_blank" rel="noopener noreferrer">
                         <img src="https://img.youtube.com/vi/zxEVToice8k/hqdefault.jpg" alt="DJ Set" loading="lazy"
                             class="video-thumb">
                         <p class="video-title">Kratex in Pune | MVP | मराठी वाजलाच पाहिजे | High Spirits | Marathi House
                             Music | Full Dj Set</p>
                     </a>
-                    <a class="video-item" href="https://www.youtube.com/watch?v=wxrUgDqwpBQ" target="_blank">
+                    <a class="video-item" href="https://www.youtube.com/watch?v=wxrUgDqwpBQ" target="_blank" rel="noopener noreferrer">
                         <img src="https://img.youtube.com/vi/wxrUgDqwpBQ/hqdefault.jpg" alt="DJ Set" loading="lazy"
                             class="video-thumb">
                         <p class="video-title">LIVE | DJ Kratex | Diwali Pahat | दिवाळी पहाट २०२४ | डोंबिवली</p>
@@ -263,124 +254,124 @@
         <!-- Merch Section -->
         <section id="merch" class="section">
             <div class="section-header">
-                <h2>MERCH</h2>
+                <h2><span class="section-index">04</span>MERCH</h2>
                 <a href="https://shop.kratex.in" target="_blank" style="color: inherit; text-decoration: none;"
-                    onclick="gtag('event', 'click', {'event_category': 'Link', 'event_label': 'View_Full_Shop'});">//
+                    onclick="gtag('event', 'click', {'event_category': 'Link', 'event_label': 'View_Full_Shop'});" rel="noopener noreferrer">//
                     VIEW
                     FULL SHOP ↗</a>
             </div>
             <div class="merch-grid">
                 <a href="https://shop.kratex.in/products/mvp-unisex-oversized-t-shirt?variant=50940723200285"
-                    target="_blank" class="merch-item">
+                    target="_blank" class="merch-item" rel="noopener noreferrer">
                     <div class="merch-img-container">
                         <img src="https://shop.kratex.in/cdn/shop/files/Back_2_c_2_11dc13e3-cd82-425a-bae6-d420c9aff174.jpg?width=800"
-                            alt="MVP Unisex Oversized T-Shirt" class="merch-img merch-img-default">
+                            alt="MVP Unisex Oversized T-Shirt" class="merch-img merch-img-default" loading="lazy" decoding="async">
                         <img src="https://shop.kratex.in/cdn/shop/files/Front_1_c_2_30d276ec-9b64-4d03-a2f8-8877841e31cb.jpg?width=800"
-                            alt="MVP Unisex Oversized T-Shirt Hover" class="merch-img merch-img-hover">
+                            alt="MVP Unisex Oversized T-Shirt Hover" class="merch-img merch-img-hover" loading="lazy" decoding="async">
                     </div>
                     <div class="merch-info">
                         <h3>MVP UNISEX OVERSIZED T-SHIRT</h3>
                     </div>
                 </a>
                 <a href="https://shop.kratex.in/products/unisex-terry-oversized-tee?variant=52029643424029"
-                    target="_blank" class="merch-item">
+                    target="_blank" class="merch-item" rel="noopener noreferrer">
                     <div class="merch-img-container">
                         <img src="https://shop.kratex.in/cdn/shop/files/white_os_back.png?width=800"
-                            alt="FAKTA HOUSE Unisex Oversized T-Shirt – White" class="merch-img merch-img-default">
+                            alt="FAKTA HOUSE Unisex Oversized T-Shirt – White" class="merch-img merch-img-default" loading="lazy" decoding="async">
                         <img src="https://shop.kratex.in/cdn/shop/files/Front_1_c_1_2b30d2cd-585f-4cda-8508-61424e44c33e.jpg?width=800"
-                            alt="FAKTA HOUSE Unisex Oversized T-Shirt – White Hover" class="merch-img merch-img-hover">
+                            alt="FAKTA HOUSE Unisex Oversized T-Shirt – White Hover" class="merch-img merch-img-hover" loading="lazy" decoding="async">
                     </div>
                     <div class="merch-info">
                         <h3>FAKTA HOUSE UNISEX OVERSIZED T-SHIRT – WHITE</h3>
                     </div>
                 </a>
                 <a href="https://shop.kratex.in/products/fakta-house-unisex-oversized-t-shirt-black?variant=52030003249437"
-                    target="_blank" class="merch-item">
+                    target="_blank" class="merch-item" rel="noopener noreferrer">
                     <div class="merch-img-container">
                         <img src="https://shop.kratex.in/cdn/shop/files/Back_2_c_2_4c4bc0db-7a78-4e4e-b020-0f1f9758c23b.jpg?width=800"
-                            alt="FAKTA HOUSE Unisex Oversized T-Shirt – Black" class="merch-img merch-img-default">
+                            alt="FAKTA HOUSE Unisex Oversized T-Shirt – Black" class="merch-img merch-img-default" loading="lazy" decoding="async">
                         <img src="https://shop.kratex.in/cdn/shop/files/Front_1_c_2_603180e5-ba0b-454d-9942-17d135126c94.jpg?width=800"
-                            alt="FAKTA HOUSE Unisex Oversized T-Shirt – Black Hover" class="merch-img merch-img-hover">
+                            alt="FAKTA HOUSE Unisex Oversized T-Shirt – Black Hover" class="merch-img merch-img-hover" loading="lazy" decoding="async">
                     </div>
                     <div class="merch-info">
                         <h3>FAKTA HOUSE UNISEX OVERSIZED T-SHIRT – BLACK</h3>
                     </div>
                 </a>
                 <a href="https://shop.kratex.in/products/mvp-unisex-oversized-hoodie?variant=50940749709597"
-                    target="_blank" class="merch-item">
+                    target="_blank" class="merch-item" rel="noopener noreferrer">
                     <div class="merch-img-container">
                         <img src="https://shop.kratex.in/cdn/shop/files/Back_2_c_2.jpg?width=800"
-                            alt="MVP Unisex Oversized Hoodie" class="merch-img merch-img-default">
+                            alt="MVP Unisex Oversized Hoodie" class="merch-img merch-img-default" loading="lazy" decoding="async">
                         <img src="https://shop.kratex.in/cdn/shop/files/Front_1_c_2.jpg?width=800"
-                            alt="MVP Unisex Oversized Hoodie Hover" class="merch-img merch-img-hover">
+                            alt="MVP Unisex Oversized Hoodie Hover" class="merch-img merch-img-hover" loading="lazy" decoding="async">
                     </div>
                     <div class="merch-info">
                         <h3>MVP UNISEX OVERSIZED HOODIE</h3>
                     </div>
                 </a>
                 <a href="https://shop.kratex.in/products/nusta-vibes-unisex-oversized-tee?variant=50954875306269"
-                    target="_blank" class="merch-item">
+                    target="_blank" class="merch-item" rel="noopener noreferrer">
                     <div class="merch-img-container">
                         <img src="https://shop.kratex.in/cdn/shop/files/Back_2_c_2_b0c2e3bc-25b7-4304-ba9a-9ee1da5a5ae4.jpg?width=800"
-                            alt="Nusta Vibes Unisex Oversized Tee" class="merch-img merch-img-default">
+                            alt="Nusta Vibes Unisex Oversized Tee" class="merch-img merch-img-default" loading="lazy" decoding="async">
                         <img src="https://shop.kratex.in/cdn/shop/files/Left_Pocket_3_c_2.jpg?width=800"
-                            alt="Nusta Vibes Unisex Oversized Tee Hover" class="merch-img merch-img-hover">
+                            alt="Nusta Vibes Unisex Oversized Tee Hover" class="merch-img merch-img-hover" loading="lazy" decoding="async">
                     </div>
                     <div class="merch-info">
                         <h3>NUSTA VIBES UNISEX OVERSIZED TEE</h3>
                     </div>
                 </a>
                 <a href="https://shop.kratex.in/products/unisex-oversized-classic-t-shirt?variant=51875725508893"
-                    target="_blank" class="merch-item">
+                    target="_blank" class="merch-item" rel="noopener noreferrer">
                     <div class="merch-img-container">
                         <img src="https://shop.kratex.in/cdn/shop/files/new_couple.png?width=800"
                             alt="MVP मराठी वाजलाच पाहिजे Unisex Oversized Classic T-Shirt"
-                            class="merch-img merch-img-default">
+                            class="merch-img merch-img-default" loading="lazy" decoding="async">
                         <img src="https://shop.kratex.in/cdn/shop/files/Front_1_c_1.jpg?width=800"
                             alt="MVP मराठी वाजलाच पाहिजे Unisex Oversized Classic T-Shirt Hover"
-                            class="merch-img merch-img-hover">
+                            class="merch-img merch-img-hover" loading="lazy" decoding="async">
                     </div>
                     <div class="merch-info">
                         <h3>MVP मराठी वाजलाच पाहिजे UNISEX OVERSIZED CLASSIC T-SHIRT</h3>
                     </div>
                 </a>
                 <a href="https://shop.kratex.in/products/mvp-mens-sleeveless-t-shirt?variant=51902761042205"
-                    target="_blank" class="merch-item">
+                    target="_blank" class="merch-item" rel="noopener noreferrer">
                     <div class="merch-img-container">
                         <img src="https://shop.kratex.in/cdn/shop/files/tank-top-mockup-of-a-fit-man-working-out-at-the-gym-34507-r-el2.png?width=800"
-                            alt="MVP Men's Sleeveless T-Shirt" class="merch-img merch-img-default">
+                            alt="MVP Men's Sleeveless T-Shirt" class="merch-img merch-img-default" loading="lazy" decoding="async">
                         <img src="https://shop.kratex.in/cdn/shop/files/Front_1_c_1_7f056d6c-ba07-4177-bbb0-0f993e13da7e.jpg?width=800"
-                            alt="MVP Men's Sleeveless T-Shirt Hover" class="merch-img merch-img-hover">
+                            alt="MVP Men's Sleeveless T-Shirt Hover" class="merch-img merch-img-hover" loading="lazy" decoding="async">
                     </div>
                     <div class="merch-info">
                         <h3>MVP MEN'S SLEEVELESS T-SHIRT</h3>
                     </div>
                 </a>
                 <a href="https://shop.kratex.in/products/fakta-house-men-s-shorts-black?variant=52030002463005"
-                    target="_blank" class="merch-item">
+                    target="_blank" class="merch-item" rel="noopener noreferrer">
                     <div class="merch-img-container">
                         <img src="https://shop.kratex.in/cdn/shop/files/Left_Pocket_1_c_2_dc5e81a2-7962-47f9-95fb-752b09198764.jpg?width=800"
-                            alt="FAKTA HOUSE Men’s Shorts – Black" class="merch-img merch-img-default">
+                            alt="FAKTA HOUSE Men’s Shorts – Black" class="merch-img merch-img-default" loading="lazy" decoding="async">
                     </div>
                     <div class="merch-info">
                         <h3>FAKTA HOUSE MEN’S SHORTS – BLACK</h3>
                     </div>
                 </a>
                 <a href="https://shop.kratex.in/products/baseball-ottoman-cap?variant=50954732601629" target="_blank"
-                    class="merch-item">
+                    class="merch-item" rel="noopener noreferrer">
                     <div class="merch-img-container">
                         <img src="https://shop.kratex.in/cdn/shop/files/Front_1_c_2_ccf09ed8-1a23-4d43-a892-9e9ac9d06a6e.jpg?width=800"
-                            alt="MVP Baseball Cap" class="merch-img merch-img-default">
+                            alt="MVP Baseball Cap" class="merch-img merch-img-default" loading="lazy" decoding="async">
                     </div>
                     <div class="merch-info">
                         <h3>MVP BASEBALL CAP</h3>
                     </div>
                 </a>
                 <a href="https://shop.kratex.in/products/fakta-house-baseball-cap-white?variant=52030002135325"
-                    target="_blank" class="merch-item">
+                    target="_blank" class="merch-item" rel="noopener noreferrer">
                     <div class="merch-img-container">
                         <img src="https://shop.kratex.in/cdn/shop/files/Front_1_c_1_4937923b-cbaf-476d-8797-18c5bedb6c2a.jpg?width=800"
-                            alt="FAKTA HOUSE - BaseBall Cap White" class="merch-img merch-img-default">
+                            alt="FAKTA HOUSE - BaseBall Cap White" class="merch-img merch-img-default" loading="lazy" decoding="async">
                     </div>
                     <div class="merch-info">
                         <h3>FAKTA HOUSE - BASEBALL CAP WHITE</h3>
@@ -393,16 +384,16 @@
         <!-- Spotify Music Section -->
         <section id="kratex-music" class="section">
             <div class="section-header">
-                <h2>KRATEX MUSIC</h2>
+                <h2><span class="section-index">05</span>KRATEX MUSIC</h2>
                 <span>// SPOTIFY</span>
             </div>
-            <div style="max-width: 800px; margin: 0 auto;">
+            <div class="spotify-layout"><div class="music-note"><span class="eyebrow">ON REPEAT</span><p>Your next<br>favourite<br>frequency.</p><a href="https://open.spotify.com/artist/3Gowc3dedLQgQAt4y0gPBo" class="text-link" target="_blank" rel="noopener noreferrer">EXPLORE ON SPOTIFY ↗</a></div><div class="spotify-player">
                 <iframe data-testid="embed-iframe" style="border-radius:12px"
                     src="https://open.spotify.com/embed/playlist/37i9dQZF1DZ06evO28WUMi?utm_source=generator&theme=0&si=1cf092153d2a4f50"
                     width="100%" height="752" frameBorder="0" allowfullscreen=""
                     allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                    loading="lazy"></iframe>
-            </div>
+                    loading="lazy" title="Kratex music on Spotify"></iframe>
+            </div></div>
         </section>
 
         <!-- Full Width Streaming Showcase Section -->
@@ -415,7 +406,7 @@
 
             <div class="stream-content-container">
                 <div class="stream-header">
-                    <span class="stream-badge">// STREAM EVERYWHERE</span>
+                    <span class="stream-badge">06 / STREAM EVERYWHERE</span>
                     <h2 class="stream-hero-title">Listen Kratex Songs at your favourite place</h2>
                     <p class="stream-hero-sub">Stream, download & playlist across your favorite music platforms</p>
                 </div>
@@ -547,190 +538,190 @@
         <!-- Music Videos Section -->
         <section id="music" class="section">
             <div class="section-header">
-                <h2>MUSIC VIDEOS</h2>
+                <h2><span class="section-index">07</span>MUSIC VIDEOS</h2>
                 <span>// ESSENTIALS</span>
             </div>
             <div class="video-carousel-container">
                 <div class="video-carousel">
-                    <a class="video-item" href="https://www.youtube.com/watch?v=kmjeMrjOjFA" target="_blank">
+                    <a class="video-item" href="https://www.youtube.com/watch?v=kmjeMrjOjFA" target="_blank" rel="noopener noreferrer">
                         <img src="https://img.youtube.com/vi/kmjeMrjOjFA/hqdefault.jpg"
                             alt="Kratex, Shreyas - Taambdi Chaamdi (Official Music Video)" loading="lazy"
                             class="video-thumb">
                         <p class="video-title">Kratex, Shreyas - Taambdi Chaamdi (Official Music Video)</p>
                     </a>
-                    <a class="video-item" href="https://www.youtube.com/watch?v=3N5D02qAo0o" target="_blank">
+                    <a class="video-item" href="https://www.youtube.com/watch?v=3N5D02qAo0o" target="_blank" rel="noopener noreferrer">
                         <img src="https://img.youtube.com/vi/3N5D02qAo0o/hqdefault.jpg"
                             alt="AAHO AAIKA NA (Music Video) - KRATEX | VAISHALI SAMANT | MANDAR CHOLKAR | T-SERIES"
                             loading="lazy" class="video-thumb">
                         <p class="video-title">AAHO AAIKA NA (Music Video) - KRATEX | VAISHALI SAMANT | MANDAR CHOLKAR |
                             T-SERIES</p>
                     </a>
-                    <a class="video-item" href="https://www.youtube.com/watch?v=e5d8-qMXYfs" target="_blank">
+                    <a class="video-item" href="https://www.youtube.com/watch?v=e5d8-qMXYfs" target="_blank" rel="noopener noreferrer">
                         <img src="https://img.youtube.com/vi/e5d8-qMXYfs/hqdefault.jpg"
                             alt="KASA TARI (Music Video) | KRATEX | Feat. ATHARVA RUKE & NAEZY | SUGA C | T-Series"
                             loading="lazy" class="video-thumb">
                         <p class="video-title">KASA TARI (Music Video) | KRATEX | Feat. ATHARVA RUKE & NAEZY | SUGA C |
                             T-Series</p>
                     </a>
-                    <a class="video-item" href="https://www.youtube.com/watch?v=9KQTeUfRXEk" target="_blank">
+                    <a class="video-item" href="https://www.youtube.com/watch?v=9KQTeUfRXEk" target="_blank" rel="noopener noreferrer">
                         <img src="https://img.youtube.com/vi/9KQTeUfRXEk/hqdefault.jpg"
                             alt="Kratex - Jevlis Ka (feat. FeniFina) [Official Music Video]" loading="lazy"
                             class="video-thumb">
                         <p class="video-title">Kratex - Jevlis Ka (feat. FeniFina) [Official Music Video]</p>
                     </a>
-                    <a class="video-item" href="https://www.youtube.com/watch?v=9oGf30uio90" target="_blank">
+                    <a class="video-item" href="https://www.youtube.com/watch?v=9oGf30uio90" target="_blank" rel="noopener noreferrer">
                         <img src="https://img.youtube.com/vi/9oGf30uio90/hqdefault.jpg"
                             alt="Housefull 5 | The Phoogdi Dance (Full Video) | Sajid Nadiadwala | Tarun Mansukhani"
                             loading="lazy" class="video-thumb">
                         <p class="video-title">Housefull 5 | The Phoogdi Dance (Full Video) | Sajid Nadiadwala | Tarun
                             Mansukhani</p>
                     </a>
-                    <a class="video-item" href="https://www.youtube.com/watch?v=CkPrq9kaVjU" target="_blank">
+                    <a class="video-item" href="https://www.youtube.com/watch?v=CkPrq9kaVjU" target="_blank" rel="noopener noreferrer">
                         <img src="https://img.youtube.com/vi/CkPrq9kaVjU/hqdefault.jpg"
                             alt="Udat Gela Sonya (M-House Mix) - Kratex | Marathi DJ Mix | Pankaj Padghan | Sayalie Pankaj"
                             loading="lazy" class="video-thumb">
                         <p class="video-title">Udat Gela Sonya (M-House Mix) - Kratex | Marathi DJ Mix | Pankaj Padghan
                             | Sayalie Pankaj</p>
                     </a>
-                    <a class="video-item" href="https://www.youtube.com/watch?v=YoSzup7NfzI" target="_blank">
+                    <a class="video-item" href="https://www.youtube.com/watch?v=YoSzup7NfzI" target="_blank" rel="noopener noreferrer">
                         <img src="https://img.youtube.com/vi/YoSzup7NfzI/hqdefault.jpg"
                             alt="Zapuk Zupuk | Song Out Now | Suraj Chavan | Kratex, Patya The Doc | Kedar Shinde | 25 April"
                             loading="lazy" class="video-thumb">
                         <p class="video-title">Zapuk Zupuk | Song Out Now | Suraj Chavan | Kratex, Patya The Doc | Kedar
                             Shinde | 25 April</p>
                     </a>
-                    <a class="video-item" href="https://www.youtube.com/watch?v=BXZRasEEGfU" target="_blank">
+                    <a class="video-item" href="https://www.youtube.com/watch?v=BXZRasEEGfU" target="_blank" rel="noopener noreferrer">
                         <img src="https://img.youtube.com/vi/BXZRasEEGfU/hqdefault.jpg"
                             alt="Kratex, The Toxxxic - Paavsaan (Official Audio)" loading="lazy" class="video-thumb">
                         <p class="video-title">Kratex, The Toxxxic - Paavsaan (Official Audio)</p>
                     </a>
-                    <a class="video-item" href="https://www.youtube.com/watch?v=WeUeYHFZwsc" target="_blank">
+                    <a class="video-item" href="https://www.youtube.com/watch?v=WeUeYHFZwsc" target="_blank" rel="noopener noreferrer">
                         <img src="https://img.youtube.com/vi/WeUeYHFZwsc/hqdefault.jpg"
                             alt="Zhaga Maga - Kratex, D'Evil | Official Lyrics Visualiser | 2025" loading="lazy"
                             class="video-thumb">
                         <p class="video-title">Zhaga Maga - Kratex, D'Evil | Official Lyrics Visualiser | 2025</p>
                     </a>
-                    <a class="video-item" href="https://www.youtube.com/watch?v=8DqlX1zeZic" target="_blank">
+                    <a class="video-item" href="https://www.youtube.com/watch?v=8DqlX1zeZic" target="_blank" rel="noopener noreferrer">
                         <img src="https://img.youtube.com/vi/8DqlX1zeZic/hqdefault.jpg"
                             alt="Ye Re Ye Re Pausa ft. Shreyas and Kratex" loading="lazy" class="video-thumb">
                         <p class="video-title">Ye Re Ye Re Pausa ft. Shreyas and Kratex</p>
                     </a>
-                    <a class="video-item" href="https://www.youtube.com/watch?v=MwIxfjxTCQM" target="_blank">
+                    <a class="video-item" href="https://www.youtube.com/watch?v=MwIxfjxTCQM" target="_blank" rel="noopener noreferrer">
                         <img src="https://img.youtube.com/vi/MwIxfjxTCQM/hqdefault.jpg"
                             alt="KASA TARI: Ashwini Reloaded (Audio) Kratex |Anuradha Paudwal,Kishore Kumar |Arun Paudwal |Shantaram"
                             loading="lazy" class="video-thumb">
                         <p class="video-title">KASA TARI: Ashwini Reloaded (Audio) Kratex |Anuradha Paudwal,Kishore
                             Kumar |Arun Paudwal |Shantaram</p>
                     </a>
-                    <a class="video-item" href="https://www.youtube.com/watch?v=-bgEEhnj3vo" target="_blank">
+                    <a class="video-item" href="https://www.youtube.com/watch?v=-bgEEhnj3vo" target="_blank" rel="noopener noreferrer">
                         <img src="https://img.youtube.com/vi/-bgEEhnj3vo/hqdefault.jpg"
                             alt="KASA TARI: Marathi Maaz (Audio) | Kratex | Siddhesh, A-Jit | Siddhesh, A-Jit"
                             loading="lazy" class="video-thumb">
                         <p class="video-title">KASA TARI: Marathi Maaz (Audio) | Kratex | Siddhesh, A-Jit | Siddhesh,
                             A-Jit</p>
                     </a>
-                    <a class="video-item" href="https://www.youtube.com/watch?v=EIfw8EJErkk" target="_blank">
+                    <a class="video-item" href="https://www.youtube.com/watch?v=EIfw8EJErkk" target="_blank" rel="noopener noreferrer">
                         <img src="https://img.youtube.com/vi/EIfw8EJErkk/hqdefault.jpg"
                             alt="KASA TARI: Aga Aga 2.0 (Audio) | Kratex | Suresh Wadkar,jyotsana Hardikar | Anil Arun | Shantaram"
                             loading="lazy" class="video-thumb">
                         <p class="video-title">KASA TARI: Aga Aga 2.0 (Audio) | Kratex | Suresh Wadkar,jyotsana Hardikar
                             | Anil Arun | Shantaram</p>
                     </a>
-                    <a class="video-item" href="https://www.youtube.com/watch?v=BMk7xLw4uM8" target="_blank">
+                    <a class="video-item" href="https://www.youtube.com/watch?v=BMk7xLw4uM8" target="_blank" rel="noopener noreferrer">
                         <img src="https://img.youtube.com/vi/BMk7xLw4uM8/hqdefault.jpg"
                             alt="KASA TARI: Nati Mhouse Work (Audio) | Kratex | Anand Shinde | Harshad Shinde | Dutta Shinde"
                             loading="lazy" class="video-thumb">
                         <p class="video-title">KASA TARI: Nati Mhouse Work (Audio) | Kratex | Anand Shinde | Harshad
                             Shinde | Dutta Shinde</p>
                     </a>
-                    <a class="video-item" href="https://www.youtube.com/watch?v=-SNaLQElFvA" target="_blank">
+                    <a class="video-item" href="https://www.youtube.com/watch?v=-SNaLQElFvA" target="_blank" rel="noopener noreferrer">
                         <img src="https://img.youtube.com/vi/-SNaLQElFvA/hqdefault.jpg"
                             alt="Kratex - Shivba @Mhouseofficial | Melodic House | Marathi @csmusicoriginals"
                             loading="lazy" class="video-thumb">
                         <p class="video-title">Kratex - Shivba @Mhouseofficial | Melodic House | Marathi
                             @csmusicoriginals</p>
                     </a>
-                    <a class="video-item" href="https://www.youtube.com/watch?v=KRWLAIT88pg" target="_blank">
+                    <a class="video-item" href="https://www.youtube.com/watch?v=KRWLAIT88pg" target="_blank" rel="noopener noreferrer">
                         <img src="https://img.youtube.com/vi/KRWLAIT88pg/hqdefault.jpg"
                             alt="Kratex, Abhijit Pohankar - Priya (ft. Amey Date) | @Mhouseofficial | Marathi Melodic Techno"
                             loading="lazy" class="video-thumb">
                         <p class="video-title">Kratex, Abhijit Pohankar - Priya (ft. Amey Date) | @Mhouseofficial |
                             Marathi Melodic Techno</p>
                     </a>
-                    <a class="video-item" href="https://www.youtube.com/watch?v=e0R_vHgXvpE" target="_blank">
+                    <a class="video-item" href="https://www.youtube.com/watch?v=e0R_vHgXvpE" target="_blank" rel="noopener noreferrer">
                         <img src="https://img.youtube.com/vi/e0R_vHgXvpE/hqdefault.jpg"
                             alt="Club is Dead (Kratex Remix) (Remix)" loading="lazy" class="video-thumb">
                         <p class="video-title">Club is Dead (Kratex Remix) (Remix)</p>
                     </a>
-                    <a class="video-item" href="https://www.youtube.com/watch?v=Y0HQH1PcFa4" target="_blank">
+                    <a class="video-item" href="https://www.youtube.com/watch?v=Y0HQH1PcFa4" target="_blank" rel="noopener noreferrer">
                         <img src="https://img.youtube.com/vi/Y0HQH1PcFa4/hqdefault.jpg"
                             alt="The Cataracs, DEV - Make Ya Body Whistle (Kratex Remix) (Official Visualizer)"
                             loading="lazy" class="video-thumb">
                         <p class="video-title">The Cataracs, DEV - Make Ya Body Whistle (Kratex Remix) (Official
                             Visualizer)</p>
                     </a>
-                    <a class="video-item" href="https://www.youtube.com/watch?v=RK1Kraf5KSY" target="_blank">
+                    <a class="video-item" href="https://www.youtube.com/watch?v=RK1Kraf5KSY" target="_blank" rel="noopener noreferrer">
                         <img src="https://img.youtube.com/vi/RK1Kraf5KSY/hqdefault.jpg" alt="Tauba (Kratex Remix)"
                             loading="lazy" class="video-thumb">
                         <p class="video-title">Tauba (Kratex Remix)</p>
                     </a>
-                    <a class="video-item" href="https://www.youtube.com/watch?v=J5n182CnqMY" target="_blank">
+                    <a class="video-item" href="https://www.youtube.com/watch?v=J5n182CnqMY" target="_blank" rel="noopener noreferrer">
                         <img src="https://img.youtube.com/vi/J5n182CnqMY/hqdefault.jpg"
                             alt="Kratex, D'Evil - Zhaga Maga | Official Music Video" loading="lazy" class="video-thumb">
                         <p class="video-title">Kratex, D'Evil - Zhaga Maga | Official Music Video</p>
                     </a>
-                    <a class="video-item" href="https://www.youtube.com/watch?v=_xZX2EACo6g" target="_blank">
+                    <a class="video-item" href="https://www.youtube.com/watch?v=_xZX2EACo6g" target="_blank" rel="noopener noreferrer">
                         <img src="https://img.youtube.com/vi/_xZX2EACo6g/hqdefault.jpg"
                             alt="Kratex - Plucky [Hybrid Trap]" loading="lazy" class="video-thumb">
                         <p class="video-title">Kratex - Plucky [Hybrid Trap]</p>
                     </a>
-                    <a class="video-item" href="https://www.youtube.com/watch?v=gIPlMUUH_T8" target="_blank">
+                    <a class="video-item" href="https://www.youtube.com/watch?v=gIPlMUUH_T8" target="_blank" rel="noopener noreferrer">
                         <img src="https://img.youtube.com/vi/gIPlMUUH_T8/hqdefault.jpg"
                             alt="SHAWTIES IN SAREE (Music Video): KRATEX | T-SERIES" loading="lazy" class="video-thumb">
                         <p class="video-title">SHAWTIES IN SAREE (Music Video): KRATEX | T-SERIES</p>
                     </a>
-                    <a class="video-item" href="https://www.youtube.com/watch?v=PLeXJVs6k1s" target="_blank">
+                    <a class="video-item" href="https://www.youtube.com/watch?v=PLeXJVs6k1s" target="_blank" rel="noopener noreferrer">
                         <img src="https://img.youtube.com/vi/PLeXJVs6k1s/hqdefault.jpg"
                             alt="Shantabai (Kratex Remix) | Trance @Mhouseofficial" loading="lazy" class="video-thumb">
                         <p class="video-title">Shantabai (Kratex Remix) | Trance @Mhouseofficial</p>
                     </a>
-                    <a class="video-item" href="https://www.youtube.com/watch?v=L24j7S_4-NY" target="_blank">
+                    <a class="video-item" href="https://www.youtube.com/watch?v=L24j7S_4-NY" target="_blank" rel="noopener noreferrer">
                         <img src="https://img.youtube.com/vi/L24j7S_4-NY/hqdefault.jpg"
                             alt="Kratex - Sonyana  @Mhouseofficial" loading="lazy" class="video-thumb">
                         <p class="video-title">Kratex - Sonyana @Mhouseofficial</p>
                     </a>
-                    <a class="video-item" href="https://www.youtube.com/watch?v=dxVb-PcnL3Y" target="_blank">
+                    <a class="video-item" href="https://www.youtube.com/watch?v=dxVb-PcnL3Y" target="_blank" rel="noopener noreferrer">
                         <img src="https://img.youtube.com/vi/dxVb-PcnL3Y/hqdefault.jpg"
                             alt="Papa Mala (Kratex Remix) | Piano House | @Mhouseofficial" loading="lazy"
                             class="video-thumb">
                         <p class="video-title">Papa Mala (Kratex Remix) | Piano House | @Mhouseofficial</p>
                     </a>
-                    <a class="video-item" href="https://www.youtube.com/watch?v=8wpVFLOq9Ps" target="_blank">
+                    <a class="video-item" href="https://www.youtube.com/watch?v=8wpVFLOq9Ps" target="_blank" rel="noopener noreferrer">
                         <img src="https://img.youtube.com/vi/8wpVFLOq9Ps/hqdefault.jpg"
                             alt="Rasika Chya Lagnat  (Kratex Remix) | House | @Mhouseofficial" loading="lazy"
                             class="video-thumb">
                         <p class="video-title">Rasika Chya Lagnat (Kratex Remix) | House | @Mhouseofficial</p>
                     </a>
-                    <a class="video-item" href="https://www.youtube.com/watch?v=HyPUVUogl3Q" target="_blank">
+                    <a class="video-item" href="https://www.youtube.com/watch?v=HyPUVUogl3Q" target="_blank" rel="noopener noreferrer">
                         <img src="https://img.youtube.com/vi/HyPUVUogl3Q/hqdefault.jpg"
                             alt="Malyachya Malya Madhi   (Kratex Remix) | House | @Mhouseofficial" loading="lazy"
                             class="video-thumb">
                         <p class="video-title">Malyachya Malya Madhi (Kratex Remix) | House | @Mhouseofficial</p>
                     </a>
-                    <a class="video-item" href="https://www.youtube.com/watch?v=IOLU6pJ_Wt0" target="_blank">
+                    <a class="video-item" href="https://www.youtube.com/watch?v=IOLU6pJ_Wt0" target="_blank" rel="noopener noreferrer">
                         <img src="https://img.youtube.com/vi/IOLU6pJ_Wt0/hqdefault.jpg"
                             alt="Raati Ardhya Raati (Kratex Remix) | House  @Mhouseofficial" loading="lazy"
                             class="video-thumb">
                         <p class="video-title">Raati Ardhya Raati (Kratex Remix) | House @Mhouseofficial</p>
                     </a>
-                    <a class="video-item" href="https://www.youtube.com/watch?v=IZHVhdnDbNQ" target="_blank">
+                    <a class="video-item" href="https://www.youtube.com/watch?v=IZHVhdnDbNQ" target="_blank" rel="noopener noreferrer">
                         <img src="https://img.youtube.com/vi/IZHVhdnDbNQ/hqdefault.jpg"
                             alt="KilBil KilBil Pakshi Bolati (Kratex Remix) | Piano House  @Mhouseofficial"
                             loading="lazy" class="video-thumb">
                         <p class="video-title">KilBil KilBil Pakshi Bolati (Kratex Remix) | Piano House @Mhouseofficial
                         </p>
                     </a>
-                    <a class="video-item" href="https://www.youtube.com/watch?v=ALghS87x9ks" target="_blank">
+                    <a class="video-item" href="https://www.youtube.com/watch?v=ALghS87x9ks" target="_blank" rel="noopener noreferrer">
                         <img src="https://img.youtube.com/vi/ALghS87x9ks/hqdefault.jpg"
                             alt="Shakira, Burna Boy - Dai Dai (Kratex Remix) [Tech House]" loading="lazy"
                             class="video-thumb">
@@ -744,7 +735,7 @@
         <section id="kratex-tv-promo" class="section">
             <div class="tv-container">
                 <div class="tv-image-wrapper">
-                    <a href="https://tv.kratex.in" target="_blank" class="tv-frame-link">
+                    <a href="https://tv.kratex.in" target="_blank" class="tv-frame-link" rel="noopener noreferrer">
                         <div class="y2k-tv-frame">
                             <img src="assets/video/kratextv.gif" alt="Kratex TV Preview" class="tv-gif">
                             <div class="tv-glare"></div>
@@ -752,7 +743,8 @@
                     </a>
                 </div>
                 <div class="tv-info">
-                    <h2 class="tv-title">KRATEX TV</h2>
+                    <span class="eyebrow">08 / STAY TUNED</span>
+                    <h2 class="tv-title">KRATEX TV<span aria-hidden="true">↗</span></h2>
                     <p class="tv-meta" style="font-size: 1.1rem; line-height: 1.5; max-width: 500px;">
                         Experience Kratex like never before. Dive into a retro 90s TV experience where every channel
                         change drops you into a random timestamp of exclusive podcasts, music videos, unreleased DJ
@@ -761,7 +753,7 @@
                     <p class="tv-release">YOUR NEW FAVORITE ADDICTION.</p>
                     <div class="tv-actions">
                         <a href="https://tv.kratex.in" target="_blank" class="btn-tv"
-                            onclick="gtag('event', 'click', {'event_category': 'Button', 'event_label': 'Watch_Kratex_TV'});">WATCH
+                            onclick="gtag('event', 'click', {'event_category': 'Button', 'event_label': 'Watch_Kratex_TV'});" rel="noopener noreferrer">WATCH
                             NOW ↗</a>
                     </div>
                 </div>
@@ -771,16 +763,19 @@
         <!-- Subscribe Section -->
         <section id="subscribe" class="section subscribe-section">
             <div class="subscribe-container">
-                <h2>CONNECT WITH KRATEX</h2>
+                <span class="eyebrow">09 / THE INNER CIRCLE</span>
+                <h2>CONNECT WITH KRATEX<span aria-hidden="true">↗</span></h2>
                 <p class="subscribe-cta">Join the inner circle for exclusive giveaways, secret show meetups, new music
                     before it drops, and early access to limited merch.</p>
                 <form id="subscribe-form" class="subscribe-form">
-                    <input type="email" id="subscribe-email" placeholder="Enter your email..." required>
+                    <label for="subscribe-email" class="sr-only">Your email address</label>
+                    <input type="email" id="subscribe-email" name="email" autocomplete="email" placeholder="Your email address" required aria-describedby="subscribe-status">
                     <a href="#" id="subscribe-btn" class="btn-subscribe btn-disabled" target="_blank"
-                        onclick="gtag('event', 'click', {'event_category': 'Button', 'event_label': 'Subscribe_Join_Free'});">JOIN
+                        onclick="gtag('event', 'click', {'event_category': 'Button', 'event_label': 'Subscribe_Join_Free'});" rel="noopener noreferrer">JOIN
                         FOR FREE
                         ↗</a>
                 </form>
+                <p class="form-note" id="subscribe-status" role="status">Continue to Bandsintown to complete your subscription.</p>
             </div>
         </section>
 
@@ -788,46 +783,47 @@
         <div class="carousel-container" id="home-carousel">
             <div class="carousel-track" id="home-carousel-track">
                 <!-- We duplicate the images to create a seamless infinite loop -->
-                <img src="assets/images/pics/dpmain.jpg" alt="Kratex">
-                <img src="assets/images/pics/p1.png" alt="Kratex">
-                <img src="assets/images/pics/p2.png" alt="Kratex">
-                <img src="assets/images/pics/p3.png" alt="Kratex">
-                <img src="assets/images/pics/p4.png" alt="Kratex">
-                <img src="assets/images/pics/p5.png" alt="Kratex">
-                <img src="assets/images/pics/p6.png" alt="Kratex">
-                <img src="assets/images/pics/dpmain.jpg" alt="Kratex">
-                <img src="assets/images/pics/p1.png" alt="Kratex">
-                <img src="assets/images/pics/p2.png" alt="Kratex">
-                <img src="assets/images/pics/p3.png" alt="Kratex">
-                <img src="assets/images/pics/p4.png" alt="Kratex">
-                <img src="assets/images/pics/p5.png" alt="Kratex">
-                <img src="assets/images/pics/p6.png" alt="Kratex">
+                <img src="assets/images/pics/dpmain.jpg" alt="Kratex" loading="lazy" decoding="async">
+                <img src="assets/images/pics/p1.png" alt="Kratex" loading="lazy" decoding="async">
+                <img src="assets/images/pics/p2.png" alt="Kratex" loading="lazy" decoding="async">
+                <img src="assets/images/pics/p3.png" alt="Kratex" loading="lazy" decoding="async">
+                <img src="assets/images/pics/p4.png" alt="Kratex" loading="lazy" decoding="async">
+                <img src="assets/images/pics/p5.png" alt="Kratex" loading="lazy" decoding="async">
+                <img src="assets/images/pics/p6.png" alt="Kratex" loading="lazy" decoding="async">
+                <img src="assets/images/pics/dpmain.jpg" alt="Kratex" loading="lazy" decoding="async">
+                <img src="assets/images/pics/p1.png" alt="Kratex" loading="lazy" decoding="async">
+                <img src="assets/images/pics/p2.png" alt="Kratex" loading="lazy" decoding="async">
+                <img src="assets/images/pics/p3.png" alt="Kratex" loading="lazy" decoding="async">
+                <img src="assets/images/pics/p4.png" alt="Kratex" loading="lazy" decoding="async">
+                <img src="assets/images/pics/p5.png" alt="Kratex" loading="lazy" decoding="async">
+                <img src="assets/images/pics/p6.png" alt="Kratex" loading="lazy" decoding="async">
             </div>
         </div>
 
         <!-- Contact Section -->
         <section id="contact" class="section contact-section">
             <div class="contact-container">
-                <h2>CONTACT</h2>
-                <span>// GET IN TOUCH</span>
+                <span class="eyebrow">10 / GET IN TOUCH</span>
+                <h2>CONTACT<span aria-hidden="true">↗</span></h2>
+
                 <div class="contact-grid">
                     <div class="contact-col">
                         <h4>BOOKINGS</h4>
                         <p>Rock Kacchi</p>
-                        <p><a href="https://wa.link/5eah82" target="_blank">+91 98341 79271</a></p>
+                        <p><a href="https://wa.link/5eah82" target="_blank" rel="noopener noreferrer">+91 98341 79271</a></p>
                         <p><a href="mailto:rock@worldofvibes.com">rock@worldofvibes.com</a></p>
                     </div>
                     <div class="contact-col">
                         <h4>PROMOS</h4>
-                        <p><a href="https://tstack.link/kratex" target="_blank">Send your music</a></p>
+                        <p><a href="https://tstack.link/kratex" target="_blank" rel="noopener noreferrer">Send your music</a></p>
                     </div>
                     <div class="contact-col">
                         <h4>M-HOUSE LABEL</h4>
-                        <p><a href="https://tstack.link/mhouse" target="_blank">Submit your demos</a></p>
+                        <p><a href="https://tstack.link/mhouse" target="_blank" rel="noopener noreferrer">Submit your demos</a></p>
                     </div>
                     <div class="contact-col">
                         <h4>COMMUNITY</h4>
-                        <p><a href="https://whatsapp.com/channel/0029VaA3LelAu3aMHcTdIY16" target="_blank">Join Kratex
+                        <p><a href="https://whatsapp.com/channel/0029VaA3LelAu3aMHcTdIY16" target="_blank" rel="noopener noreferrer">Join Kratex
                                 WhatsApp</a></p>
                     </div>
                     <div class="contact-col">
@@ -861,42 +857,42 @@
                 </div>
                 <div class="footer-col">
                     <h4>ECOSYSTEM</h4>
-                    <p><a href="https://press.kratex.in" target="_blank">Kratex Presskit</a></p>
-                    <p><a href="https://academy.kratex.in" target="_blank">Kratex Academy</a></p>
-                    <p><a href="https://mhousemusic.in" target="_blank">M-House Music Records</a></p>
+                    <p><a href="https://press.kratex.in" target="_blank" rel="noopener noreferrer">Kratex Presskit</a></p>
+                    <p><a href="https://academy.kratex.in" target="_blank" rel="noopener noreferrer">Kratex Academy</a></p>
+                    <p><a href="https://mhousemusic.in" target="_blank" rel="noopener noreferrer">M-House Music Records</a></p>
                 </div>
                 <div class="footer-col socials-col">
                     <h4>SOCIALS</h4>
                     <div class="social-icons">
 
-                        <a href="https://www.facebook.com/kratexmusic" target="_blank"><i
+                        <a href="https://www.facebook.com/kratexmusic" target="_blank" rel="noopener noreferrer"><i
                                 class="fa-brands fa-facebook-f"></i> Facebook</a>
-                        <a href="https://www.instagram.com/kratexmusic" target="_blank"><i
+                        <a href="https://www.instagram.com/kratexmusic" target="_blank" rel="noopener noreferrer"><i
                                 class="fa-brands fa-instagram"></i> Instagram</a>
-                        <a href="https://www.snapchat.com/add/kratexsnap" target="_blank"><i
+                        <a href="https://www.snapchat.com/add/kratexsnap" target="_blank" rel="noopener noreferrer"><i
                                 class="fa-brands fa-snapchat"></i> Snapchat</a>
-                        <a href="https://music.apple.com/in/artist/kratex/1054012287" target="_blank"><i
+                        <a href="https://music.apple.com/in/artist/kratex/1054012287" target="_blank" rel="noopener noreferrer"><i
                                 class="fa-brands fa-apple"></i> Apple Music</a>
-                        <a href="https://open.spotify.com/artist/3Gowc3dedLQgQAt4y0gPBo" target="_blank"><i
+                        <a href="https://open.spotify.com/artist/3Gowc3dedLQgQAt4y0gPBo" target="_blank" rel="noopener noreferrer"><i
                                 class="fa-brands fa-spotify"></i> Spotify</a>
-                        <a href="https://www.youtube.com/@Kratexmusic" target="_blank"><i
+                        <a href="https://www.youtube.com/@Kratexmusic" target="_blank" rel="noopener noreferrer"><i
                                 class="fa-brands fa-youtube"></i> YouTube</a>
-                        <a href="https://x.com/kratexmusic" target="_blank"><i class="fa-brands fa-x-twitter"></i>
+                        <a href="https://x.com/kratexmusic" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-x-twitter"></i>
                             Twitter</a>
-                        <a href="https://kratex.bandcamp.com/" target="_blank"><i class="fa-brands fa-bandcamp"></i>
+                        <a href="https://kratex.bandcamp.com/" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-bandcamp"></i>
                             Bandcamp</a>
-                        <a href="https://soundcloud.com/kratexmusic" target="_blank"><i
+                        <a href="https://soundcloud.com/kratexmusic" target="_blank" rel="noopener noreferrer"><i
                                 class="fa-brands fa-soundcloud"></i> SoundCloud</a>
                     </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2026 KRATEX &nbsp;|&nbsp; <a href="/faktahouse/orkut" style="color: #555; text-decoration: none; font-size: 0.8rem;">orkut???</a></p>
+                <p>&copy; 2026 KRATEX &nbsp;|&nbsp; <a href="/faktahouse/orkut" class="easter-egg">orkut???</a></p>
             </div>
         </footer>
-    </div>
+    </main>
 
-    <script src="script.js?v=9"></script>
+    <script src="script.js?v=15" defer></script>
 </body>
 
 </html>

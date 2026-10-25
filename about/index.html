@@ -4,10 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KRATEX | MULTIVERSE</title>
-    <link rel="stylesheet" href="../style.css?v=9">
-    <link rel="stylesheet" href="../mobile.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.0/css/all.min.css">
+    <title>About Kratex | DJ & Music Producer</title>
+    <link rel="stylesheet" href="../style.css?v=15">
+    <link rel="stylesheet" href="../mobile.css?v=15">
     <meta name="description" content="Official website of Kratex. Discover new music, DJ sets, tour dates, exclusive merch, and more from music producer and DJ Kratex.">
     <meta name="keywords" content="Kratex, DJ Kratex, Music Producer, Electronic Music, DJ Sets, Live Shows, Kratex Merch, Kratex Music">
     <meta name="author" content="Kratex">
@@ -20,7 +19,7 @@
     <meta property="og:image:type" content="image/png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
-    <meta property="og:url" content="https://kratex.in/about.html">
+    <meta property="og:url" content="https://kratex.in/about">
     <meta property="og:site_name" content="KRATEX">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
@@ -33,10 +32,11 @@
 </head>
 
 <body class="about-page">
+    <a class="skip-link" href="#main-content">Skip to content</a>
 
     <!-- Top Navigation -->
     <!-- Top Navigation -->
-    <nav class="top-nav">
+    <nav class="top-nav" aria-label="Main navigation">
         <div class="nav-links">
             <div class="nav-left">
                 <a href="/about">ABOUT KRATEX</a>
@@ -48,11 +48,12 @@
             <div class="nav-right">
                 <a href="/#merch">MERCH</a>
                 <a href="/#music">MUSIC</a>
+                <a href="/#subscribe">SUBSCRIBE</a>
                 <a href="/#contact">CONTACT</a>
             </div>
         </div>
-        <button class="hamburger" id="hamburger-menu" aria-label="Menu">
-            <svg viewBox="0 0 100 80" width="30" height="30" fill="var(--text-color)">
+        <button class="hamburger" id="hamburger-menu" aria-label="Open navigation" aria-controls="mobile-menu" aria-expanded="false">
+            <span>MENU</span><svg viewBox="0 0 100 80" width="24" height="24" fill="currentColor" aria-hidden="true">
                 <rect width="100" height="10"></rect>
                 <rect y="30" width="100" height="10"></rect>
                 <rect y="60" width="100" height="10"></rect>
@@ -61,8 +62,8 @@
     </nav>
 
     <!-- Mobile Menu Overlay -->
-    <div class="mobile-menu-overlay" id="mobile-menu">
-        <button class="close-menu" id="close-menu" aria-label="Close">✕</button>
+    <div class="mobile-menu-overlay" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigation" inert>
+        <button class="close-menu" id="close-menu" aria-label="Close navigation">✕</button>
         <div class="mobile-nav-links">
             <a href="/about" class="mobile-link">ABOUT KRATEX</a>
             <a href="/#shows" class="mobile-link">SHOWS</a>
@@ -70,34 +71,35 @@
             <a href="/#merch" class="mobile-link">MERCH</a>
             <a href="/#music" class="mobile-link">MUSIC</a>
             <a href="/#subscribe" class="mobile-link">SUBSCRIBE</a>
+            <a href="/#contact" class="mobile-link">CONTACT</a>
         </div>
     </div>
 
     <!-- Video Hero Section -->
     
-    <div class="content-wrapper" style="padding-top: 150px;">
+    <main class="content-wrapper" id="main-content">
         <section class="section">
             <div class="about-content">
                 <a href="/" style="display: inline-block; margin-bottom: 2rem; font-weight: 700; text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px;">← GO BACK</a>
-                <h2>About Kratex</h2>
+                <span class="eyebrow">THE ARTIST / THE SOUND / THE CULTURE</span><h1>About Kratex</h1>
                 
                 <div class="carousel-container" id="about-carousel">
                     <div class="carousel-track" id="about-carousel-track">
                         <!-- We duplicate the images to create a seamless infinite loop -->
-                        <img src="../assets/images/pics/dpmain.jpg" alt="Kratex">
-                        <img src="../assets/images/pics/p1.png" alt="Kratex">
-                        <img src="../assets/images/pics/p2.png" alt="Kratex">
-                        <img src="../assets/images/pics/p3.png" alt="Kratex">
-                        <img src="../assets/images/pics/p4.png" alt="Kratex">
-                        <img src="../assets/images/pics/p5.png" alt="Kratex">
-                        <img src="../assets/images/pics/p6.png" alt="Kratex">
-                        <img src="../assets/images/pics/dpmain.jpg" alt="Kratex">
-                        <img src="../assets/images/pics/p1.png" alt="Kratex">
-                        <img src="../assets/images/pics/p2.png" alt="Kratex">
-                        <img src="../assets/images/pics/p3.png" alt="Kratex">
-                        <img src="../assets/images/pics/p4.png" alt="Kratex">
-                        <img src="../assets/images/pics/p5.png" alt="Kratex">
-                        <img src="../assets/images/pics/p6.png" alt="Kratex">
+                        <img src="../assets/images/pics/dpmain.jpg" alt="Kratex" loading="lazy" decoding="async">
+                        <img src="../assets/images/pics/p1.png" alt="Kratex" loading="lazy" decoding="async">
+                        <img src="../assets/images/pics/p2.png" alt="Kratex" loading="lazy" decoding="async">
+                        <img src="../assets/images/pics/p3.png" alt="Kratex" loading="lazy" decoding="async">
+                        <img src="../assets/images/pics/p4.png" alt="Kratex" loading="lazy" decoding="async">
+                        <img src="../assets/images/pics/p5.png" alt="Kratex" loading="lazy" decoding="async">
+                        <img src="../assets/images/pics/p6.png" alt="Kratex" loading="lazy" decoding="async">
+                        <img src="../assets/images/pics/dpmain.jpg" alt="Kratex" loading="lazy" decoding="async">
+                        <img src="../assets/images/pics/p1.png" alt="Kratex" loading="lazy" decoding="async">
+                        <img src="../assets/images/pics/p2.png" alt="Kratex" loading="lazy" decoding="async">
+                        <img src="../assets/images/pics/p3.png" alt="Kratex" loading="lazy" decoding="async">
+                        <img src="../assets/images/pics/p4.png" alt="Kratex" loading="lazy" decoding="async">
+                        <img src="../assets/images/pics/p5.png" alt="Kratex" loading="lazy" decoding="async">
+                        <img src="../assets/images/pics/p6.png" alt="Kratex" loading="lazy" decoding="async">
                     </div>
                 </div>
 
@@ -108,8 +110,8 @@
                 <p>Kratex has gained good support and appreciation on his productions from Afrojack, Chris Lake, Claude Von Stroke, Carnage, Fedde le Grand, Timmy Trumpet, Blasterjaxx, Club Banditz, etc</p>
                 
                 <p class="about-links" style="margin-top: 4rem; display: flex; flex-direction: column; align-items: flex-start; gap: 1rem;">
-                    <a href="https://press.kratex.in/assets/pdf/kratex_presskit_2026.pdf" target="_blank" class="text-link">DOWNLOAD KRATEX PRESS KIT ↗</a>
-                    <a href="https://press.kratex.in" target="_blank" class="text-link">MORE PRESS INFO: PRESS.KRATEX.IN ↗</a>
+                    <a href="https://press.kratex.in/assets/pdf/kratex_presskit_2026.pdf" target="_blank" class="text-link" rel="noopener noreferrer">DOWNLOAD KRATEX PRESS KIT ↗</a>
+                    <a href="https://press.kratex.in" target="_blank" class="text-link" rel="noopener noreferrer">MORE PRESS INFO: PRESS.KRATEX.IN ↗</a>
                 </p>
             </div>
         </section>
@@ -119,7 +121,7 @@
                 <h2>CONNECT WITH KRATEX</h2>
                 <p>GET FIRST ACCESS TO DROPS, TICKETS, AND NEW MUSIC.</p>
                 <a href="https://www.bandsintown.com/artist-subscribe/15525088" target="_blank"
-                    class="btn-subscribe">JOIN FOR FREE ↗</a>
+                    class="btn-subscribe" rel="noopener noreferrer">JOIN FOR FREE ↗</a>
             </div>
         </section>
 
@@ -142,31 +144,31 @@
                 </div>
                 <div class="footer-col">
                     <h4>ECOSYSTEM</h4>
-                    <p><a href="https://press.kratex.in" target="_blank">Kratex Presskit</a></p>
-                    <p><a href="https://academy.kratex.in" target="_blank">Kratex Academy</a></p>
-                    <p><a href="https://mhousemusic.in" target="_blank">M-House Music Records</a></p>
+                    <p><a href="https://press.kratex.in" target="_blank" rel="noopener noreferrer">Kratex Presskit</a></p>
+                    <p><a href="https://academy.kratex.in" target="_blank" rel="noopener noreferrer">Kratex Academy</a></p>
+                    <p><a href="https://mhousemusic.in" target="_blank" rel="noopener noreferrer">M-House Music Records</a></p>
                 </div>
                 <div class="footer-col socials-col">
                     <h4>SOCIALS</h4>
                     <div class="social-icons">
 
-                        <a href="https://www.facebook.com/kratexmusic" target="_blank"><i
+                        <a href="https://www.facebook.com/kratexmusic" target="_blank" rel="noopener noreferrer"><i
                                 class="fa-brands fa-facebook-f"></i> Facebook</a>
-                        <a href="https://www.instagram.com/kratexmusic" target="_blank"><i
+                        <a href="https://www.instagram.com/kratexmusic" target="_blank" rel="noopener noreferrer"><i
                                 class="fa-brands fa-instagram"></i> Instagram</a>
-                        <a href="https://www.snapchat.com/add/kratexsnap" target="_blank"><i
+                        <a href="https://www.snapchat.com/add/kratexsnap" target="_blank" rel="noopener noreferrer"><i
                                 class="fa-brands fa-snapchat"></i> Snapchat</a>
-                        <a href="https://music.apple.com/in/artist/kratex/1054012287" target="_blank"><i
+                        <a href="https://music.apple.com/in/artist/kratex/1054012287" target="_blank" rel="noopener noreferrer"><i
                                 class="fa-brands fa-apple"></i> Apple Music</a>
-                        <a href="https://open.spotify.com/artist/3Gowc3dedLQgQAt4y0gPBo" target="_blank"><i
+                        <a href="https://open.spotify.com/artist/3Gowc3dedLQgQAt4y0gPBo" target="_blank" rel="noopener noreferrer"><i
                                 class="fa-brands fa-spotify"></i> Spotify</a>
-                        <a href="https://www.youtube.com/@Kratexmusic" target="_blank"><i
+                        <a href="https://www.youtube.com/@Kratexmusic" target="_blank" rel="noopener noreferrer"><i
                                 class="fa-brands fa-youtube"></i> YouTube</a>
-                        <a href="https://x.com/kratexmusic" target="_blank"><i class="fa-brands fa-x-twitter"></i>
+                        <a href="https://x.com/kratexmusic" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-x-twitter"></i>
                             Twitter</a>
-                        <a href="https://kratex.bandcamp.com/" target="_blank"><i class="fa-brands fa-bandcamp"></i>
+                        <a href="https://kratex.bandcamp.com/" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-bandcamp"></i>
                             Bandcamp</a>
-                        <a href="https://soundcloud.com/kratexmusic" target="_blank"><i
+                        <a href="https://soundcloud.com/kratexmusic" target="_blank" rel="noopener noreferrer"><i
                                 class="fa-brands fa-soundcloud"></i> SoundCloud</a>
                     </div>
                 </div>
@@ -175,9 +177,9 @@
                 <p>&copy; 2026 KRATEX</p>
             </div>
         </footer>
-    </div>
+    </main>
 
-    <script src="../script.js"></script>
+    <script src="../script.js?v=15" defer></script>
 </body>
 
 </html>
