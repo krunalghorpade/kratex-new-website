@@ -3,6 +3,99 @@
 // Keep existing analytics handlers safe on pages that do not load Google Analytics.
 window.gtag = window.gtag || function () { (window.dataLayer = window.dataLayer || []).push(arguments); };
 const motionPreference = window.matchMedia('(prefers-reduced-motion: reduce)');
+const settingsPromise = fetch('/settings.json')
+  .then(response => response.ok ? response.json() : {})
+  .catch(() => ({}));
+
+function initPreloader() {
+  const loader = document.getElementById('preloader');
+  const percentage = document.getElementById('loader-percentage');
+  const phrase = document.getElementById('loader-phrase');
+  const fill = document.getElementById('loader-progress-fill');
+  if (!loader || loader.hidden || !percentage || !phrase || !fill) return;
+
+  const startedAt = window.kratexLoader?.startedAt ?? performance.now();
+  const reducedMotion = motionPreference.matches;
+  const minimumDuration = reducedMotion ? 200 : 1800;
+  const heroVideo = document.querySelector('.hero-bg-video');
+  let phrases = ['Fakta House', 'Nusta Vibes', 'Marathi Vaajlach Pahije'];
+  let phraseIndex = 0;
+  let finishing = false;
+  let readyTimer;
+  let hideTimer;
+  let fadeTimer;
+  phrase.textContent = phrases[0];
+
+  const showProgress = value => {
+    percentage.textContent = `${value}%`;
+    fill.style.width = `${value}%`;
+  };
+  const progressTimer = setInterval(() => {
+    const elapsed = performance.now() - startedAt;
+    showProgress(Math.min(90, Math.round(90 * (1 - Math.exp(-elapsed / 600)))));
+  }, 100);
+  const phraseTimer = reducedMotion ? null : setInterval(() => {
+    phraseIndex = (phraseIndex + 1) % phrases.length;
+    phrase.textContent = phrases[phraseIndex];
+  }, 450);
+
+  settingsPromise.then(settings => {
+    if (finishing) return;
+    const customPhrases = settings.loadingPhrases?.filter(value => typeof value === 'string' && value.trim());
+    if (!customPhrases?.length) return;
+    phrases = [...customPhrases];
+    for (let index = phrases.length - 1; index > 0; index--) {
+      const random = Math.floor(Math.random() * (index + 1));
+      [phrases[index], phrases[random]] = [phrases[random], phrases[index]];
+    }
+    phraseIndex = 0;
+    phrase.textContent = phrases[0];
+  }).catch(() => {});
+
+  function clearWork() {
+    clearInterval(progressTimer);
+    clearInterval(phraseTimer);
+    clearTimeout(readyTimer);
+    clearTimeout(maximumTimer);
+    window.removeEventListener('load', ready);
+    heroVideo?.removeEventListener('loadeddata', ready);
+    heroVideo?.removeEventListener('error', ready);
+  }
+  function hide() {
+    finishing = true;
+    clearWork();
+    clearTimeout(fadeTimer);
+    clearTimeout(hideTimer);
+    clearTimeout(window.kratexLoader?.failSafe);
+    delete window.kratexLoader;
+    loader.hidden = true;
+    document.documentElement.classList.remove('is-loading');
+    window.removeEventListener('pagehide', hide);
+  }
+  function finish() {
+    if (finishing) return;
+    finishing = true;
+    clearWork();
+    showProgress(100);
+    fadeTimer = setTimeout(() => {
+      document.documentElement.classList.remove('is-loading');
+      loader.classList.add('fade-out');
+      hideTimer = setTimeout(hide, reducedMotion ? 0 : 550);
+    }, reducedMotion ? 80 : 220);
+  }
+  function ready() {
+    if (finishing || readyTimer !== undefined) return;
+    readyTimer = setTimeout(finish, Math.max(0, minimumDuration - (performance.now() - startedAt)));
+  }
+  // Only the first screen gates the intro; slow embeds never block browsing.
+  const maximumTimer = setTimeout(finish, Math.max(0, 4000 - (performance.now() - startedAt)));
+  window.addEventListener('pagehide', hide);
+  window.addEventListener('load', ready, { once: true });
+  heroVideo?.addEventListener('loadeddata', ready, { once: true });
+  heroVideo?.addEventListener('error', ready, { once: true });
+  if (document.readyState === 'complete' || !heroVideo || heroVideo.readyState >= 2) ready();
+}
+
 
 function initNavigation() {
   const nav = document.querySelector('.top-nav');
@@ -232,9 +325,7 @@ function initSubscribeForm() {
 
 async function initSettings() {
   try {
-    const response = await fetch('/settings.json');
-    if (!response.ok) return;
-    const settings = await response.json();
+    const settings = await settingsPromise;
     const speed = Number(settings.aboutCarouselSpeed);
     if (Number.isFinite(speed) && speed >= 10) document.documentElement.style.setProperty('--carousel-speed', `${speed * 2}s`);
   } catch { /* Presentation defaults work even when settings cannot be loaded. */ }
@@ -243,6 +334,7 @@ async function initSettings() {
 }
 
 function init() {
+  initPreloader();
   initNavigation();
   initMotion();
   initCollections();

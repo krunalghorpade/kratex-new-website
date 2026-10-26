@@ -10,8 +10,8 @@
         content="Kratex, DJ Kratex, Music Producer, Electronic Music, DJ Sets, Live Shows, Kratex Merch, Kratex Music">
     <meta name="author" content="Kratex">
     <title>KRATEX | Official Website - DJ & Music Producer</title>
-    <link rel="stylesheet" href="style.css?v=15">
-    <link rel="stylesheet" href="mobile.css?v=15">
+    <link rel="stylesheet" href="style.css?v=16">
+    <link rel="stylesheet" href="mobile.css?v=16">
     <link rel="icon" type="image/x-icon" href="assets/icon.ico">
     <link rel="icon" type="image/png" href="assets/icon.png">
     <meta property="og:title" content="KRATEX | Official Website - DJ & Music Producer">
@@ -47,6 +47,36 @@
 </script>
 
 <body>
+    <!-- Original loader, restyled for the orange-and-white theme. Hidden when JavaScript is unavailable. -->
+    <div id="preloader" hidden>
+        <span class="sr-only" role="status">Loading Kratex</span>
+        <div class="loader-content" aria-hidden="true">
+            <img src="assets/logom.svg" alt="" class="loader-icon" width="72" height="57">
+            <div class="loader-text-container">
+                <span id="loader-percentage">0%</span>
+                <span id="loader-phrase">Loading...</span>
+            </div>
+        </div>
+        <div id="loader-progress-bar" aria-hidden="true">
+            <div id="loader-progress-fill"></div>
+        </div>
+    </div>
+    <script>
+        (() => {
+            const loader = document.getElementById('preloader');
+            loader.hidden = false;
+            document.documentElement.classList.add('is-loading');
+            // Release the page even if the main script never arrives or fails to start.
+            window.kratexLoader = {
+                startedAt: performance.now(),
+                failSafe: setTimeout(() => {
+                    loader.hidden = true;
+                    document.documentElement.classList.remove('is-loading');
+                    delete window.kratexLoader;
+                }, 5000)
+            };
+        })();
+    </script>
     <a class="skip-link" href="#shows">Skip to content</a>
 
     <!-- Top Navigation -->
@@ -892,7 +922,7 @@
         </footer>
     </main>
 
-    <script src="script.js?v=15" defer></script>
+    <script src="script.js?v=16" defer></script>
 </body>
 
 </html>
