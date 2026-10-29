@@ -36,6 +36,7 @@
   .section-index { margin-right: 12px; font-size: .75rem; }
   .section-header > span, .section-header > a { font-size: .75rem; }
   .tour-item { grid-template-columns: 1fr 2fr auto; gap: 15px; padding: 22px 0; }
+  #shows .tour-item:first-child { background: linear-gradient(110deg, rgba(255,116,56,.14), rgba(255,116,56,.03)); box-shadow: inset 3px 0 var(--accent); padding-inline: 14px; }
   .tour-left .date { font-size: 12px; }
   .tour-left .day { font-size: .75rem; }
   .tour-middle .title { font-size: 17px; }
@@ -89,7 +90,6 @@
   .tour-item { grid-template-columns: 82px 1fr; gap: 15px; }
   .tour-right { grid-column: 2; }
   .tour-right .btn-tv { min-height: 38px; }
-  .tour-item:hover { padding-left: 8px; }
   .shows-action { text-align: left; }
   .text-link { font-size: .8125rem; }
   .album-container, .tv-container { grid-template-columns: 1fr; gap: 36px; }

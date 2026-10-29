@@ -95,11 +95,15 @@ body.menu-open { overflow: hidden; }
 .tour-list { display: flex; flex-direction: column; }
 .tour-list > p { padding: 30px 0; color: var(--text-dark); font-size: 1rem; line-height: 1.6; }
 .tour-list > p a { color: var(--accent); border-bottom: 1px solid currentColor; }
-.tour-item { display: grid; grid-template-columns: 1fr 2fr auto; gap: 30px; padding: 27px 12px; border-bottom: 1px solid var(--line); align-items: center; transition: background .25s, padding .3s var(--ease); }
-.tour-item:hover { background: rgba(255,116,56,.07); padding-left: 24px; }
+.tour-item { display: grid; grid-template-columns: 1fr 2fr auto; gap: 30px; padding: 27px 12px; border-bottom: 1px solid var(--line); align-items: center; color: var(--text-color); -webkit-text-fill-color: var(--text-color); opacity: 1; transition: background .25s, padding .3s var(--ease); }
+.tour-item:visited { color: var(--text-color); -webkit-text-fill-color: var(--text-color); }
+@media (hover: hover) and (pointer: fine) {
+  .tour-item:hover { background: rgba(255,116,56,.07); padding-left: 24px; }
+}
 .tour-left, .tour-middle { display: flex; flex-direction: column; gap: 8px; }
 .tour-left .date { font-size: 16px; }
 .tour-left .day, .tour-middle .location { color: var(--text-dark); font-size: .8125rem; }
+.tour-left .day, .tour-middle .location { -webkit-text-fill-color: var(--text-dark); }
 .tour-middle .title { font-size: 22px; letter-spacing: -.03em; }
 .shows-action { margin-top: 30px; text-align: right; }
 .text-link { display: inline-block; font-size: .875rem; font-weight: 600; line-height: 1.5; padding-bottom: 7px; border-bottom: 1px solid currentColor; transition: color .25s; }
