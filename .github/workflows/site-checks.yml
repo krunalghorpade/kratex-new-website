@@ -1,0 +1,29 @@
+name: Site checks
+
+on:
+  push:
+    branches:
+      - main
+      - seo/house-music-dj-india
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+      - name: Use Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Run site checks
+        run: npm run check
+      - name: Build static site
+        run: npm run build
