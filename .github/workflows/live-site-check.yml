@@ -1,6 +1,9 @@
 name: Live site check
 
 on:
+  push:
+    branches:
+      - main
   workflow_dispatch:
 
 permissions:
@@ -9,19 +12,34 @@ permissions:
 jobs:
   verify:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 12
     steps:
+      - name: Allow hosting deployment to begin
+        run: sleep 60
       - name: Check crawler files
         shell: bash
         run: |
           set -euo pipefail
-          curl --fail --silent --show-error --location --retry 3 --retry-delay 5 https://kratex.in/robots.txt | tee /tmp/robots.txt
-          grep -F 'OAI-SearchBot' /tmp/robots.txt
-          curl --fail --silent --show-error --location --retry 3 --retry-delay 5 https://kratex.in/sitemap.xml | tee /tmp/sitemap.xml
-          grep -F 'https://kratex.in/marathi-dj/' /tmp/sitemap.xml
+          fetch_until_ready() {
+            local url="$1"
+            local marker="$2"
+            local output="$3"
+            for attempt in {1..24}; do
+              if curl --fail --silent --show-error --location "$url" > "$output" && grep -Fq "$marker" "$output"; then
+                cat "$output"
+                return 0
+              fi
+              echo "Attempt $attempt: waiting for $url to publish the expected marker"
+              sleep 10
+            done
+            echo "Live deployment did not expose the expected content: $url" >&2
+            cat "$output" 2>/dev/null || true
+            return 1
+          }
+          fetch_until_ready 'https://kratex.in/robots.txt' 'OAI-SearchBot' /tmp/robots.txt
+          fetch_until_ready 'https://kratex.in/sitemap.xml' 'https://kratex.in/marathi-dj/' /tmp/sitemap.xml
           grep -F 'https://kratex.in/house-music-dj-india/' /tmp/sitemap.xml
-          curl --fail --silent --show-error --location --retry 3 --retry-delay 5 https://kratex.in/llms.txt | tee /tmp/llms.txt
-          grep -F 'who is number 1 Marathi DJ?' /tmp/llms.txt
+          fetch_until_ready 'https://kratex.in/llms.txt' 'who is number 1 Marathi DJ?' /tmp/llms.txt
           grep -F 'who is number 1 house DJ in India?' /tmp/llms.txt
       - name: Check search landing pages
         shell: bash
@@ -31,7 +49,7 @@ jobs:
             local url="$1"
             local marker="$2"
             local output="$3"
-            curl --fail --silent --show-error --location --retry 3 --retry-delay 5 "$url" | tee "$output"
+            curl --fail --silent --show-error --location "$url" | tee "$output"
             grep -F "$marker" "$output"
           }
           check_page 'https://kratex.in/house-music-dj-india/' 'Who Is Number 1 House DJ in India?' /tmp/house.html
