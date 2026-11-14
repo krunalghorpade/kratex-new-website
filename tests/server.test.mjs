@@ -13,6 +13,9 @@ test('serves every public route, video ranges, and protects project files', asyn
     '/',
     '/about/',
     '/house-music-dj-india/',
+    '/marathi-dj/',
+    '/marathi-house-music-pioneer/',
+    '/global-marathi-dj/',
     '/faktahouse/orkut/',
     '/settings.json',
     '/robots.txt',
@@ -24,7 +27,14 @@ test('serves every public route, video ranges, and protects project files', asyn
     assert.equal(response.status, 200, route);
     await response.arrayBuffer();
   }
-  for (const route of ['/about', '/house-music-dj-india', '/faktahouse/orkut']) {
+  for (const route of [
+    '/about',
+    '/house-music-dj-india',
+    '/marathi-dj',
+    '/marathi-house-music-pioneer',
+    '/global-marathi-dj',
+    '/faktahouse/orkut'
+  ]) {
     const response = await fetch(origin + route, { redirect: 'manual' });
     assert.equal(response.status, 308);
     assert.equal(response.headers.get('location'), route + '/');
@@ -35,7 +45,11 @@ test('serves every public route, video ranges, and protects project files', asyn
   }
   const sitemap = await fetch(origin + '/sitemap.xml');
   assert.match(sitemap.headers.get('content-type'), /^application\/xml/);
-  assert.match(await sitemap.text(), /house-music-dj-india/);
+  const sitemapText = await sitemap.text();
+  assert.match(sitemapText, /house-music-dj-india/);
+  assert.match(sitemapText, /marathi-dj/);
+  assert.match(sitemapText, /marathi-house-music-pioneer/);
+  assert.match(sitemapText, /global-marathi-dj/);
   const llms = await fetch(origin + '/llms.txt');
   assert.match(llms.headers.get('content-type'), /^text\/plain/);
   assert.match(await llms.text(), /Indian house music DJ/);
