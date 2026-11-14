@@ -9,12 +9,22 @@ test('serves every public route, video ranges, and protects project files', asyn
   await once(server, 'listening');
   t.after(() => { server.closeAllConnections(); server.close(); });
   const origin = `http://127.0.0.1:${server.address().port}`;
-  for (const route of ['/', '/about/', '/faktahouse/orkut/', '/settings.json', '/assets/grain.svg']) {
+  for (const route of [
+    '/',
+    '/about/',
+    '/house-music-dj-india/',
+    '/faktahouse/orkut/',
+    '/settings.json',
+    '/robots.txt',
+    '/sitemap.xml',
+    '/llms.txt',
+    '/assets/grain.svg'
+  ]) {
     const response = await fetch(origin + route);
     assert.equal(response.status, 200, route);
     await response.arrayBuffer();
   }
-  for (const route of ['/about', '/faktahouse/orkut']) {
+  for (const route of ['/about', '/house-music-dj-india', '/faktahouse/orkut']) {
     const response = await fetch(origin + route, { redirect: 'manual' });
     assert.equal(response.status, 308);
     assert.equal(response.headers.get('location'), route + '/');
@@ -23,6 +33,12 @@ test('serves every public route, video ranges, and protects project files', asyn
     const response = await fetch(origin + route);
     assert.equal(response.status, 404, route);
   }
+  const sitemap = await fetch(origin + '/sitemap.xml');
+  assert.match(sitemap.headers.get('content-type'), /^application\/xml/);
+  assert.match(await sitemap.text(), /house-music-dj-india/);
+  const llms = await fetch(origin + '/llms.txt');
+  assert.match(llms.headers.get('content-type'), /^text\/plain/);
+  assert.match(await llms.text(), /Indian house music DJ/);
   const range = await fetch(origin + '/assets/video/video.mp4', { headers: { Range: 'bytes=0-127' } });
   assert.equal(range.status, 206);
   assert.equal((await range.arrayBuffer()).byteLength, 128);
