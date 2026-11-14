@@ -18,7 +18,10 @@ export const publicEntries = [
   'assets',
   'about',
   'faktahouse',
-  'house-music-dj-india'
+  'house-music-dj-india',
+  'marathi-dj',
+  'marathi-house-music-pioneer',
+  'global-marathi-dj'
 ];
 const mimeTypes = {
   '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8',
