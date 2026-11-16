@@ -36,7 +36,7 @@
   .section-index { margin-right: 12px; font-size: .75rem; }
   .section-header > span, .section-header > a { font-size: .75rem; }
   .tour-item { grid-template-columns: 1fr 2fr auto; gap: 15px; padding: 22px 0; }
-  #shows .tour-item:first-child { background: linear-gradient(110deg, rgba(255,116,56,.14), rgba(255,116,56,.03)); box-shadow: inset 3px 0 var(--accent); padding-inline: 14px; }
+  #shows .tour-item:first-child { background: #222; box-shadow: inset 3px 0 var(--accent); padding-inline: 14px; }
   .tour-left .date { font-size: 12px; }
   .tour-left .day { font-size: .75rem; }
   .tour-middle .title { font-size: 17px; }
