@@ -18,8 +18,8 @@
   .nav-logo { width: 105px; }
   .hamburger { display: flex; }
   .top-nav.is-scrolled, .about-page .top-nav { padding: 17px 14px; }
-  .hero-video { margin: 10px; height: calc(90svh - 20px); min-height: 620px; max-height: 950px; }
-  .hero-overlay { padding: 0 14px; }
+  .hero-video { margin: 0; height: 100svh; min-height: 620px; max-height: none; }
+  .hero-overlay { padding: 0 var(--gutter); }
   .hero-about { margin-top: 0; font-size: .75rem; gap: 14px; }
   .hero-wordmark { font-size: 25.2vw; }
   .hero-meta { padding-bottom: 32px; }
@@ -73,7 +73,7 @@
   .footer-grid { grid-template-columns: 1fr 1fr; row-gap: 35px; }
 }
 @media (max-width: 540px) {
-  .hero-video { min-height: 600px; height: calc(88svh - 20px); }
+  .hero-video { min-height: 600px; height: 100svh; }
   .hero-cta-container { flex: 0 1 60%; max-width: 60%; }
   .hero-about { flex: 0 1 36%; max-width: 36%; font-size: .75rem; gap: 8px; }
   .hero-meta { gap: 8px; padding-bottom: 36px; }
