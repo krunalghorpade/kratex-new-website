@@ -286,111 +286,143 @@ body.menu-open { overflow: hidden; }
   #loader-progress-fill { background: Highlight; }
 }
 
-/* Editorial homepage: oversized Helvetica Neue type and image-led blocks. */
+/* Full-bleed editorial homepage: bold type, black space, and large media. */
+.home-page { background: #050505; }
+.home-page .content-wrapper { padding: 0; }
 .home-page h1, .home-page h2, .home-page h3, .about-page h1, .about-page h2 {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: 700;
   letter-spacing: -.04em;
 }
 .home-page .hero-wordmark { font-size: 23.3vw; font-weight: 700; letter-spacing: -.04em; }
-.home-page .section { padding-top: clamp(88px, 10vw, 170px); padding-bottom: clamp(88px, 10vw, 170px); }
-.home-page .section-header { margin-bottom: clamp(34px, 5vw, 76px); padding-bottom: 28px; }
-.home-page #shows { padding-top: clamp(88px, 10vw, 170px); padding-bottom: clamp(88px, 10vw, 170px); }
-.home-page .section-header h2 { font-size: clamp(56px, 8.2vw, 140px); line-height: .86; }
-.home-page .section-index { font-size: .75rem; font-weight: 700; letter-spacing: .06em; margin-top: 9px; }
+.home-page .section { max-width: none; margin: 0; padding: clamp(100px, 11vw, 190px) var(--gutter); }
+.home-page .section + .section { border-top: 0; }
+.home-page .section-header { margin-bottom: clamp(44px, 5vw, 86px); padding-bottom: 26px; }
+.home-page .section-header h2 { font-size: clamp(64px, 10vw, 178px); line-height: .82; }
+.home-page .section-index { font-size: .75rem; font-weight: 700; letter-spacing: .06em; margin-top: 10px; }
 
-.editorial-story {
-  max-width: 1600px;
-  margin: clamp(24px, 4vw, 68px) auto 0;
-  padding: clamp(26px, 5vw, 82px);
-  background: #050505;
-  color: #fff;
-}
+.editorial-story { width: 100%; margin: 0; padding: 0; background: #050505; color: #fff; }
 .story-label, .story-image figcaption, .story-side-note > span, .story-panorama-copy small {
-  display: block;
-  font-size: clamp(11px, .9vw, 14px);
-  font-weight: 700;
-  line-height: 1.35;
-  letter-spacing: .11em;
-  text-transform: uppercase;
+  display: block; font-size: clamp(11px, .9vw, 14px); font-weight: 700; line-height: 1.35;
+  letter-spacing: .11em; text-transform: uppercase;
 }
-.story-masthead { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(220px, .4fr); column-gap: 7vw; align-items: end; }
-.story-masthead .story-label { grid-column: 1 / -1; margin-bottom: clamp(26px, 4vw, 60px); }
-.story-masthead h2 { font-size: clamp(70px, 10vw, 190px); line-height: .78; margin: 0; max-width: 1180px; }
-.story-masthead > p { font-size: clamp(16px, 1.35vw, 22px); line-height: 1.45; max-width: 320px; margin: 0 0 8px; }
-.story-opening { display: grid; grid-template-columns: 2.4fr 5fr 2fr; gap: clamp(15px, 2vw, 34px); align-items: end; margin-top: clamp(74px, 9vw, 150px); }
-.story-image { margin: 0; min-width: 0; }
-.story-image img { display: block; width: 100%; object-fit: cover; background: #202020; }
-.story-image-small { padding-bottom: clamp(35px, 6vw, 120px); }
-.story-image-small img { aspect-ratio: 1 / 1.12; }
-.story-image-portrait img { aspect-ratio: 4 / 5; }
-.story-image figcaption { margin-top: 12px; color: #a8a8a8; }
-.story-side-note { align-self: end; padding-bottom: clamp(42px, 8vw, 155px); }
-.story-side-note p { font-size: clamp(17px, 1.45vw, 24px); line-height: 1.28; margin-top: 22px; }
-.story-middle { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, .75fr); gap: clamp(30px, 6vw, 100px); align-items: end; margin-top: clamp(80px, 11vw, 190px); }
-.story-image-crowd img { aspect-ratio: 1.35 / 1; }
-.story-bio { max-width: 550px; padding-bottom: 34px; }
-.story-bio h3 { font-size: clamp(38px, 4.7vw, 76px); line-height: .9; margin: 22px 0 32px; }
-.story-bio p { color: #d5d5d5; font-size: clamp(15px, 1.15vw, 19px); line-height: 1.55; margin-top: 18px; }
+.story-masthead {
+  position: relative; isolation: isolate; overflow: hidden;
+  min-height: 82svh; padding: clamp(68px, 8vw, 138px) var(--gutter);
+  display: grid; grid-template-columns: minmax(0, 1.8fr) minmax(230px, .42fr);
+  gap: 36px; align-content: end; align-items: end;
+}
+.story-masthead::before {
+  content: ''; position: absolute; inset: -8%; z-index: 0;
+  background: url('/assets/images/pics/dpmain.jpg') center 40% / cover no-repeat;
+  filter: grayscale(1) blur(26px) brightness(.5); opacity: .55;
+}
+.story-masthead::after { content: ''; position: absolute; inset: 0; z-index: 0; background: linear-gradient(90deg, rgba(0,0,0,.66), rgba(0,0,0,.2)); }
+.story-masthead > * { position: relative; z-index: 1; }
+.story-masthead .story-label { grid-column: 1 / -1; margin-bottom: clamp(12px, 2vw, 35px); }
+.story-masthead h2 { font-size: clamp(90px, 13.5vw, 250px); line-height: .76; margin: 0; max-width: none; }
+.story-masthead > p { font-size: clamp(16px, 1.35vw, 23px); line-height: 1.4; max-width: 390px; margin: 0 0 6px; }
+.story-opening { display: grid; grid-template-columns: 33% 47% 20%; gap: 0; align-items: end; margin: 0; }
+.story-image { position: relative; display: block; margin: 0; min-width: 0; overflow: hidden; background: #151515; }
+.story-image img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.story-image-small { height: 36vw; max-height: 680px; }
+.story-image-portrait { height: 61vw; max-height: 1050px; }
+.story-image-crowd { height: min(62vw, 920px); }
+.story-image figcaption {
+  position: absolute; left: 0; right: 0; bottom: 0; margin: 0;
+  padding: 32px var(--gutter); color: #fff; text-shadow: 0 1px 12px #000;
+  background: linear-gradient(0deg, rgba(0,0,0,.65), transparent);
+}
+.story-side-note { min-height: 100%; padding: clamp(24px, 3vw, 56px); display: flex; flex-direction: column; justify-content: flex-end; }
+.story-side-note p { font-size: clamp(17px, 1.7vw, 30px); line-height: 1.16; margin-top: 22px; font-weight: 700; letter-spacing: -.04em; }
+.story-middle { display: grid; grid-template-columns: 64% 36%; gap: 0; align-items: stretch; margin: 0; }
+.story-bio { max-width: none; min-width: 0; padding: clamp(38px, 5vw, 88px); display: flex; flex-direction: column; justify-content: center; }
+.story-bio h3 { font-size: clamp(42px, 4.1vw, 80px); line-height: .85; margin: 26px 0 42px; }
+.story-bio p { color: #d5d5d5; font-size: clamp(15px, 1.18vw, 21px); line-height: 1.55; margin-top: 18px; }
 .story-bio p a { color: #fff; border-bottom: 1px solid currentColor; }
-.story-panorama { position: relative; display: block; min-height: 440px; height: min(70vw, 820px); margin-top: clamp(80px, 10vw, 160px); overflow: hidden; background: #202020; }
-.story-panorama::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.2) 45%, rgba(0,0,0,.72)); }
+.story-panorama { position: relative; display: block; width: 100%; min-height: 600px; height: 95svh; margin: 0; overflow: hidden; background: #202020; }
+.story-panorama::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.04), rgba(0,0,0,.08) 35%, rgba(0,0,0,.68)); }
 .story-panorama > img { width: 100%; height: 100%; object-fit: cover; transition: transform .8s var(--ease); }
-.story-panorama:hover > img { transform: scale(1.035); }
-.story-panorama-copy { position: absolute; z-index: 1; inset: auto clamp(24px, 4vw, 64px) clamp(24px, 4vw, 64px); display: flex; flex-direction: column; align-items: flex-start; gap: clamp(18px, 2vw, 32px); }
-.story-panorama-copy strong { font-size: clamp(60px, 9vw, 150px); line-height: .82; letter-spacing: -.04em; font-weight: 700; }
+.story-panorama:hover > img { transform: scale(1.025); }
+.story-panorama-copy { position: absolute; z-index: 1; inset: auto var(--gutter) clamp(36px, 5vw, 88px); display: flex; flex-direction: column; align-items: flex-start; gap: clamp(18px, 2vw, 32px); }
+.story-panorama-copy strong { font-size: clamp(82px, 12vw, 220px); line-height: .78; letter-spacing: -.04em; font-weight: 700; }
 .story-panorama-copy > span { border-bottom: 1px solid currentColor; padding-bottom: 6px; font-size: .875rem; font-weight: 700; }
-.story-links { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 38px; }
-.story-links a { border-top: 1px solid #666; padding-top: 16px; font-size: clamp(13px, 1vw, 16px); font-weight: 700; letter-spacing: -.02em; }
+.story-links { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin: 0; padding: 40px var(--gutter) clamp(70px, 9vw, 150px); background: #050505; }
+.story-links a { border-top: 1px solid #666; padding: 18px 20px 18px 0; font-size: clamp(13px, 1vw, 16px); font-weight: 700; letter-spacing: -.02em; }
 .story-links a:hover { border-color: #fff; }
 
-.home-page #album-promo { background: #050505; color: #fff; padding-top: clamp(60px, 7vw, 120px); padding-bottom: clamp(60px, 7vw, 120px); }
-.home-page .album-container { grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); gap: clamp(40px, 6vw, 105px); }
-.home-page .album-image-wrapper { display: grid; place-items: center; padding: clamp(25px, 4vw, 60px); background: #fff; min-height: clamp(460px, 70vh, 820px); }
-.home-page .album-img { width: 100%; max-height: 650px; }
-.home-page .album-title { font-size: clamp(76px, 8.5vw, 155px); font-weight: 700; letter-spacing: -.04em; line-height: .82; }
+.home-page #shows { position: relative; isolation: isolate; min-height: 82svh; padding: clamp(110px, 11vw, 190px) var(--gutter); background: #111 url('/assets/images/pics/p4.png') center / cover no-repeat; }
+.home-page #shows::before { content: ''; position: absolute; inset: 0; z-index: -1; background: rgba(0,0,0,.76); }
+.home-page #shows .section-header, .home-page #shows .tour-item { border-color: rgba(255,255,255,.5); }
+.home-page #album-promo { width: 100%; margin: 0; padding: 0; background: #050505; color: #fff; }
+.home-page .album-container { max-width: none; min-height: 100svh; grid-template-columns: 55% 45%; gap: 0; }
+.home-page .album-image-wrapper { display: grid; place-items: center; margin: 0; padding: clamp(25px, 4vw, 70px); background: #fff; min-height: 100svh; }
+.home-page .album-img { width: 100%; max-height: 72svh; }
+.home-page .album-info { max-width: none; padding: clamp(40px, 5vw, 90px); align-self: center; }
+.home-page .album-title { font-size: clamp(78px, 8.5vw, 165px); font-weight: 700; letter-spacing: -.04em; line-height: .8; }
 .home-page .album-actions .btn-filled { background: #fff; border-color: #fff; color: #111; }
 .home-page .album-actions .btn-filled:hover { background: #ddd; border-color: #ddd; }
 .home-page .album-actions .btn-tv:hover { color: #111; }
-.home-page .video-carousel { gap: clamp(18px, 2.5vw, 42px); }
-.home-page .video-item { flex: 0 0 min(68vw, 900px); }
+.home-page #djsets, .home-page #music, .home-page #merch { padding-left: 0; padding-right: 0; }
+.home-page #djsets .section-header, .home-page #music .section-header, .home-page #merch .section-header { margin-left: var(--gutter); margin-right: var(--gutter); }
+.home-page .video-carousel, .home-page .merch-grid { gap: 8px; padding-bottom: 0; }
+.home-page .video-item { flex: 0 0 min(78vw, 1200px); }
 .home-page .video-thumb { aspect-ratio: 16 / 9; filter: none; }
-.home-page .video-title { max-width: 760px; font-size: clamp(15px, 1.3vw, 21px); line-height: 1.4; font-weight: 700; letter-spacing: -.02em; }
-.home-page .merch-grid { gap: clamp(18px, 2.5vw, 42px); }
-.home-page .merch-item { flex: 0 0 min(42vw, 560px); }
+.home-page .video-title { max-width: 1000px; padding: 18px var(--gutter) 42px; font-size: clamp(16px, 1.35vw, 24px); line-height: 1.3; font-weight: 700; letter-spacing: -.02em; }
+.home-page .merch-item { flex: 0 0 min(50vw, 800px); }
 .home-page .merch-img-container { aspect-ratio: 4 / 5; }
-.home-page #kratex-tv-promo .tv-container { min-height: 70vh; grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); }
-.home-page #kratex-tv-promo .tv-title { font-size: clamp(70px, 8vw, 140px); font-weight: 700; letter-spacing: -.04em; }
+.home-page .merch-info { padding: 18px var(--gutter) 42px; }
+.home-page .merch-info::after { right: var(--gutter); }
+.home-page .rail-controls { margin-left: var(--gutter); margin-right: var(--gutter); }
+.home-page .stream-showcase-section { margin: 0; }
+.home-page .carousel-container { margin: 0; }
+.home-page #kratex-tv-promo { padding: 0; }
+.home-page #kratex-tv-promo .tv-container { max-width: none; min-height: 85svh; grid-template-columns: 58% 42%; gap: 0; }
+.home-page #kratex-tv-promo .tv-image-wrapper { display: grid; place-items: center; min-height: 85svh; padding: clamp(24px, 5vw, 80px); background: #101010 url('/assets/images/pics/p5.png') center / cover no-repeat; }
+.home-page #kratex-tv-promo .tv-info { align-self: center; padding: clamp(44px, 5vw, 90px); }
+.home-page #kratex-tv-promo .tv-title { font-size: clamp(75px, 8vw, 145px); font-weight: 700; letter-spacing: -.04em; }
 
 @media (max-width: 900px) {
-  .story-masthead { grid-template-columns: 1fr; }
-  .story-masthead > p { max-width: 600px; margin-top: 32px; }
-  .story-opening { grid-template-columns: 1fr 1.4fr; }
-  .story-image-small { padding-bottom: 0; }
-  .story-side-note { grid-column: 1 / -1; padding: 20px 0 0; }
-  .story-side-note p { margin-top: 10px; }
+  .story-masthead { min-height: 65svh; grid-template-columns: 1fr; align-content: end; }
+  .story-masthead > p { max-width: 640px; margin-top: 12px; }
+  .story-opening { grid-template-columns: 38% 62%; }
+  .story-image-small { height: 48vw; }
+  .story-image-portrait { height: 78vw; }
+  .story-side-note { grid-column: 1 / -1; min-height: 0; padding: 28px var(--gutter) 42px; }
+  .story-side-note p { margin-top: 8px; }
   .story-middle { grid-template-columns: 1fr; }
-  .story-bio { max-width: 700px; padding: 0; }
+  .story-image-crowd { height: 65svh; }
+  .story-bio { padding: clamp(50px, 8vw, 90px) var(--gutter); }
   .story-links { grid-template-columns: 1fr 1fr; }
   .home-page .album-container, .home-page #kratex-tv-promo .tv-container { grid-template-columns: 1fr; }
-  .home-page .album-image-wrapper { min-height: 460px; }
+  .home-page .album-image-wrapper { min-height: 70svh; }
+  .home-page .album-info { padding: 70px var(--gutter) 90px; }
+  .home-page #kratex-tv-promo .tv-image-wrapper { min-height: 70svh; }
 }
 @media (max-width: 600px) {
   .home-page .hero-wordmark { font-size: 21.8vw; }
-  .editorial-story { margin: 18px calc(-1 * var(--gutter)) 0; padding: 28px var(--gutter) 42px; }
-  .story-masthead h2 { font-size: clamp(58px, 12.5vw, 88px); }
-  .story-opening { grid-template-columns: 1fr 1.25fr; gap: 12px; margin-top: 70px; }
-  .story-image-small { align-self: end; padding-bottom: 48px; }
-  .story-image-portrait img { aspect-ratio: 3 / 4; }
-  .story-side-note { padding-top: 22px; }
-  .story-middle { gap: 42px; margin-top: 80px; }
-  .story-image-crowd img { aspect-ratio: 1 / 1; }
-  .story-panorama { min-height: 460px; height: 72svh; margin-top: 80px; }
-  .story-panorama-copy strong { font-size: clamp(58px, 12vw, 90px); }
-  .story-links { grid-template-columns: 1fr 1fr; gap: 24px 14px; }
-  .home-page .section-header h2 { font-size: clamp(48px, 11vw, 72px); }
-  .home-page .video-item { flex-basis: 84vw; }
-  .home-page .merch-item { flex-basis: 72vw; }
-  .home-page .album-image-wrapper { min-height: 340px; }
-  .home-page .album-title { font-size: clamp(70px, 15vw, 108px); }
+  .home-page .section { padding-top: 86px; padding-bottom: 86px; }
+  .home-page .section-header h2 { font-size: clamp(48px, 11vw, 74px); }
+  .story-masthead { min-height: 70svh; padding: 70px var(--gutter) 64px; }
+  .story-masthead h2 { font-size: clamp(56px, 12.8vw, 82px); }
+  .story-masthead > p { font-size: 16px; max-width: 330px; }
+  .story-image-small { height: 58vw; }
+  .story-image-portrait { height: 86vw; }
+  .story-image figcaption { padding: 14px; font-size: 10px; }
+  .story-side-note { padding: 28px var(--gutter) 38px; }
+  .story-side-note p { font-size: 22px; }
+  .story-image-crowd { height: 65svh; }
+  .story-bio { padding: 66px var(--gutter) 80px; }
+  .story-bio h3 { font-size: clamp(44px, 11vw, 72px); }
+  .story-panorama { min-height: 560px; height: 80svh; }
+  .story-panorama-copy strong { font-size: clamp(58px, 13vw, 96px); }
+  .story-links { gap: 16px; padding: 28px var(--gutter) 80px; }
+  .story-links a { font-size: 13px; padding-right: 10px; }
+  .home-page #shows { min-height: 75svh; padding: 90px var(--gutter); }
+  .home-page .album-image-wrapper { min-height: 52svh; }
+  .home-page .album-info { padding: 70px var(--gutter) 80px; }
+  .home-page .album-title { font-size: clamp(70px, 15vw, 110px); }
+  .home-page .video-item { flex-basis: 92vw; }
+  .home-page .merch-item { flex-basis: 78vw; }
+  .home-page #kratex-tv-promo .tv-image-wrapper { min-height: 60svh; }
 }
