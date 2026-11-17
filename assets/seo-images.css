@@ -1,0 +1,16 @@
+.seo-lead-photo{margin:0;background:#050505}
+.seo-lead-photo img{display:block;width:100%;height:clamp(360px,44vw,660px);object-fit:cover;object-position:center}
+.seo-lead-photo--portrait img{object-position:center 35%}
+.seo-lead-photo--stage img{object-position:center 50%}
+.seo-lead-photo figcaption,.seo-story-photo figcaption,.tour-gallery figcaption,.film-art figcaption{color:#aaa;font:700 11px/1.5 'Helvetica Neue',Helvetica,Arial,sans-serif;letter-spacing:.11em;text-transform:uppercase}
+.seo-lead-photo figcaption{padding:14px 5vw 16px;border-bottom:1px solid rgba(255,255,255,.18)}
+.seo-story-photo{margin:88px 0 0}
+.seo-story-photo img{display:block;width:100%;height:clamp(360px,48vw,640px);object-fit:cover;object-position:center 45%}
+.seo-story-photo figcaption{padding-top:13px}
+.tour-gallery{margin-top:96px}
+.tour-gallery>p{max-width:760px}
+.tour-gallery-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;align-items:start;margin-top:34px}
+.tour-gallery figure,.film-art{margin:0}
+.tour-gallery img,.film-art img{display:block;width:100%;height:auto}
+.tour-gallery figcaption,.film-art figcaption{padding-top:13px}
+@media(max-width:760px){.seo-lead-photo img{height:clamp(320px,75vw,520px)}.seo-lead-photo--portrait img{object-position:center 32%}.seo-story-photo{margin-top:70px}.seo-story-photo img{height:clamp(300px,75vw,500px)}.tour-gallery{margin-top:70px}.tour-gallery-grid{grid-template-columns:1fr;gap:32px}}
