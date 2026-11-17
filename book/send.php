@@ -88,7 +88,7 @@ $body = "New Kratex booking inquiry\n\n"
     . "Additional notes: " . ($notes === '' ? 'None' : "\n{$notes}") . "\n";
 $headers = [
     'From' => 'Kratex Bookings <contact@kratex.in>',
-    'Cc' => 'chintan@worldofvibes.com, contact@kratex.com',
+    'Cc' => 'chintan@worldofvibes.com, contact@kratex.in',
     'MIME-Version' => '1.0',
     'Content-Type' => 'text/plain; charset=UTF-8',
 ];
