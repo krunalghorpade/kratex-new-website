@@ -17,6 +17,7 @@ export const publicEntries = [
   'llms.txt',
   'assets',
   'about',
+  'book',
   'faktahouse',
   'house-music-dj-india',
   'marathi-dj',

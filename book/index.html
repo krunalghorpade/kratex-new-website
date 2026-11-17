@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en-IN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Book Kratex | Booking Inquiry</title>
+  <meta name="description" content="Book Kratex for a club night, festival or live show. Send your city, date, venue and contact details to the World of Vibes booking team.">
+  <meta name="robots" content="index,follow">
+  <link rel="canonical" href="https://kratex.in/book/">
+  <link rel="icon" href="/assets/icon.png" type="image/png">
+  <meta property="og:title" content="Book Kratex | Booking Inquiry">
+  <meta property="og:description" content="Bring M-House to your city. Send a booking inquiry for Kratex to the World of Vibes team.">
+  <meta property="og:url" content="https://kratex.in/book/">
+  <meta property="og:image" content="https://kratex.in/assets/social_share.png">
+  <link rel="stylesheet" href="/book/booking.css?v=20261117">
+</head>
+<body>
+  <a class="skip-link" href="#booking-form">Skip to booking form</a>
+  <header class="site-header">
+    <a href="/" aria-label="Kratex home"><img src="/assets/logo.svg" alt="Kratex" width="140" height="20"></a>
+    <a href="/" class="back-link">BACK TO SITE ↗</a>
+  </header>
+  <main class="booking-layout">
+    <div class="booking-visual">
+      <img src="/assets/images/pics/p3.png" alt="Kratex performing live" class="booking-photo" fetchpriority="high">
+      <div class="visual-shade"></div>
+      <div class="visual-copy">
+        <span class="eyebrow">KRATEX / WORLD OF VIBES</span>
+        <h1>BOOK<br>KRATEX.</h1>
+        <p>Bring M-House to your city.</p>
+      </div>
+      <span class="visual-index">BOOKINGS / 01</span>
+    </div>
+    <section class="form-panel" aria-labelledby="form-title">
+      <div class="form-intro">
+        <span class="eyebrow">BOOKING INQUIRY / WORLD OF VIBES</span>
+        <h2 id="form-title">LET'S MAKE<br>IT HAPPEN.</h2>
+        <p>Tell us about your show. The booking team will follow up using the contact number you provide.</p>
+      </div>
+      <div id="form-message" class="form-message" role="status" aria-live="polite" hidden></div>
+      <form id="booking-form" action="/book/send.php" method="post">
+        <div class="form-grid">
+          <div class="field">
+            <label for="name">Your name <span aria-hidden="true">*</span></label>
+            <input id="name" name="name" type="text" autocomplete="name" maxlength="120" placeholder="Full name" required>
+          </div>
+          <div class="field">
+            <label for="contact-number">Contact number <span aria-hidden="true">*</span></label>
+            <input id="contact-number" name="contact_number" type="tel" inputmode="tel" autocomplete="tel" maxlength="30" placeholder="Include country code" required>
+          </div>
+          <div class="field">
+            <label for="show-city">Show city <span aria-hidden="true">*</span></label>
+            <input id="show-city" name="show_city" type="text" autocomplete="address-level2" maxlength="100" placeholder="City" required>
+          </div>
+          <div class="field">
+            <label for="show-date">Show date <span aria-hidden="true">*</span></label>
+            <input id="show-date" name="show_date" type="date" required>
+          </div>
+          <div class="field">
+            <label for="venue-name">Venue / club name <span aria-hidden="true">*</span></label>
+            <input id="venue-name" name="venue_name" type="text" maxlength="150" placeholder="Venue or club" required>
+          </div>
+          <div class="field">
+            <label for="number-of-shows">Number of shows <span aria-hidden="true">*</span></label>
+            <input id="number-of-shows" name="number_of_shows" type="number" min="1" max="50" step="1" value="1" required>
+          </div>
+          <div class="field field-wide">
+            <label for="additional-notes">Additional notes</label>
+            <textarea id="additional-notes" name="additional_notes" rows="4" maxlength="2000" placeholder="Anything else the booking team should know?"></textarea>
+          </div>
+        </div>
+        <div class="honeypot" aria-hidden="true">
+          <label for="company-website">Company website</label>
+          <input id="company-website" name="company_website" type="text" tabindex="-1" autocomplete="off">
+        </div>
+        <button type="submit" class="send-button">SEND BOOKING INQUIRY <span aria-hidden="true">↗</span></button>
+        <p class="form-note">Your details go to the World of Vibes booking team.</p>
+      </form>
+    </section>
+  </main>
+  <footer><span>KRATEX / BOOKINGS</span><a href="/">BACK TO KRATEX.IN ↗</a></footer>
+  <script>
+    const params = new URLSearchParams(location.search);
+    const message = document.getElementById('form-message');
+    const form = document.getElementById('booking-form');
+    if (params.get('sent') === '1') {
+      message.textContent = 'Your booking inquiry has been sent. The World of Vibes team will contact you soon.';
+      message.hidden = false;
+      form.hidden = true;
+    } else if (params.get('error') === 'delivery') {
+      message.textContent = 'We could not send your inquiry right now. Please try again or email rock@worldofvibes.com.';
+      message.hidden = false;
+    } else if (params.get('error') === 'invalid') {
+      message.textContent = 'Please check your details and try again.';
+      message.hidden = false;
+    } else if (params.get('error') === 'wait') {
+      message.textContent = 'Please wait a minute before sending another inquiry.';
+      message.hidden = false;
+    }
+    form.addEventListener('submit', () => {
+      const button = form.querySelector('button[type="submit"]');
+      button.disabled = true;
+      button.textContent = 'SENDING…';
+    });
+  </script>
+</body>
+</html>
