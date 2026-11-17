@@ -10,8 +10,8 @@
     <meta name="author" content="Kratex">
     <title>Kratex | Marathi House Music DJ & Producer in India</title>
     <link rel="canonical" href="https://kratex.in/">
-    <link rel="stylesheet" href="style.css?v=20261117c">
-    <link rel="stylesheet" href="mobile.css?v=20261117c">
+    <link rel="stylesheet" href="style.css?v=20261117d">
+    <link rel="stylesheet" href="mobile.css?v=20261117d">
     <link rel="icon" type="image/x-icon" href="assets/icon.ico">
     <link rel="icon" type="image/png" href="assets/icon.png">
     <meta property="og:title" content="Kratex | Marathi House Music DJ & Producer in India">
@@ -145,18 +145,39 @@
             <div class="hero-bottom">
                 <span>INDEPENDENT SOUND. COLLECTIVE ENERGY.</span>
                 <button type="button" class="motion-toggle" id="motion-toggle" aria-pressed="false">PAUSE MOTION <span aria-hidden="true">Ⅱ</span></button>
-                <a href="#story" class="scroll-prompt">SCROLL TO EXPLORE <span aria-hidden="true">↓</span></a>
+                <a href="#shows" class="scroll-prompt">SCROLL TO EXPLORE <span aria-hidden="true">↓</span></a>
             </div>
         </div>
     </header>
 
     <!-- Content Sections -->
     <main class="content-wrapper" id="main-content">
+        <!-- Shows Section (Bandsintown API) -->
+        <section id="shows" class="section">
+            <div class="section-header">
+                <h2><span class="section-index">01</span><span class="gradient-type">SHOWS</span></h2>
+                <span>// UPCOMING</span>
+            </div>
+            <div id="bandsintown-events" class="tour-list" aria-live="polite" aria-busy="true">
+                <!-- Events will be injected here by JS -->
+                <p>LOADING DATES...</p>
+            </div>
+
+            <div class="shows-action">
+                <a href="https://www.bandsintown.com/artist-subscribe/15525088-kratex" target="_blank"
+                    class="text-link"
+                    onclick="gtag('event', 'click', {'event_category': 'Button', 'event_label': 'Request_Show'});" rel="noopener noreferrer">REQUEST
+                    A SHOW IN YOUR
+                    CITY</a>
+            </div>
+        </section>
+
+
         <div id="story" class="editorial-story" role="region" aria-label="About the artist">
             <div class="story-masthead">
-                <span class="story-label">00 / THE ARTIST / MUMBAI, INDIA</span>
-                <h2>MARATHI<br>HOUSE<br>IN MOTION.</h2>
-                <p>Kratex makes music built for movement. Marathi roots, house rhythm, and the energy of a room coming alive.</p>
+                <span class="story-label">M-HOUSE / BORN IN MUMBAI</span>
+                <h2>A NEW HOUSE<br>SOUND<br>FROM ASIA.</h2>
+                <p>Kratex created M-House: a Marathi-rooted house sound from Mumbai bringing a new voice from Asia to global dance floors.</p>
             </div>
 
             <div class="story-opening">
@@ -198,27 +219,6 @@
                 <a href="/global-marathi-dj/">Global milestones ↗</a>
             </div>
         </div>
-
-
-        <!-- Shows Section (Bandsintown API) -->
-        <section id="shows" class="section">
-            <div class="section-header">
-                <h2><span class="section-index">01</span><span class="gradient-type">SHOWS</span></h2>
-                <span>// UPCOMING</span>
-            </div>
-            <div id="bandsintown-events" class="tour-list" aria-live="polite" aria-busy="true">
-                <!-- Events will be injected here by JS -->
-                <p>LOADING DATES...</p>
-            </div>
-
-            <div class="shows-action">
-                <a href="https://www.bandsintown.com/artist-subscribe/15525088-kratex" target="_blank"
-                    class="text-link"
-                    onclick="gtag('event', 'click', {'event_category': 'Button', 'event_label': 'Request_Show'});" rel="noopener noreferrer">REQUEST
-                    A SHOW IN YOUR
-                    CITY</a>
-            </div>
-        </section>
 
 
         <!-- Album Promo Section -->
